@@ -5,25 +5,32 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "docs:dev": "vuepress dev ../docs",
+    "docs:build": "vuepress build ../docs"
   },
   "dependencies": {
+    "buefy": "^0.9.4",
     "core-js": "^3.6.5",
+    "node-sass": "^5.0.0",
     "prismjs": "^1.22.0",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.6",
-    "vue-prism-editor": "^1.2.2"
+    "vue-prism-editor": "^1.2.2",
+    "webpackbar": "^5.0.0-3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "@vuepress/plugin-register-components": "^1.7.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.7.1"
   },
   "eslintConfig": {
     "root": true,

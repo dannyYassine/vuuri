@@ -1,0 +1,73 @@
+<template>
+  <div>
+    <div class="full-height">
+      <h2>Usage</h2>
+      <div class="pre-code">
+        <div class="language-vue extra-class">
+          <pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>vuuri</span> <span class="token attr-name">:items</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>items<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">#item</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{ item }<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>YourComponent</span> <span class="token attr-name">:item</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>vuuri</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div>
+      </div>
+    </div>
+
+    <div class="full-height">
+      <h2>Automatic CRUD Updates</h2>
+      <h2>You just worry about writing javascript</h2>
+      <div class="pre-code">
+        <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// adding</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>newItem<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// removing</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token">1</span><span class="token punctuation">,</span> <span class="token">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
+      </div>
+    </div>
+    <div class="full-height">
+      <h2>Vuuri takes care of the rest</h2>
+    </div>
+  </div>
+</template>
+
+<script>
+import { usageCode, crudCode } from './codefile';
+
+export default {
+  name: "CodeDemo",
+  data() {
+    return {
+      code: usageCode,
+      crudCode: crudCode
+    }
+  },
+  methods: {
+  }
+}
+</script>
+
+<style scoped lang="scss">
+.language-vue,
+.language-js {
+  background: unset;
+}
+
+h1, h2 {
+  text-align: center;
+  border: none;
+}
+
+.pre-code {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.language-vue {
+  .tag:not(body) {
+    font-size: 1rem;
+  }
+}
+
+</style>

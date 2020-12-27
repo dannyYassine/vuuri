@@ -1,5 +1,6 @@
 <template>
   <header>
+    <HeaderNav />
     <div class="logo">
       <div>
         <svg width="620" height="620" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet">
@@ -19,15 +20,229 @@
     </div>
     <div style="position: relative">
       <h1>The Vue Muuri Integration</h1>
+      <div class="my-editor" @click="onCodeClicked">
+        $ yarn add vuuri
+      </div>
     </div>
   </header>
 </template>
 
 <script>
+import { install } from './codefile';
+import { NotificationProgrammatic as Notification } from 'buefy'
+
 export default {
-name: "Header"
+  name: "Header",
+  data() {
+    return {
+      install: install
+    }
+  },
+  methods: {
+    onCodeClicked() {
+      /* Get the text field */
+      navigator.clipboard.writeText('yarn add vuuri').then(() => {
+        /* Alert the copied text */
+        Notification.open({
+          message: 'Copied to clipboard!',
+          type: 'is-success'
+        })
+      })
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
+header {
+  background-color: rgba(255,105,234,0.05);
+}
+
+/* required class */
+.my-editor {
+  cursor: pointer;
+  /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
+  background: rgba(255,105,234, 0.1);
+  color: #41b883;
+  width: 230px;
+  height: 80px;
+  margin: 30px auto;
+  overflow: hidden;
+  text-align: center;
+
+  /* you must provide font-family font-size line-height. Example: */
+  font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
+  font-size: 18px;
+  padding: 25px 5px 5px 5px;
+
+  /* optional class for removing the outline */
+  &::v-deep .prism-editor__textarea:focus {
+    outline: none;
+  }
+
+  &::v-deep div.prism-editor__container {
+    top: -6px;
+  }
+}
+
+
+/* Header */
+
+header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh);
+  width: 100%;
+  max-width: 94rem;
+  margin: 0 auto;
+  //padding: calc(3 * var(--vh)) 0;
+  padding-bottom: 10px;
+}
+
+header, footer {
+  .logo {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+}
+header, footer {
+  .logo div {
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+header, footer {
+  .logo svg {
+    /*height: calc(50 * var(--vh));*/
+    /*width: 70vw;*/
+    /*max-width: 100%;*/
+    /*max-height: 100%;*/
+    margin: auto;
+  }
+}
+
+header, footer {
+  h1 {
+    text-align: center;
+    font-size: calc(50% + calc(3 * var(--vh)));
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 500;
+    margin: calc(3 * var(--vh)) auto;
+    color: #ff69ea;
+  }
+}
+
+header, footer {
+  nav {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top: 0.7rem dotted #65ffc3;
+    border-bottom: 0.7rem dotted #65ffc3;
+  }
+}
+header, footer {
+  .nav-item {
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+}
+header, footer {
+  .nav-item-link {
+    display: block;
+    position: relative;
+    margin: auto;
+    padding-top: calc(2 * var(--vh));
+    padding-bottom: calc(3 * var(--vh));
+  }
+}
+header, footer {
+  .nav-item-link:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -2rem;
+    right: -2rem;
+    top: calc(2 * var(--vh));
+    bottom: calc(2 * var(--vh));
+    border-left: 0.7rem double #ff4bd8;
+    border-right: 0.7rem double #ff4bd8;
+    opacity: 0;
+    transform: scale(1, 0);
+    transition: transform 0.1s ease-in-out, opacity 0.1s linear;
+  }
+}
+header, footer {
+  .nav-item-link:focus:after {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+header, footer {
+  .nav-item-text {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: lowercase;
+    font-size: calc(50% + calc(1.5 * var(--vh)));
+    line-height: 1.2;
+    margin-bottom: calc(2 * var(--vh));
+    font-weight: 500;
+    color: #6464ff;
+    pointer-events: none;
+  }
+}
+header, footer {
+  .nav-item-icon {
+    display: flex;
+    position: relative;
+    height: calc(7 * var(--vh));
+    width: calc(7 * var(--vh));
+    margin: 0 auto;
+    pointer-events: none;
+  }
+}
+header, footer {
+  .nav-item-icon svg {
+    position: absolute;
+    flex-grow: 1;
+    transition: all 0.2s ease-in-out;
+  }
+}
+header, footer {
+  .nav-item-icon svg:first-child {
+    transform: translate(-7%, 7%);
+    color: #65ffc3;
+  }
+}
+header, footer {
+  .nav-item-link:hover .nav-item-icon svg:first-child {
+    transform: translate(0%, 0%);
+    color: #6464ff;
+  }
+}
+header, footer {
+  .nav-item-icon svg:last-child {
+    transform: translate(0%, 0%);
+    color: #6464ff;
+  }
+}
+header, footer {
+  .nav-item-link:hover .nav-item-icon svg:last-child {
+    transform: translate(7%, -7%);
+    color: #ff69ea;
+  }
+}
 </style>

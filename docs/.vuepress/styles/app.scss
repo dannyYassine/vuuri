@@ -2,7 +2,7 @@
 
 .full-height {
   margin-top: 40vh;
-  margin-bottom: 40vh;
+  margin-bottom: 60vh;
 }
 
 .spacer {
@@ -16,4 +16,12 @@
 
 .spacer-bottom {
   margin-bottom: 300px;
+}
+
+.tag:not(body) {
+  background: unset;
+}
+
+.relative {
+  position: relative;
 }

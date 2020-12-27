@@ -1,4 +1,8 @@
 
+export const install = `
+  $ yarn add vuuri
+`;
+
 export const usageCode = `
 <vuuri :items="items">
   <template #item="{ item }">
