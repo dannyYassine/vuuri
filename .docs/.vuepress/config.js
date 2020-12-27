@@ -20,6 +20,25 @@ module.exports = {
           children: [
             ['guide/install', 'Installation']
           ]
+        },
+        {
+          title: 'Examples',   // required
+          collapsable: false, // optional, defaults to true
+          children: [
+            ['guide/basic_usage', 'Basic Usage'],
+            ['guide/using_options', 'Using Options'],
+            ['guide/custom_slots', 'Custom Slots']
+          ]
+        },
+        {
+          title: 'Api',   // required
+          collapsable: false, // optional, defaults to true
+          children: [
+            ['guide/props', 'Props'],
+            ['guide/methods', 'Methods'],
+            ['guide/events', 'Events'],
+            ['guide/slots', 'Slots']
+          ]
         }
       ]
     }

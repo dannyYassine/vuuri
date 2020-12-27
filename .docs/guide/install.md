@@ -1,6 +1,6 @@
-## Yarn / NPM
+# Installation
 
-Installation:
+## via Yarn / NPM
 
 ```bash
 yarn add vuuri
@@ -18,6 +18,16 @@ import vuuri from 'vurri'
 Vue.component('vuuri', vuuri);
 ```
 
+## via CDN
+```html
+<script src="https://unpkg.com/vuuri@1.0.0"></script>
+```
+
+```js
+// register globally
+Vue.component('vue-multiselect', window.VueMultiselect.default)
+```
+
 ## CSS
 
 The package itself does not include any CSS, since it only takes care of displaying your elements.
@@ -25,17 +35,36 @@ The package itself does not include any CSS, since it only takes care of display
 ## Basic Usage
 
 ```vue
-<vuuri :items="items">
-  <template #item="{ item }">
-    <YourComponent :item="item" />
-  </template>
-</vuuri>
-```
+<template>
+  <vuuri :items="items">
+    <template #item="{ item }">
+      <YourComponent :item="item" />
+    </template>
+  </vuuri>
+</template>
 
-```js
-// adding
-this.items.push(newItem);
+<script>
+import vuuri from 'vuuri';
+import YourComponent from '/@/components/YourComponent';
 
-// removing
-this.items.splice(1, 0);
+// register globally
+Vue.component('vuuri', vuuri)
+
+export default {
+    // OR register locally
+    components: { 
+        vuuri,
+        YourComponent
+    },
+    data () {
+      return {
+        items: [...], // your elements to render on screen
+      }
+    }
+}
+</script>
+
+<style scoped lang="scss">
+  // your styles
+</style>
 ```
