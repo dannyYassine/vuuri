@@ -94,7 +94,6 @@ header {
   flex-direction: column;
   height: calc(100vh);
   width: 100%;
-  max-width: 94rem;
   margin: 0 auto;
   //padding: calc(3 * var(--vh)) 0;
   padding-bottom: 10px;
