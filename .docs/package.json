@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "docs:dev": "vuepress dev ../docs",
-    "docs:build": "vuepress build ../docs"
+    "docs:build": "vuepress build ../.docs ; rm -rf ../docs/* ; cp -R .vuepress/dist/ ../docs/"
   },
   "dependencies": {
     "buefy": "^0.9.4",

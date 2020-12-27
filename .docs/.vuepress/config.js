@@ -1,4 +1,5 @@
 module.exports = {
+  base: '/vuuri/',
   port: 8888,
   title: 'Vuuri',
   description: 'Just playing around',
