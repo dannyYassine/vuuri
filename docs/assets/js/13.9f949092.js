@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[13],{384:function(e,t,n){"use strict";n.r(t);var a={name:"HomePage"},i=n(48),o=Object(i.a)(a,(function(){var e=this.$createElement,t=this._self._c||e;return t("div",{attrs:{id:"home-page"}},[t("Header"),this._v(" "),t("CodeDemo"),this._v(" "),t("GridDemo")],1)}),[],!1,null,"676c3409",null);t.default=o.exports}}]);

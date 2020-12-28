@@ -3,6 +3,7 @@
     <Header />
     <CodeDemo />
     <GridDemo />
+    <Credits />
   </div>
 </template>
 

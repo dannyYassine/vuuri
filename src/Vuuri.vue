@@ -2,7 +2,7 @@
   <div ref="muuri" class="muuri-grid" :class="element">
     <div
         v-for="item in items"
-        :key="item[itemKey]"
+        :key="itemKey ? item[itemKey] : getItemKey(item)"
         class="free-flow-grid-item item"
     >
       <slot name="item" :item="item" />
@@ -39,6 +39,13 @@ export default {
     items: {
       type: Array,
       required: true
+    },
+    /**
+     * Identifier property for each item
+     */
+    itemKey: {
+      type: String,
+      required: false
     }
   },
   data() {
@@ -58,6 +65,9 @@ export default {
             .refreshItems()
             .layout(true, () => this.$emit('updated'));
       });
+    },
+    _getItemKey(item) {
+      return item
     },
     _resizeOnLoad: debounce(function() {
       this.$nextTick(() => {
