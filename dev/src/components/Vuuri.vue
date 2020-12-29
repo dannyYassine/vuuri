@@ -72,7 +72,7 @@ export default {
   },
   data() {
     return {
-      copiedItems: null
+      copiedItems: []
     }
   },
   watch: {
@@ -123,9 +123,9 @@ export default {
       })
     },
     _remove(newItems, oldItems) {
-      const promises = [];
       const valuesToRemove = this._getDiff(oldItems, newItems);
       if (valuesToRemove.length) {
+        const itemsToRemove = []
         valuesToRemove.forEach(value => {
           const itemToRemove = this.muuri.getItems().find(item => {
             return (
@@ -135,21 +135,27 @@ export default {
           });
 
           if (itemToRemove) {
-            promises.push(new Promise((resolve) => {
-              this.muuri.hide([itemToRemove], {
-                onFinish: () => {
-                  this.muuri.remove([itemToRemove], { removeElements: true });
+            itemsToRemove.push(itemToRemove)
+          }
+        });
+
+        if (itemsToRemove.length) {
+          return new Promise((resolve) => {
+            this.muuri.hide(itemsToRemove, {
+              onFinish: () => {
+                valuesToRemove.forEach(value => {
                   const index = this.copiedItems.findIndex(item => item.id === value.id);
                   this.copiedItems.splice(index, 1);
-                  resolve();
-                }
-              });
-            }));
-          }
-        })
+                });
+                this.muuri.remove(itemsToRemove);
+                resolve();
+              }
+            });
+          });
+        }
       }
 
-      return Promise.all(promises);
+      return Promise.resolve();
     },
     _add(newItems, oldItems) {
       const valuesToAdd = this._getDiff(newItems, oldItems);
@@ -175,7 +181,6 @@ export default {
     },
   },
   created() {
-    this._copyItems();
   },
   mounted() {
     this.muuri = new Muuri(this.selector, this.options);
@@ -183,7 +188,7 @@ export default {
       this._resizeOnLoad();
     });
     this.observer.observe(this.$refs.muuri);
-    this.update();
+    this._sync(this.items, []);
   },
 }
 </script>

@@ -2,6 +2,7 @@
   <div id="app">
     <img alt="Vue logo" height="200px" src="https://github.com/dannyYassine/vuuri/blob/master/.docs/.vuepress/public/vuuri_logo.png?raw=true">
     <button @click="onAddClicked()">Add</button>
+    <button @click="onDeleteMoreClicked()">Delete one or more</button>
     <vuuri
         :items="items"
         item-key="id"
@@ -12,7 +13,6 @@
       <template #item="{ item }">
         <div class="demo-item" :style="{ backgroundColor: item.color }">
           <div class="grid-card-handle">
-            {{item.name}}
           </div>
           <div class="delete-btn" @click="onDeleteClicked(item)">delete</div>
         </div>
@@ -31,22 +31,8 @@ export default {
   },
   data() {
     return {
-      items: [
-        {
-          id: 1,
-          name: makeid(2),
-          width: this.getSize(),
-          height: this.getSize(),
-          color: this._getColor()
-        },
-        {
-          id: 2,
-          name: makeid(2),
-          width: this.getSize(),
-          height: this.getSize(),
-          color: this._getColor()
-        }
-      ],
+      count: 0,
+      items: [],
       options: {
         showDuration: 400,
         showEasing: 'ease',
@@ -90,13 +76,19 @@ export default {
       this.items.splice(index, 1);
     },
     onAddClicked() {
-      this.items.push({
-        id: Math.random(),
-        name: makeid(2),
-        color: this._getColor(),
-        width: this.getSize(),
-        height: this.getSize()
-      })
+      this._buildItems();
+    },
+    onDeleteMoreClicked() {
+      const numberOfTimesToDelete = Math.max(1, Math.floor(Math.random() * this.items.length));
+      console.log('numberOfTimesToDelete: ', numberOfTimesToDelete);
+      for (let i = 0; i < numberOfTimesToDelete; i++) {
+        const index = Math.floor(Math.random() * this.items.length);
+        if (index < 0) {
+          return;
+        }
+        console.log('index', index, this.items.length);
+        this.items.splice(index, 1);
+      }
     },
     getItemWidth(item) {
       return `${item.width}px`;
@@ -116,6 +108,32 @@ export default {
 
       return 200;
     },
+    _buildItems(numberOfTimes = 4) {
+      const numberOfItems = Math.max(1, Math.floor(Math.random() * numberOfTimes));
+      for (let i = 0; i < numberOfItems; i++) {
+        this.items.push(this._buildItem());
+      }
+    },
+    _addItems() {
+      if (this.count > 20) {
+        return;
+      }
+
+      setTimeout(() => {
+        this.count++
+        this._buildItems(1);
+        this._addItems();
+      }, 150);
+    },
+    _buildItem() {
+      return {
+        id: Math.random(),
+        name: makeid(2),
+        color: this._getColor(),
+        width: this.getSize(),
+        height: this.getSize()
+      }
+    },
     _getColor() {
       const number = Math.random();
       if (number < 0.333) {
@@ -128,6 +146,9 @@ export default {
 
       return 'rgb(139, 152, 255)';
     }
+  },
+  mounted() {
+    this._addItems();
   }
 }
 
