@@ -19,6 +19,7 @@
     "vue": "^2.6.11",
     "vue-loader": "^15.9.6",
     "vue-prism-editor": "^1.2.2",
+    "vuuri": "^0.1.1",
     "webpackbar": "^5.0.0-3"
   },
   "devDependencies": {

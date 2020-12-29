@@ -70,6 +70,7 @@
         </div>
       </div>
 
+
       <div class="grid muuri drag-enabled" style="height: 960px;"><div class="grid-item h1 w2 red muuri-item muuri-item-shown" data-color="red" data-title="xa" style="left: 0px; top: 0px; transform: translateX(240px) translateY(0px);">
         <div class="grid-item-content" style="opacity: 1; transform: scale(1);">
           <div class="grid-card">

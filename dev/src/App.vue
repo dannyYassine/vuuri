@@ -1,214 +1,188 @@
 <template>
-  <div ref="muuri" class="muuri-grid" :class="className">
-    <div
-        v-for="item in copiedItems"
-        :key="itemKey ? item[itemKey] : _getItemKey(item)"
-        :style="_getItemStyles(item)"
-        class="muuri-item"
-        :data-item-key="itemKey ? item[itemKey] : _getItemKey(item)"
+  <div id="app">
+    <img alt="Vue logo" height="200px" src="https://github.com/dannyYassine/vuuri/blob/master/.docs/.vuepress/public/vuuri_logo.png?raw=true">
+    <button @click="onAddClicked()">Add</button>
+    <vuuri
+        :items="items"
+        item-key="id"
+        :get-item-width="getItemWidth"
+        :get-item-height="getItemHeight"
+        :options="options"
     >
-      <div class="muuri-item-content">
-        <slot name="item" :item="item" />
-      </div>
-    </div>
+      <template #item="{ item }">
+        <div class="demo-item" :style="{ backgroundColor: item.color }">
+          <div class="grid-card-handle">
+            {{item.name}}
+          </div>
+          <div class="delete-btn" @click="onDeleteClicked(item)">delete</div>
+        </div>
+      </template>
+    </vuuri>
   </div>
 </template>
 
 <script>
-import { cloneDeep, debounce, differenceWith } from 'lodash';
-import Muuri from 'muuri';
-import { v4 as uuidv4 } from 'uuid';
+import vuuri from './components/Vuuri';
 
 export default {
-  name: 'Vuuri',
-  props: {
-    /**
-     * Optional class name to add to the grid. If not, one will be provided
-     */
-    className: {
-      type: String,
-      required: false,
-      default: () => `class${uuidv4().replaceAll('-', '')}`
-    },
-    /**
-     * To set up options of the grid
-     * https://github.com/haltu/muuri#grid-options
-     */
-    options: {
-      type: Object,
-      required: false,
-      default: () => ({})
-    },
-    /**
-     * Collection to render
-     */
-    items: {
-      type: Array,
-      required: true
-    },
-    /**
-     * Identifier property for each item
-     */
-    itemKey: {
-      type: String,
-      required: false
-    },
-    /**
-     * Callback to fetch a dynamic width based on item
-     */
-    getItemWidth: {
-      type: Function,
-      required: false,
-      default: () => () => '100px'
-    },
-    /**
-     * Callback to fetch a dynamic height based on item
-     */
-    getItemHeight: {
-      type: Function,
-      required: false,
-      default: () => () => '100px'
-    }
+  name: 'App',
+  components: {
+    vuuri
   },
   data() {
     return {
-      copiedItems: null
-    }
-  },
-  watch: {
-    items(newItems) {
-      this._sync(newItems, this.copiedItems);
-    }
-  },
-  computed: {
-    selector() {
-      return `.${this.className}`;
+      items: [
+        {
+          id: 1,
+          name: makeid(2),
+          width: this.getSize(),
+          height: this.getSize(),
+          color: this._getColor()
+        },
+        {
+          id: 2,
+          name: makeid(2),
+          width: this.getSize(),
+          height: this.getSize(),
+          color: this._getColor()
+        }
+      ],
+      options: {
+        showDuration: 400,
+        showEasing: 'ease',
+        hideDuration: 400,
+        hideEasing: 'ease',
+        layoutDuration: 400,
+        layoutEasing: 'cubic-bezier(0.625, 0.225, 0.100, 0.890)',
+        sortData: {
+          title(item, element) {
+            return element.getAttribute('data-title') || '';
+          },
+          color(item, element) {
+            return element.getAttribute('data-color') || '';
+          },
+        },
+        dragEnabled: true,
+        dragHandle: '.grid-card-handle',
+        dragContainer: document.querySelector('.muuri-grid'),
+        dragRelease: {
+          duration: 400,
+          easing: 'cubic-bezier(0.625, 0.225, 0.100, 0.890)',
+          useDragContainer: true,
+        },
+        dragPlaceholder: {
+          enabled: true,
+          createElement(item) {
+            return item.getElement().cloneNode(true);
+          },
+        },
+        dragAutoScroll: {
+          targets: [window],
+          sortDuringScroll: false,
+          syncAfterScroll: false,
+        }
+      }
     }
   },
   methods: {
-    update() {
-      this.$nextTick(() => {
-        this.muuri
-            .refreshItems()
-            .layout(true, () => this.$emit('updated'));
-      });
+    onDeleteClicked(item) {
+      const index = this.items.findIndex(value => value.id === item.id);
+      this.items.splice(index, 1);
     },
-    /**
-     * Styles for each grid item
-     */
-    _getItemStyles(item) {
-      return {
-        width: this.getItemWidth(item),
-        height: this.getItemHeight(item)
-      };
-    },
-    _getItemKey(item) {
-      return Object.values(item).join('-')
-    },
-    _resizeOnLoad: debounce(function() {
-      this.$nextTick(() => {
-        this._sync();
-      }, 100);
-    }),
-    _getDiff(newValue, oldValue) {
-      return differenceWith(newValue, oldValue, (a, b) => {
-        return a[this.itemKey] === b[this.itemKey];
-      });
-    },
-    _sync(newItems, oldItems) {
-      this._remove(newItems, oldItems).then(() => {
-        this.update();
-
-        this._add(newItems, oldItems);
+    onAddClicked() {
+      this.items.push({
+        id: Math.random(),
+        name: makeid(2),
+        color: this._getColor(),
+        width: this.getSize(),
+        height: this.getSize()
       })
     },
-    _remove(newItems, oldItems) {
-      const promises = [];
-      const valuesToRemove = this._getDiff(oldItems, newItems);
-      if (valuesToRemove.length) {
-        valuesToRemove.forEach(value => {
-          const itemToRemove = this.muuri.getItems().find(item => {
-            return (
-                value[this.itemKey]+'' ===
-                item.getElement().getAttribute('data-item-key')
-            );
-          });
-
-          if (itemToRemove) {
-            promises.push(new Promise((resolve) => {
-              this.muuri.hide([itemToRemove], {
-                onFinish: () => {
-                  this.muuri.remove([itemToRemove], { removeElements: true });
-                  const index = this.copiedItems.findIndex(item => item.id === value.id);
-                  this.copiedItems.splice(index, 1);
-                  resolve();
-                }
-              });
-            }));
-          }
-        })
+    getItemWidth(item) {
+      return `${item.width}px`;
+    },
+    getItemHeight(item) {
+      return `${item.height}px`;
+    },
+    getSize() {
+      const number = Math.random();
+      if (number < 0.333) {
+        return 100;
       }
 
-      return Promise.all(promises);
-    },
-    _add(newItems, oldItems) {
-      const valuesToAdd = this._getDiff(newItems, oldItems);
+      if (number < 0.666) {
+        return 150;
+      }
 
-      // renders new elements
-      this.copiedItems = this.copiedItems.concat(valuesToAdd);
+      return 200;
+    },
+    _getColor() {
+      const number = Math.random();
+      if (number < 0.333) {
+        return '#aaffdc';
+      }
 
-      this.$nextTick(() => {
-        if (valuesToAdd.length) {
-          valuesToAdd.forEach(value => {
-            const $element = document.querySelector(`[data-item-key="${value[this.itemKey]}"]`);
-            this.muuri.add($element, {
-              layout: false,
-              active: false
-            });
-          });
-        }
-        this.muuri.filter(() => true);
-      });
-    },
-    _copyItems(items = this.items) {
-      this.copiedItems = cloneDeep(items);
-    },
-  },
-  created() {
-    this._copyItems();
-  },
-  mounted() {
-    this.muuri = new Muuri(this.selector, this.options);
-    this.observer = new ResizeObserver(() => {
-      this._resizeOnLoad();
-    });
-    this.observer.observe(this.$refs.muuri);
-    this.update();
-  },
+      if (number < 0.666) {
+        return '#ff69ea';
+      }
+
+      return 'rgb(139, 152, 255)';
+    }
+  }
+}
+
+function makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 }
 </script>
 
-<style scoped>
-.muuri-grid {
-  position: relative;
-}
-.muuri-item {
-  display: block;
-  position: absolute;
-  z-index: 1;
-}
-.muuri-item.muuri-item-dragging {
-  z-index: 3;
-}
-.muuri-item.muuri-item-releasing {
-  z-index: 2;
-}
-.muuri-item.muuri-item-hidden {
-  z-index: 0;
-}
-.muuri-item-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
+<style scoped lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+
+  .demo-item {
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+
+    .grid-card-handle {
+      height: 100%;
+    }
+
+    .delete-btn {
+      position: relative;
+      top: -20px;
+      display: none;
+    }
+
+    &:hover {
+      .delete-btn {
+        display: unset;
+      }
+    }
+  }
+
+  &::v-deep{
+    .muuri-item {
+      margin: 5px;
+    }
+
+    .muuri-item-placeholder {
+      opacity: 0.5;
+      margin: 0 !important;
+    }
+  }
+
 }
 </style>
