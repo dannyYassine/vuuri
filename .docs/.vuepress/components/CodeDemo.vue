@@ -24,7 +24,9 @@
 <span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token">1</span><span class="token punctuation">,</span> <span class="token">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre></div>
       </div>
+      <ClientOnly>
       <AddDeleteDemo class="add-delete-demo"/>
+      </ClientOnly>
     </div>
     <div class="full-height">
       <h2>Vuuri takes care of the rest</h2>
