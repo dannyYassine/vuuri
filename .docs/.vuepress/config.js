@@ -10,6 +10,7 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/guide/install' },
+      { text: 'Sandbox', link: 'https://codesandbox.io/s/serene-rgb-0d8me' },
       { text: 'GitHub', link: 'https://github.com/dannyyassine/vuuri' }
     ],
     sidebar: {
