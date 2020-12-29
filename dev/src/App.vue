@@ -1,8 +1,12 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" height="200px" src="https://github.com/dannyYassine/vuuri/blob/master/.docs/.vuepress/public/vuuri_logo.png?raw=true">
-    <button @click="onAddClicked()">Add</button>
-    <button @click="onDeleteMoreClicked()">Delete one or more</button>
+  <div id="code-demo-app">
+    <div>
+    <img alt="Vue logo" src="https://github.com/dannyYassine/vuuri/blob/master/.docs/.vuepress/public/vuuri_logo.png?raw=true">
+    </div>
+    <div>
+      <b-button @click="onAddClicked()">Add</b-button>
+      <b-button @click="onDeleteMoreClicked()">Delete one or more</b-button>
+    </div>
     <vuuri
         :items="items"
         item-key="id"
@@ -14,7 +18,7 @@
         <div class="demo-item" :style="{ backgroundColor: item.color }">
           <div class="grid-card-handle">
           </div>
-          <div class="delete-btn" @click="onDeleteClicked(item)">delete</div>
+          <b-button type="is-danger" class="delete-btn" @click="onDeleteClicked(item)">&times;</b-button>
         </div>
       </template>
     </vuuri>
@@ -164,7 +168,7 @@ function makeid(length) {
 </script>
 
 <style scoped lang="scss">
-#app {
+#code-demo-app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -172,24 +176,38 @@ function makeid(length) {
   color: #2c3e50;
   margin-top: 60px;
 
+  img {
+    max-height: 200px;
+  }
+
   .demo-item {
+    position: relative;
     height: 100%;
     width: 100%;
     border-radius: 15px;
-
+    cursor: move;
     .grid-card-handle {
       height: 100%;
     }
 
     .delete-btn {
-      position: relative;
-      top: -20px;
-      display: none;
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border-radius: 10px;
+      height: 30px !important;
+      width: 30px !important;
+      padding: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      opacity: 0;
+      transform: scale(0.5);
     }
 
     &:hover {
       .delete-btn {
-        display: unset;
+        opacity: 1;
+        transform: scale(1);
       }
     }
   }
