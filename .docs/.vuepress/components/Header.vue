@@ -1,7 +1,7 @@
 <template>
   <header>
     <HeaderNav />
-    <div class="logo">
+    <div class="logo animate-delay-1">
       <div>
         <svg width="620" height="620" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet">
 
@@ -19,8 +19,8 @@
       </div>
     </div>
     <div style="position: relative">
-      <h1>The Vue Muuri Integration</h1>
-      <div class="my-editor" @click="onCodeClicked">
+      <h1 class="animate-delay-2">The Vue Muuri Integration</h1>
+      <div class="my-editor animate-delay-3" @click="onCodeClicked">
         $ yarn add vuuri
       </div>
     </div>
@@ -56,6 +56,44 @@ export default {
 <style scoped lang="scss">
 header {
   background-color: rgba(255,105,234,0.05);
+}
+
+.animate-delay-1 {
+  opacity: 0;
+  animation-duration: 0.6s;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards;
+  animation-name: animate-delay;
+  animation-timing-function: ease;
+}
+
+.animate-delay-2 {
+  opacity: 0;
+  animation-duration: 0.6s;
+  animation-delay: 1.8s;
+  animation-fill-mode: forwards;
+  animation-name: animate-delay;
+  animation-timing-function: ease;
+}
+
+.animate-delay-3 {
+  opacity: 0;
+  animation-duration: 0.6s;
+  animation-delay: 2.1s;
+  animation-fill-mode: forwards;
+  animation-name: animate-delay;
+  animation-timing-function: ease;
+}
+
+@keyframes animate-delay {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* required class */
@@ -104,6 +142,7 @@ header, footer {
     position: relative;
     flex-grow: 1;
     display: flex;
+    opacity: 0;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 50px;

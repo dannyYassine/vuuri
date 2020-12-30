@@ -109,14 +109,14 @@ export default {
     getSize() {
       const number = Math.random();
       if (number < 0.333) {
-        return 100;
+        return 75;
       }
 
       if (number < 0.666) {
-        return 150;
+        return 100;
       }
 
-      return 200;
+      return 125;
     },
     _buildItems(numberOfTimes = 4) {
       const numberOfItems = Math.max(
@@ -128,7 +128,7 @@ export default {
       }
     },
     _addItems() {
-      if (this.count > 10) {
+      if (this.count > 15) {
         return;
       }
 
@@ -214,9 +214,9 @@ function makeid(length) {
       position: absolute;
       top: 10px;
       right: 10px;
-      border-radius: 10px;
-      height: 30px !important;
-      width: 30px !important;
+      border-radius: 5px;
+      height: 20px !important;
+      width: 20px !important;
       padding: 0;
       transition: opacity 0.3s ease, transform 0.3s ease;
       opacity: 0;

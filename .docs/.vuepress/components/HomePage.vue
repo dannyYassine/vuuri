@@ -2,7 +2,9 @@
   <div id="home-page">
     <Header />
     <CodeDemo />
-    <GridDemo />
+    <ClientOnly>
+      <GridDemo />
+    </ClientOnly>
     <Credits />
   </div>
 </template>
