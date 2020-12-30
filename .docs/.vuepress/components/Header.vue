@@ -61,7 +61,7 @@ header {
 .animate-delay-1 {
   opacity: 0;
   animation-duration: 0.6s;
-  animation-delay: 1.5s;
+  animation-delay: 0.5s;
   animation-fill-mode: forwards;
   animation-name: animate-delay;
   animation-timing-function: ease;
@@ -70,7 +70,7 @@ header {
 .animate-delay-2 {
   opacity: 0;
   animation-duration: 0.6s;
-  animation-delay: 1.8s;
+  animation-delay: 0.8s;
   animation-fill-mode: forwards;
   animation-name: animate-delay;
   animation-timing-function: ease;
@@ -79,7 +79,7 @@ header {
 .animate-delay-3 {
   opacity: 0;
   animation-duration: 0.6s;
-  animation-delay: 2.1s;
+  animation-delay: 1.1s;
   animation-fill-mode: forwards;
   animation-name: animate-delay;
   animation-timing-function: ease;
