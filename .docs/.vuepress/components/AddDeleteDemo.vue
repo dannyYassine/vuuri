@@ -8,6 +8,7 @@
       <vuuri
           :items="items"
           item-key="id"
+          class-name="add-delete-demo-muuri-grid"
           :get-item-width="getItemWidth"
           :get-item-height="getItemHeight"
           :options="options"
@@ -57,7 +58,7 @@ export default {
         },
         dragEnabled: true,
         dragHandle: ".grid-card-handle",
-        dragContainer: document.querySelector(".muuri-grid"),
+        dragContainer: document.querySelector(".add-delete-demo-muuri-grid"),
         dragRelease: {
           duration: 400,
           easing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
