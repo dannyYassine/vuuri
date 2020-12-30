@@ -28,6 +28,7 @@ module.exports = {
           children: [
             ['guide/basic_usage', 'Basic Usage'],
             ['guide/using_options', 'Using Options'],
+            ['guide/size', 'Dynamic Size'],
             ['guide/custom_slots', 'Custom Slots']
           ]
         },
