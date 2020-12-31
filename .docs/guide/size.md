@@ -22,7 +22,7 @@ You will need to always return a formatted string with the right unit of size. F
 
 <ClientOnly>
   <DynamicHeightDemo />
-</ClientOnly
+</ClientOnly>
 
 ## Code
 
