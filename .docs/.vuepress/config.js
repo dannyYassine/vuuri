@@ -2,7 +2,7 @@ module.exports = {
   base: '/vuuri/',
   port: 8888,
   title: 'Vuuri',
-  description: 'Just playing around',
+  description: 'The Vue Muuri Integration',
   head: [
     ['link', { rel: "icon", href: "/favicon.ico"}],
   ],

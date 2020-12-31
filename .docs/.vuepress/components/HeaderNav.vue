@@ -4,11 +4,11 @@
       <a href="javascript:void(0);">Vuuri</a>
     </div>
     <div class="float-right">
-      <a href="javascript:void(0);">Home</a>
-      <a href="/vuuri/guide/install">Docs</a>
-      <a target="_blank" href="https://github.com/dannyyassine/vuuri">GitHub</a>
-      <a href="javascript:void(0);" class="icon" :click="onHeaderClicked">
-        <i class="fa fa-bars"></i>
+      <a is-icon href="javascript:void(0);">Home</a>
+      <a is-icon href="/vuuri/guide/install">Docs</a>
+      <a is-icon target="_blank" href="https://github.com/dannyyassine/vuuri">GitHub</a>
+      <a is-hamburger href="javascript:void(0);" class="icon" @click="onHeaderClicked">
+        &#9776;
       </a>
     </div>
   </div>
@@ -19,7 +19,12 @@ export default {
 name: "HeaderNav",
   methods: {
     onHeaderClicked() {
-
+      var x = document.getElementById("home-page-nav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
     }
   }
 }
@@ -53,6 +58,11 @@ name: "HeaderNav",
   display: none;
 }
 
+[is-hamburger] {
+  margin-right: 15px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 600px) {
   #home-page-nav.topnav a:not(:first-child) {display: none;}
   #home-page-nav.topnav a.icon {
@@ -72,6 +82,12 @@ name: "HeaderNav",
     float: none;
     display: block;
     text-align: left;
+  }
+  #home-page-nav.topnav [is-icon] {
+    display: none;
+  }
+  #home-page-nav.topnav.responsive [is-icon] {
+    display: block;
   }
 }
 </style>

@@ -3,7 +3,7 @@
     <HeaderNav />
     <div class="logo animate-delay-1">
       <div>
-        <svg width="620" height="620" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 620 620" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet">
 
           <g>
             <title>background</title>
@@ -160,10 +160,10 @@ header, footer {
 }
 header, footer {
   .logo svg {
-    /*height: calc(50 * var(--vh));*/
-    /*width: 70vw;*/
-    /*max-width: 100%;*/
-    /*max-height: 100%;*/
+    height: calc(50 * var(--vh));
+    width: 70vw;
+    max-width: 100%;
+    max-height: 100%;
     margin: auto;
   }
 }
