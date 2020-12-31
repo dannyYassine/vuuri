@@ -27,6 +27,37 @@ export default {
 </style>
 ```
 
+## Required Slot
+
+You will need to implement the required slot `#item`, in order to display your content as there is no fallback if the slot is not implemented.
+
+```vue
+<vuuri :items="items">
+  <template #item="{ item }">
+    /* your custom markup here */
+    <YourCustomComponent :model="item" />
+  </template>
+</vuuri>
+```
+
+## Automatic Adds and Deletes
+
+You simply need to worry about writing javascript when adding or removing elements in the grid.
+`vuuri` figures out what you did in the `items` array to do the right update.
+
+```javascript
+// adding
+this.items.push(new Item());
+
+// removing
+const index = this.items.findIndex((value) => value.id === item.id);
+this.items.splice(index, 1);
+```
+
+<ClientOnly>
+  <AddDeleteDemo min="100" max="100" starting-items="5" adds="1" deletes="1" />
+</ClientOnly>
+
 ## Using className
 
 If you need to add a custom CSS class to the muuri grid, you can pass it via the `class-name` prop:

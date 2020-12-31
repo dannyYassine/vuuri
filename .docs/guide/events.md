@@ -11,7 +11,7 @@
 *Event name in camelCase are translated to kebab-case*
 
 ```javascript
-<vue
+<vuuri
   synchronize="onSynchronize"
   layout-start="onLayoutStart"
   layout-end="onLayoutEnd"
@@ -37,5 +37,5 @@
   drag-release-start="onDragReleaseStart"
   drag-release-end="onDragReleaseEnd"
   destroy="onDestroy">
-</vue>
+</vuuri>
 ```

@@ -30,9 +30,8 @@ module.exports = {
           collapsable: false, // optional, defaults to true
           children: [
             ['guide/basic_usage', 'Basic Usage'],
-            ['guide/using_options', 'Using Options'],
             ['guide/size', 'Dynamic Size'],
-            ['guide/custom_slots', 'Custom Slots'],
+            ['guide/using_options', 'Using Options'],
             ['guide/simple_drag_drop', 'Simple Drag & Drop']
           ]
         },

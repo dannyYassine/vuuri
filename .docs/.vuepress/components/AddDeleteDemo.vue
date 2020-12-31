@@ -39,15 +39,24 @@ export default {
   },
   props: {
     min: {
-      type: Number,
-      required: false
+      type: [Number, String],
+      required: false,
     },
     max: {
-      type: Number,
+      type: [Number, String],
+      required: false
+    },
+    adds: {
+      type: [Number, String],
+      required: false,
+      default: 4
+    },
+    deletes: {
+      type: [Number, String],
       required: false
     },
     startingItems: {
-      type: Number,
+      type: [Number, String],
       default: 15
     }
   },
@@ -92,18 +101,35 @@ export default {
       },
     };
   },
+  computed: {
+    _min() {
+      return Number(this.min);
+    },
+    _max() {
+      return Number(this.max);
+    },
+    _startingItems() {
+      return Number(this.startingItems);
+    },
+    _adds() {
+      return Number(this.adds);
+    },
+    _deletes() {
+      return Number(this.deletes);
+    }
+  },
   methods: {
     onDeleteClicked(item) {
       const index = this.items.findIndex((value) => value.id === item.id);
       this.items.splice(index, 1);
     },
     onAddClicked() {
-      this._buildItems();
+      this._buildItems(this._adds);
     },
     onDeleteMoreClicked() {
       const numberOfTimesToDelete = Math.max(
           1,
-          Math.floor(Math.random() * this.items.length)
+          Math.floor(Math.random() * this._deletes ? this._deletes : this.items.length)
       );
       console.log("numberOfTimesToDelete: ", numberOfTimesToDelete);
       for (let i = 0; i < numberOfTimesToDelete; i++) {
@@ -123,7 +149,7 @@ export default {
     },
     getSize() {
       if (this.min && this.max) {
-        return Math.floor(Math.random() * Math.max(this.min, this.max)) + Math.min(this.min, this.max);
+        return Math.floor(Math.random() * (Math.max(this._min, this._max) - Math.min(this._min, this._max) + 1) + Math.min(this._min, this._max));
       }
 
       const number = Math.random();
@@ -147,7 +173,7 @@ export default {
       }
     },
     _addItems() {
-      if (this.count > this.startingItems) {
+      if (this.count > this._startingItems) {
         return;
       }
 
@@ -207,12 +233,10 @@ function makeid(length) {
 
   .add-delete-buttons {
     position: relative;
-    top: 160px;
   }
 
   .vuuri-container {
     position: relative;
-    top: 160px;
     height: 500px;
     max-height: 500px;
     overflow-y: scroll;

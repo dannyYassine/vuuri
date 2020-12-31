@@ -25,7 +25,14 @@
 </code></pre></div>
       </div>
       <ClientOnly>
-      <AddDeleteDemo class="add-delete-demo"/>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <AddDeleteDemo class="add-delete-demo"/>
       </ClientOnly>
     </div>
     <div class="full-height">

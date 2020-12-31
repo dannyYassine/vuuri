@@ -25,14 +25,14 @@ Vue.component('vuuri', vuuri);
 
 ```js
 // register globally
-Vue.component('vue-multiselect', window.VueMultiselect.default)
+Vue.component('vuuri', window.vuuri.default)
 ```
 
 ## CSS
 
 The package itself does not include any CSS, since it only takes care of displaying your elements.
 
-## Basic Usage
+## Usage
 
 ```vue
 <template>
