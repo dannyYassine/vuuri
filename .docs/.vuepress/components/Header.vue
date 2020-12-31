@@ -175,8 +175,8 @@ header, footer {
     font-style: italic;
     line-height: 1.5;
     font-weight: 500;
-    margin: calc(3 * var(--vh)) auto;
     color: #ff69ea;
+    margin: 15px;
   }
 }
 
