@@ -12,4 +12,4 @@
 
 This object is the same signature as the [Muuri options](https://github.com/haltu/muuri#grid-options).
 
-Go check out the example [simple drag and drop example](http://localhost:8888/vuuri/guide/simple_drag_drop.html#example)
+Go check out the example [simple drag and drop example](/guide/simple_drag_drop.html#example)

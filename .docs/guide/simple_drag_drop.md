@@ -39,7 +39,7 @@ Granted that the *dragHandle* `.grid-card-handle` is located on your grid item.
 
 <ClientOnly>
   <ImageList />
-</ClientOnly
+</ClientOnly>
 
 ## Code
 

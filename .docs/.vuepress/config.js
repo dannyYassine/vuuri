@@ -3,6 +3,9 @@ module.exports = {
   port: 8888,
   title: 'Vuuri',
   description: 'Just playing around',
+  head: [
+    ['link', { rel: "icon", href: "/favicon.ico"}],
+  ],
   theme: '@vuepress/theme-default',
   plugins: ['@vuepress/register-components'],
   themeConfig: {
