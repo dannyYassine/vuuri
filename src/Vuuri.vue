@@ -18,6 +18,7 @@
 import { cloneDeep, debounce, differenceWith } from 'lodash';
 import Muuri from 'muuri';
 import { v4 as uuidv4 } from 'uuid';
+import { GridEvent } from "./GridEvent";
 
 export default {
   name: 'Vuuri',
@@ -73,7 +74,16 @@ export default {
   },
   data() {
     return {
-      copiedItems: []
+      /**
+       * Deep copy of props items
+       * @type Array<*>
+       */
+      copiedItems: [],
+      /**
+       * Map of events with respective listener function
+       * @type Object.<string, function>
+       */
+      events: {}
     }
   },
   watch: {
@@ -108,6 +118,26 @@ export default {
       });
       this.observer.observe(this.$refs.muuri);
       this._sync(this.items, []);
+    },
+    /**
+     * Registers Muuri events
+     */
+    _registerEvents() {
+      Object.values(GridEvent).forEach(event => {
+        this.events[event] = (...args) => {
+          this.$emit(event, ...args);
+        }
+        this.muuri.on(event, this.events[event]);
+      });
+    },
+    /**
+     * Unregisters Muuri events
+     */
+    _unregisterEvents() {
+      Object.values(GridEvent).forEach(event => {
+        this.muuri.off(event, this.events[event]);
+        delete this.events[event];
+      });
     },
     /**
      * Styles for each grid item
@@ -254,7 +284,11 @@ export default {
   },
   mounted() {
     this._setup();
+    this._registerEvents();
   },
+  beforeDestroy() {
+    this._unregisterEvents();
+  }
 }
 </script>
 
