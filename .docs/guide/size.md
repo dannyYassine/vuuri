@@ -17,6 +17,14 @@ methods: {
 
 You will need to always return a formatted string with the right unit of size. For example, for percentage `33%` and pixels `100px`. You can obviously return `rem` or `em`;
 
+## Example
+<br>
+
+<ClientOnly>
+  <DynamicHeightDemo />
+</ClientOnly
+
+## Code
 
 ```vue
 <template>

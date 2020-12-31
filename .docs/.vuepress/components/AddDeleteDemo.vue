@@ -37,6 +37,20 @@ export default {
   components: {
     vuuri,
   },
+  props: {
+    min: {
+      type: Number,
+      required: false
+    },
+    max: {
+      type: Number,
+      required: false
+    },
+    startingItems: {
+      type: Number,
+      default: 15
+    }
+  },
   data() {
     return {
       count: 0,
@@ -108,6 +122,10 @@ export default {
       return `${item.height}px`;
     },
     getSize() {
+      if (this.min && this.max) {
+        return Math.floor(Math.random() * Math.max(this.min, this.max)) + Math.min(this.min, this.max);
+      }
+
       const number = Math.random();
       if (number < 0.333) {
         return 75;
@@ -129,7 +147,7 @@ export default {
       }
     },
     _addItems() {
-      if (this.count > 15) {
+      if (this.count > this.startingItems) {
         return;
       }
 

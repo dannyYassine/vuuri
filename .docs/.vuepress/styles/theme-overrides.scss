@@ -2,12 +2,10 @@
   max-width: unset !important;
 }
 
-.language-vue {
-  .number {
-    font-size: unset;
-    background-color: unset;
-    margin-right: unset;
-    min-width: unset;
-    padding: unset;
-  }
+.token.number {
+  font-size: unset;
+  background-color: unset;
+  margin-right: unset;
+  min-width: unset;
+  padding: unset;
 }

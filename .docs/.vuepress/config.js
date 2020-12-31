@@ -29,7 +29,8 @@ module.exports = {
             ['guide/basic_usage', 'Basic Usage'],
             ['guide/using_options', 'Using Options'],
             ['guide/size', 'Dynamic Size'],
-            ['guide/custom_slots', 'Custom Slots']
+            ['guide/custom_slots', 'Custom Slots'],
+            ['guide/simple_drag_drop', 'Simple Drag & Drop']
           ]
         },
         {

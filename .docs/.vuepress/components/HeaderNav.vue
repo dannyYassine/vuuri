@@ -5,7 +5,7 @@
     </div>
     <div class="float-right">
       <a href="javascript:void(0);">Home</a>
-      <a href="/vuuri/guide/">Docs</a>
+      <a href="/vuuri/guide/install">Docs</a>
       <a target="_blank" href="https://github.com/dannyyassine/vuuri">GitHub</a>
       <a href="javascript:void(0);" class="icon" :click="onHeaderClicked">
         <i class="fa fa-bars"></i>
