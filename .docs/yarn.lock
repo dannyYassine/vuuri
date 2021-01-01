@@ -9686,9 +9686,9 @@ vuepress@^1.7.1:
     update-notifier "^4.0.0"
 
 vuuri@^0.1.1:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/vuuri/-/vuuri-0.1.3.tgz#8e3e9a649486db11425bdcf6d6edeffaf694ecfc"
-  integrity sha512-rB4XvKqvFNTNqGt8XEY1SODiXRE05PtP5oNjrL4kf+gt3sA3/Y8dTwAsWo60/XToYbhmQCkk1ZdpUkJPVr5QDQ==
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/vuuri/-/vuuri-0.1.6.tgz#7d3278f0a047d54dc47e6497e482e1cb5944f615"
+  integrity sha512-6+MvouOdXHm9vdKU9VdDT7bicOKUUe+Uf2PczQiFOgWipkSfz9MFl0klgynmBG7x/ti1U9IRRnQlMLhygY8Evg==
   dependencies:
     lodash "^4.17.20"
     muuri "^0.9.3"
