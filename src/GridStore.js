@@ -1,11 +1,9 @@
 
 export class GridStore {
-  /**
-   * @type {Map<string, Array[Muuri]>}
-   */
-  store;
-  
   constructor() {
+    /**
+     * @type {Map<string, Array[Muuri]>}
+     */
     this.store = new Map();
   }
   
