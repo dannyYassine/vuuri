@@ -2,8 +2,8 @@
   <div id="code-demo-app">
     <div class="columns">
       <div class="column">
-        <div>
-          <h2>TO DO</h2>
+        <div class="mb-6">
+          <h6>TO DO</h6>
         </div>
         <div>
           <vuuri
@@ -14,16 +14,16 @@
               :group-id="1"
           >
             <template #item="{ item }">
-              <div class="demo-item" :style="{ backgroundColor: item.color }">
-                <div class="grid-card-handle"></div>
+              <div class="demo-item" :style="{ border: `4px ${item.color} solid`, backgroundColor: 'white' }">
+                {{item.name}}
               </div>
             </template>
           </vuuri>
         </div>
       </div>
       <div class="column">
-        <div>
-          <h2>DONE</h2>
+        <div class="mb-6">
+          <h6>DONE</h6>
         </div>
         <div>
           <vuuri
@@ -34,8 +34,8 @@
               :group-ids="[1, 'deletable']"
           >
             <template #item="{ item }">
-              <div class="demo-item" :style="{ backgroundColor: item.color }">
-                <div class="grid-card-handle"></div>
+              <div class="demo-item" :style="{ border: `4px ${item.color} solid`, backgroundColor: 'white' }">
+                {{item.name}}
               </div>
             </template>
           </vuuri>
@@ -43,8 +43,8 @@
       </div>
       <div class="column">
         <div>
-          <h2>BIN</h2>
-          <h6>Only items from 'Done' can be dragged here</h6>
+          <h6>BIN</h6>
+          <p>Only items from 'Done' can be dragged here</p>
         </div>
         <div>
           <vuuri
@@ -55,8 +55,8 @@
               group-id="deletable"
           >
             <template #item="{ item }">
-              <div class="demo-item" :style="{ backgroundColor: item.color }">
-                <div class="grid-card-handle"></div>
+              <div class="demo-item" :style="{ border: `4px ${item.color} solid`, backgroundColor: 'white' }">
+                {{item.name}}
               </div>
             </template>
           </vuuri>
@@ -129,7 +129,7 @@ export default {
       }
     },
     _addItems() {
-      if (this.count > 10) {
+      if (this.count > 3) {
         return;
       }
 
@@ -187,15 +187,19 @@ function makeid(length) {
   color: #2c3e50;
   margin: 10px;
 
+  p {
+    font-size: 14.5px;
+  }
+
   .demo-item {
     position: relative;
     height: 100%;
     width: 100%;
     border-radius: 15px;
     cursor: move;
-    .grid-card-handle {
-      height: 100%;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .delete-btn {
       cursor: pointer;
@@ -222,10 +226,12 @@ function makeid(length) {
   &::v-deep {
     .muuri-grid {
       min-height: 100px;
-      border: forestgreen 1px solid;
+      border-radius: 5px;
+      border: forestgreen 4px solid;
+      padding: 2px;
     }
     .muuri-item {
-      margin: 5px 0;
+      padding: 5px;
       width: 100% !important;
     }
   }

@@ -1,38 +1,14 @@
 # Drag and Drop
 
-The configuration below illustrates a basic options configuration to add drag and drop functionality with Muuri. All other configurable options can be located [here](https://github.com/haltu/muuri#grid-options).
+You simply need to add the `drag-enabled` attribute on the `vuuri` component to add this feature.
 
-```javascript
-options: {
-    showDuration: 400,
-    showEasing: "ease",
-    hideDuration: 400,
-    hideEasing: "ease",
-    layoutDuration: 400,
-    layoutEasing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
-    dragEnabled: true,
-    dragHandle: ".grid-card-handle",
-    dragContainer: document.querySelector(".muuri-grid"),
-    dragRelease: {
-      duration: 400,
-      easing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
-      useDragContainer: true,
-    },
-    dragPlaceholder: {
-      enabled: true,
-      createElement(item) {
-        return item.getElement().cloneNode(true);
-      },
-    },
-    dragAutoScroll: {
-      targets: [window],
-      sortDuringScroll: false,
-      syncAfterScroll: false
-    }
-}
+```vue
+<template>
+  <vuuri
+    :items="items"
+    drag-enabled />
+</template>
 ```
-
-Granted that the *dragHandle* `.grid-card-handle` is located on your grid item.
 
 ## Example
 <br>
@@ -49,7 +25,7 @@ Granted that the *dragHandle* `.grid-card-handle` is located on your grid item.
     <vuuri
         v-if="items"
         :items="items"
-        :options="options"
+        drag-enabled
     >
       <template #item="{ item }">
         <div class="demo-item grid-card-handle">
@@ -70,42 +46,7 @@ export default {
   },
   data() {
     return {
-      items: null,
-      options: {
-        showDuration: 400,
-        showEasing: "ease",
-        hideDuration: 400,
-        hideEasing: "ease",
-        layoutDuration: 400,
-        layoutEasing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
-        sortData: {
-          title(item, element) {
-            return element.getAttribute("data-title") || "";
-          },
-          color(item, element) {
-            return element.getAttribute("data-color") || "";
-          },
-        },
-        dragEnabled: true,
-        dragHandle: ".grid-card-handle",
-        dragContainer: document.querySelector(".vuuri-container"),
-        dragRelease: {
-          duration: 400,
-          easing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
-          useDragContainer: true,
-        },
-        dragPlaceholder: {
-          enabled: true,
-          createElement(item) {
-            return item.getElement().cloneNode(true);
-          },
-        },
-        dragAutoScroll: {
-          targets: [window],
-          sortDuringScroll: false,
-          syncAfterScroll: false,
-        },
-      },
+      items: null
     }
   },
   methods: {

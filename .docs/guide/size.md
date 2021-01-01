@@ -1,4 +1,4 @@
-# Dynamic Sizes
+# Dynamic Height & Width
 
 <p>Using <code>vuuri</code> becomes more satisfying when the items you want to render each have a different height and/or width to fully leverage dynamic layouts.</p>
 <br>

@@ -1,12 +1,12 @@
 # KanBan
 
-Below is a simple example which you can use `vuuri` to build a kan ban board.
+Below is a simple example which you can use `vuuri` to build a kan ban board, leveraging the `group-id` and `group-ids` attributes.
 
-# Example
+## Example
 <br>
 
 <ClientOnly>
-    <KanBanDemo />
+<KanBanDemo />
 </ClientOnly>
 
 ## Code
@@ -28,7 +28,7 @@ Below is a simple example which you can use `vuuri` to build a kan ban board.
               :group-id="1"
           >
             <template #item="{ item }">
-              <div class="demo-item" :style="{ backgroundColor: item.color }">
+              <div class="demo-item" :style="{ border: `2px ${item.color} solid` }">
                 <div class="grid-card-handle"></div>
               </div>
             </template>
@@ -48,7 +48,7 @@ Below is a simple example which you can use `vuuri` to build a kan ban board.
               :group-ids="[1, 'deletable']"
           >
             <template #item="{ item }">
-              <div class="demo-item" :style="{ backgroundColor: item.color }">
+              <div class="demo-item" :style="{ border: `2px ${item.color} solid` }">
                 <div class="grid-card-handle"></div>
               </div>
             </template>
@@ -69,7 +69,7 @@ Below is a simple example which you can use `vuuri` to build a kan ban board.
               group-id="deletable"
           >
             <template #item="{ item }">
-              <div class="demo-item" :style="{ backgroundColor: item.color }">
+              <div class="demo-item" :style="{ border: `2px ${item.color} solid` }">
                 <div class="grid-card-handle"></div>
               </div>
             </template>
@@ -156,7 +156,7 @@ export default {
     _buildItem() {
       return {
         id: Math.random(),
-        name: makeid(2),
+        name: makeid(10),
         color: this._getColor(),
         width: this.getSize(),
         height: this.getSize(),

@@ -26,12 +26,19 @@ module.exports = {
           ]
         },
         {
-          title: 'Examples',   // required
+          title: 'Usage',   // required
           collapsable: false, // optional, defaults to true
           children: [
             ['guide/basic_usage', 'Basic Usage'],
-            ['guide/size', 'Dynamic Size'],
-            ['guide/using_options', 'Using Options'],
+            ['guide/groups', 'Groups'],
+            ['guide/using_options', 'Using Options']
+          ]
+        },
+        {
+          title: 'Examples',   // required
+          collapsable: false, // optional, defaults to true
+          children: [
+            ['guide/size', 'Dynamic Height & Width'],
             ['guide/simple_drag_drop', 'Simple Drag & Drop'],
             ['guide/kanban', 'KanBan Grid']
           ]
