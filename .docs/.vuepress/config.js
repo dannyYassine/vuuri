@@ -32,7 +32,8 @@ module.exports = {
             ['guide/basic_usage', 'Basic Usage'],
             ['guide/size', 'Dynamic Size'],
             ['guide/using_options', 'Using Options'],
-            ['guide/simple_drag_drop', 'Simple Drag & Drop']
+            ['guide/simple_drag_drop', 'Simple Drag & Drop'],
+            ['guide/kanban', 'KanBan Grid']
           ]
         },
         {

@@ -6,17 +6,17 @@
           src="https://github.com/dannyYassine/vuuri/blob/master/.docs/.vuepress/public/vuuri_logo.png?raw=true"
       />
     </div>
-    <AddDeleteDemo />
+    <KanBanDemo />
   </div>
 </template>
 
 <script>
-import AddDeleteDemo from './components/AddDeleteDemo';
+import KanBanDemo from './components/KanBanDemo';
 
 export default {
   name: "App",
   components: {
-    AddDeleteDemo
+    KanBanDemo
   }
 };
 
