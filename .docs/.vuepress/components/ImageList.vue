@@ -23,6 +23,11 @@ export default {
   components: {
     vuuri
   },
+  props: {
+    cancelImage: {
+      type: String
+    }
+  },
   data() {
     return {
       items: null
@@ -34,14 +39,17 @@ export default {
         .then(response => response.json())
         .then(data => this.items = data.hits)
         .catch(() => {
-          const items = [];
-          for (let i = 0; i < 20; i++) {
-            items.push({
-              color: this._getColor()
-            });
-          }
-          this.items = items;
+          this._createItems();
         });
+    },
+    _createItems() {
+      const items = [];
+      for (let i = 0; i < 20; i++) {
+        items.push({
+          color: this._getColor()
+        });
+      }
+      this.items = items;
     },
     _getColor() {
       const number = Math.random();
@@ -57,7 +65,11 @@ export default {
     },
   },
   mounted() {
-    this.loadImages();
+    if (!this.cancelImage) {
+      this.loadImages();
+    } else {
+      this._createItems();
+    }
   }
 }
 </script>
@@ -85,6 +97,7 @@ export default {
 .demo-item {
   width: 100%;
   height: 100%;
+  border-radius: 5px;
 
   img {
     width: 100%;

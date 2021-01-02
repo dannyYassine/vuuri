@@ -32,7 +32,7 @@
         <br>
         <br>
         <br>
-        <AddDeleteDemo class="add-delete-demo"/>
+        <AddDeleteDemo class="add-delete-demo" deletes="false"/>
       </ClientOnly>
     </div>
     <div class="full-height">

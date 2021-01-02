@@ -8,3 +8,7 @@
 | itemKey | String | `'_$muuri_id'` | Identifier property for each item |
 | getItemWidth | Function | `100px` | Callback to fetch a dynamic width based on the item |
 | getItemHeight | Function | `100px` | Callback to fetch a dynamic height based on the item |
+| dragEnabled | Boolean | `false` | Flag to enable dragging in the grid |
+| dragHandle | String | `'.muuri-item:first-child'` | Selector on the item to activate dragging |
+| groupId | String, Number | `undefined` | Group Id to associate a group of vuuri grids |
+| groupIds | [String\|Number] | `undefined` | Group Ids to associate a group of vuuri grids |

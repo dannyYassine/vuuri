@@ -40,6 +40,19 @@ You will need to implement the required slot `#item`, in order to display your c
 </vuuri>
 ```
 
+## Enable Dragging
+
+Simply add the `drag-enabled` attriute to the `vuuri` component.
+
+```vue
+<vuuri :items="items" drag-enabled>
+</vuuri>
+```
+
+<ClientOnly>
+<ImageList cancel-image="false" />
+</ClientOnly>
+
 ## Automatic Adds and Deletes
 
 You simply need to worry about writing javascript when adding or removing elements in the grid.

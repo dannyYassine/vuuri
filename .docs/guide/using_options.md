@@ -36,7 +36,7 @@ The merge strategy makes the options have a higher priority and will override th
 
 <br>
 
-This object is the same signature as the [Muuri options](https://github.com/haltu/muuri#grid-options). Go check out the example [simple drag and drop example](/guide/simple_drag_drop.html#example)
+Go check out the example [simple drag and drop example](/guide/simple_drag_drop.html#example)
 
 ## Helping Out
 You can always add the required to add this use case and create a pull request on GitHub :) 

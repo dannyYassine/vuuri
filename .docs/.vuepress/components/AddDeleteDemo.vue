@@ -129,15 +129,13 @@ export default {
     onDeleteMoreClicked() {
       const numberOfTimesToDelete = Math.max(
           1,
-          Math.floor(Math.random() * this._deletes ? this._deletes : this.items.length)
+          Math.floor(Math.random() * (!!this._deletes ? this._deletes : this.items.length))
       );
-      console.log("numberOfTimesToDelete: ", numberOfTimesToDelete);
       for (let i = 0; i < numberOfTimesToDelete; i++) {
         const index = Math.floor(Math.random() * this.items.length);
         if (index < 0) {
           return;
         }
-        console.log("index", index, this.items.length);
         this.items.splice(index, 1);
       }
     },

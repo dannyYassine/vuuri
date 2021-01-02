@@ -12,6 +12,7 @@
   "dependencies": {
     "buefy": "^0.9.4",
     "core-js": "^3.6.5",
+    "firebase": "^8.2.1",
     "node-sass": "^5.0.0",
     "prismjs": "^1.22.0",
     "sass": "^1.30.0",

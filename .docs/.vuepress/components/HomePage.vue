@@ -6,6 +6,9 @@
       <GridDemo />
     </ClientOnly>
     <Credits />
+    <ClientOnly>
+      <GoogleAnalytics />
+    </ClientOnly>
   </div>
 </template>
 
