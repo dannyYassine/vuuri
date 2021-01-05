@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-The Vue Muuri Integration
+  The Vue Muuri Integration: the abstraction over the <a href="https://muuri.dev/" target="_blank">Muuri library</a> for creating dynamic layout in vue.js
 </p>
 
 ## Getting Started
