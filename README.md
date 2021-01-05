@@ -6,6 +6,7 @@
 The Vue Muuri Integration
 </p>
 
-## Documentation
+## Getting Started
 
-[Go to docs](https://dannyyassine.github.io/vuuri/guide/install.html)
+* [Go to website](https://dannyyassine.github.io/vuuri/)
+* [Go to docs](https://dannyyassine.github.io/vuuri/guide/install.html)
