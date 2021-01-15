@@ -4,7 +4,6 @@
     <div class="logo animate-delay-1">
       <div>
         <svg viewBox="0 0 620 620" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet">
-
           <g>
             <title>background</title>
             <rect fill="none" id="canvas_background" height="602" width="802" y="-1" x="-1"/>
@@ -17,6 +16,11 @@
           </g>
         </svg>
       </div>
+    </div>
+    <div class="badges animate-delay-1 mt-5">
+      <a href='https://www.npmjs.com/package/vuuri' target="_blank"><img src='https://img.shields.io/npm/v/vuuri.svg' alt='Library Version' /></a>
+      <a href='https://travis-ci.com/dannyYassine/vuuri' target="_blank"><img src='https://travis-ci.com/dannyYassine/vuuri.svg?branch=master' alt='Build Status' /></a>
+      <a href='https://coveralls.io/github/dannyYassine/vuuri?branch=master' target="_blank"><img src='https://coveralls.io/repos/github/dannyYassine/vuuri/badge.svg?branch=master' alt='Coverage Status' /></a>
     </div>
     <div style="position: relative">
       <h1 class="animate-delay-2">The Vue Muuri Integration</h1>

@@ -1,0 +1,7 @@
+{
+  "pluginsFile": "tests/cypress/plugins/index.js",
+  "defaultCommandTimeout": 10000,
+  "viewportWidth": 1500,
+  "viewportHeight": 860,
+  "env": {}
+}

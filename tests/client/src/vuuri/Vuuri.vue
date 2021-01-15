@@ -20,7 +20,6 @@ import Muuri from 'muuri';
 import { v4 as uuidv4 } from 'uuid';
 import { GridEvent } from './GridEvent';
 import GridStore from './GridStore';
-import { Env } from './Env';
 
 export default {
   name: 'Vuuri',
@@ -31,7 +30,7 @@ export default {
     className: {
       type: String,
       required: false,
-      default: () => `class${uuidv4().replace(/-/g, '')}`
+      default: () => `class${uuidv4().replaceAll('-', '')}`
     },
     /**
      * To set up options of the grid
@@ -152,13 +151,10 @@ export default {
       if (this.groupIds) {
         GridStore.addGridToGroups(this.groupIds, this.muuri);
       }
-
-      if (Env.isUnitTesting) {
-        this.observer = new ResizeObserver(() => {
-          this._resizeOnLoad();
-        });
-        this.observer.observe(this.$refs.muuri);
-      }
+      this.observer = new ResizeObserver(() => {
+        this._resizeOnLoad();
+      });
+      this.observer.observe(this.$refs.muuri);
       this._sync(this.items, []);
     },
     _setupNonReactiveProps() {

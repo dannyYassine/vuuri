@@ -5,10 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit",
-    "test:unit:watch": "vue-cli-service test:unit --watch",
-    "test:unit:coverage": "vue-cli-service test:unit --coverage"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "buefy": "^0.9.4",

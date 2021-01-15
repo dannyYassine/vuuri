@@ -18,9 +18,6 @@
 import { cloneDeep, debounce, differenceWith } from 'lodash';
 import Muuri from 'muuri';
 import { v4 as uuidv4 } from 'uuid';
-import { GridEvent } from './GridEvent';
-import GridStore from './GridStore';
-import { Env } from './Env';
 
 export default {
   name: 'Vuuri',
@@ -31,7 +28,7 @@ export default {
     className: {
       type: String,
       required: false,
-      default: () => `class${uuidv4().replace(/-/g, '')}`
+      default: () => `class${uuidv4().replaceAll('-', '')}`
     },
     /**
      * To set up options of the grid
@@ -63,7 +60,7 @@ export default {
     getItemWidth: {
       type: Function,
       required: false,
-      default: () => '100px'
+      default: () => () => '100px'
     },
     /**
      * Callback to fetch a dynamic height based on item
@@ -71,52 +68,12 @@ export default {
     getItemHeight: {
       type: Function,
       required: false,
-      default: () => '100px'
-    },
-    /**
-     * Enable drag and drop feature on the grid
-     */
-    dragEnabled: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    dragHandle: {
-      type: String,
-      required: false,
-      default: '.muuri-item:first-child'
-    },
-    /**
-     * When dragEnabled is on, can control which other grid you can drag into
-     */
-    groupId: {
-      type: [String, Number],
-      required: false
-    },
-    /**
-     * When dragEnabled is on, can control which other grid you can drag into
-     */
-    groupIds: {
-      type: [Array],
-      required: false
+      default: () => () => '100px'
     }
   },
   data() {
     return {
-      /**
-       * Deep copy of props items
-       * @type Array<*>
-       */
-      copiedItems: [],
-      /**
-       * Map of events with respective listener function
-       * @type Object.<string, function>
-       */
-      events: {},
-      /*
-      * The generated Muuri Options object
-      */
-      muuriOptions: {}
+      copiedItems: []
     }
   },
   watch: {
@@ -145,92 +102,12 @@ export default {
      * @private
      */
     _setup() {
-      this.muuri = new Muuri(this.selector, this.muuriOptions);
-      if (this.groupId) {
-        GridStore.addGrid(this.groupId, this.muuri);
-      }
-      if (this.groupIds) {
-        GridStore.addGridToGroups(this.groupIds, this.muuri);
-      }
-
-      if (Env.isUnitTesting) {
-        this.observer = new ResizeObserver(() => {
-          this._resizeOnLoad();
-        });
-        this.observer.observe(this.$refs.muuri);
-      }
+      this.muuri = new Muuri(this.selector, this.options);
+      this.observer = new ResizeObserver(() => {
+        this._resizeOnLoad();
+      });
+      this.observer.observe(this.$refs.muuri);
       this._sync(this.items, []);
-    },
-    _setupNonReactiveProps() {
-      /**
-       * @type {Muuri}
-       */
-      this.muuri = undefined;
-      /**
-       * @type {ResizeObserver}
-       */
-      this.observer = undefined;
-    },
-    _setupOptions() {
-      if (this.dragEnabled) {
-        this.muuriOptions = {...this._generateDragOptions(), ...this.muuriOptions};
-      }
-      if (this.groupId || this.groupIds) {
-        let groupIds = [];
-        if (this.groupId) {
-          groupIds.push(this.groupId);
-        }
-        if (this.groupIds) {
-          groupIds = groupIds.concat(this.groupIds);
-        }
-        this.muuriOptions.dragSort = () => {
-          return GridStore.getGrids(groupIds);
-        };
-      }
-      this.muuriOptions = {...this.options, ...this.muuriOptions};
-    },
-    _generateDragOptions() {
-      return {
-        dragEnabled: true,
-          dragHandle: this.dragHandle,
-          dragContainer: document.querySelector(`.muuri-grid${this.selector}`),
-          dragRelease: {
-          duration: 400,
-          easing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
-          useDragContainer: true,
-        },
-        dragPlaceholder: {
-          enabled: true,
-          createElement(item) {
-            return item.getElement().cloneNode(true);
-          },
-        },
-        dragAutoScroll: {
-          targets: [window],
-            sortDuringScroll: false,
-            syncAfterScroll: false,
-        },
-      };
-    },
-    /**
-     * Registers Muuri events
-     */
-    _registerEvents() {
-      Object.values(GridEvent).forEach(event => {
-        this.events[event] = (...args) => {
-          this.$emit(event, ...args);
-        }
-        this.muuri.on(event, this.events[event]);
-      });
-    },
-    /**
-     * Unregisters Muuri events
-     */
-    _unregisterEvents() {
-      Object.values(GridEvent).forEach(event => {
-        this.muuri.off(event, this.events[event]);
-        delete this.events[event];
-      });
     },
     /**
      * Styles for each grid item
@@ -357,7 +234,7 @@ export default {
 
       this.$nextTick(() => {
         valuesToAdd.forEach(value => {
-          const $element = document.querySelector(`${this.selector} [data-item-key="${value[this.itemKey]}"]`);
+          const $element = document.querySelector(`[data-item-key="${value[this.itemKey]}"]`);
           this.muuri.add($element, {
             layout: false,
             active: false
@@ -375,17 +252,9 @@ export default {
       this.copiedItems = cloneDeep(items);
     },
   },
-  created() {
-    this._setupNonReactiveProps();
-    this._setupOptions();
-  },
   mounted() {
     this._setup();
-    this._registerEvents();
   },
-  beforeDestroy() {
-    this._unregisterEvents();
-  }
 }
 </script>
 
@@ -411,9 +280,5 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-}
-.muuri-item-placeholder {
-  opacity: 0.5;
-  margin: 0 !important;
 }
 </style>

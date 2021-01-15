@@ -4,22 +4,35 @@
   "description": "Muuri Vue Integration",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "vue-cli-service build --target lib --name vuuri src/index.js"
+    "serve": "",
+    "build": "vue-cli-service build --target lib --name vuuri src/index.js",
+    "test": "start-server-and-test serve \"http://localhost:8080\" test:cypress:run",
+    "test:unit": "vue-cli-service test:unit",
+    "test:unit:watch": "yarn test:unit --watch",
+    "test:unit:coverage": "vue-cli-service test:unit --coverage",
+    "test:cypress:install": "cypress install",
+    "test:cypress:open": "./node_modules/.bin/cypress open",
+    "test:cypress:run": "./node_modules/.bin/cypress run",
+    "send-coverage": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@vue/cli-plugin-unit-jest": "^4.5.10",
     "lodash": "^4.17.20",
     "muuri": "^0.9.3",
     "uuid": "^8.3.2",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-jest": "^3.0.7"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "@vue/test-utils": "^1.1.2",
     "babel-eslint": "^10.1.0",
+    "coveralls": "^3.1.0",
+    "cypress": "^6.2.1",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
