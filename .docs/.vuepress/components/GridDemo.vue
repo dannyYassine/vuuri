@@ -70,7 +70,7 @@
 <!--        </div>-->
 <!--      </div>-->
 
-      <vuuri :items="items"
+      <vuuri v-model="items"
              item-key="id"
              :get-item-width="getItemWidth"
              :get-item-height="getItemHeight"
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import vuuri from 'vuuri';
+import vuuri from "../../../src";
 import GridDemoItem from "./GridDemoItem";
 
 export default {

@@ -9,12 +9,12 @@ Simply assign the grids with the same `group-id`:
 <template>
   <div>
     <vuuri>
-      :items="todoItems"
+      v-model="todoItems"
       group-id="kanbanboard"
       drag-enabled
     </vuuri>
     <vuuri>
-      :items="doneItems"
+      v-model="doneItems"
       group-id="kanbanboard"
       drag-enabled
     </vuuri>    
@@ -34,17 +34,17 @@ You can also make use of `group-ids`. Same principle, but you can associate a `v
 <template>
   <div>
     <vuuri>
-      :items="todoItems"
+      v-model="todoItems"
       :group-ids="['grid_a', 'grid_c']"
       drag-enabled
     </vuuri>
     <vuuri>
-      :items="doneItems"
+      v-model="doneItems"
       :group-ids="['grid_b', 'grid_d']"
       drag-enabled
     </vuuri>
     <vuuri>
-      :items="doneItems"
+      v-model="doneItems"
       :group-ids="['grid_c', 'grid_d']"
       drag-enabled
     </vuuri>        

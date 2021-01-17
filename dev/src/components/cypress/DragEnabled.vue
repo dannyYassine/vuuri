@@ -1,5 +1,5 @@
 <template>
-  <vuuri :items="todoItems" drag-enabled>
+  <vuuri v-model="todoItems" drag-enabled>
 
   </vuuri>
 </template>

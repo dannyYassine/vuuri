@@ -1,7 +1,7 @@
 <template>
   <div>
     Drag Enabled
-    <vuuri :items="todoItems" drag-enabled>
+    <vuuri v-model="todoItems" drag-enabled>
       <template #item="{ item }">
         <div class="item-content">
           {{item.id}}
@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import vuuri from "../../../../src";
+import vuuri from "@vuuri";
 
 export default {
 name: "DragEnabled",

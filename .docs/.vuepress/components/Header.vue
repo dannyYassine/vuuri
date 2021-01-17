@@ -89,6 +89,17 @@ header {
   animation-timing-function: ease;
 }
 
+.badges {
+  position: relative;
+  top: -75px;
+  display: flex;
+  justify-content: center;
+
+  a {
+    margin: 0 4px;
+  }
+}
+
 @keyframes animate-delay {
   0% {
     opacity: 0;

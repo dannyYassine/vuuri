@@ -21,7 +21,7 @@ You will need to always return a formatted string with the right unit of size. F
 ```vue
 <template>
   <vuuri
-    :items="items" &#32;
+    v-model="items" &#32;
     :get-item-width="getItemWidth"
     :get-item-height="getItemHeight" />
     <template #item="{ item }>

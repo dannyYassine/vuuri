@@ -4,7 +4,47 @@ export class GridStore {
     /**
      * @type {Map<string, Array[Muuri]>}
      */
-    this.store = new Map();
+    this._store = new Map();
+  
+    /**
+     * @type {Map<string, Array<*>>}
+     */
+    this._itemStore = new Map();
+  
+    /**
+     * @type {Muuri.Item}
+     */
+    this._draggingGridItem = null;
+  
+    /**
+     * @type {*}
+     */
+    this._draggingItem = null;
+  }
+  
+  setItemsForGridId(gridId, items) {
+    this._itemStore.set(gridId, items);
+  }
+  
+  getItemFromGridId(gridId, muuriItem) {
+    const items = this._itemStore.get(gridId);
+    return items.find(item => item.id == muuriItem.getElement().dataset.itemKey);
+  }
+  
+  setDraggingGridItem(value) {
+    this._draggingGridItem = value;
+  }
+  
+  setDraggingItem(value) {
+    this._draggingItem = value;
+  }
+  
+  getDraggingGridItem() {
+    return this._draggingGridItem;
+  }
+  
+  getDraggingItem() {
+    return this._draggingItem;
   }
   
   /**
@@ -13,10 +53,10 @@ export class GridStore {
    */
   addGrid(groupId, grid) {
     const groupIdString = groupId+'';
-    if (!this.store.has(groupIdString)) {
-      this.store.set(groupIdString+'', []);
+    if (!this._store.has(groupIdString)) {
+      this._store.set(groupIdString+'', []);
     }
-    this.store.get(groupIdString).push(grid);
+    this._store.get(groupIdString).push(grid);
   }
   
   /**
@@ -34,12 +74,12 @@ export class GridStore {
   getGrids(group) {
     if (Array.isArray(group)) {
       let groups = [];
-      group.forEach((groupy) => groups = groups.concat(this.store.get((groupy+''))));
+      group.forEach((groupy) => groups = groups.concat(this._store.get((groupy+''))));
       return groups;
     }
   
     const groupIdString = group+'';
-    return this.store.get(groupIdString);
+    return this._store.get(groupIdString);
   }
 }
 

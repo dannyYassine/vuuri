@@ -5,11 +5,11 @@
       <b-button @click="onDeleteMoreClicked()">Delete</b-button>
     </div>
     <vuuri
-        :items="items"
+        v-model="items"
         item-key="id"
         :get-item-width="getItemWidth"
         :get-item-height="getItemHeight"
-        :options="options"
+        drag-enabled
     >
       <template #item="{ item }">
         <div class="demo-item" :style="{ backgroundColor: item.color }">
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import vuuri from "vuuri";
+import vuuri from "@vuuri";
 
 export default {
   name: "App",
@@ -37,42 +37,7 @@ export default {
   data() {
     return {
       count: 0,
-      items: [],
-      options: {
-        showDuration: 400,
-        showEasing: "ease",
-        hideDuration: 400,
-        hideEasing: "ease",
-        layoutDuration: 400,
-        layoutEasing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
-        sortData: {
-          title(item, element) {
-            return element.getAttribute("data-title") || "";
-          },
-          color(item, element) {
-            return element.getAttribute("data-color") || "";
-          },
-        },
-        dragEnabled: true,
-        dragHandle: ".grid-card-handle",
-        dragContainer: document.querySelector(".muuri-grid"),
-        dragRelease: {
-          duration: 400,
-          easing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
-          useDragContainer: true,
-        },
-        dragPlaceholder: {
-          enabled: true,
-          createElement(item) {
-            return item.getElement().cloneNode(true);
-          },
-        },
-        dragAutoScroll: {
-          targets: [window],
-          sortDuringScroll: false,
-          syncAfterScroll: false,
-        },
-      },
+      items: []
     };
   },
   methods: {
@@ -159,7 +124,7 @@ export default {
     },
   },
   mounted() {
-    this._addItems();
+    this._buildItems(5);
   },
 };
 

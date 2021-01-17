@@ -4,7 +4,7 @@
       <h2>Usage</h2>
       <div class="pre-code">
         <div class="language-vue extra-class">
-          <pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>vuuri</span> <span class="token attr-name">:items</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>items<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+          <pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>vuuri</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>items<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">#item</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{ item }<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>YourComponent</span> <span class="token attr-name">:item</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
@@ -36,16 +36,33 @@
       </ClientOnly>
     </div>
     <div class="full-height">
+      <h2>Create Groups</h2>
+      <h4>Vuuri automatically handles the model updates for you</h4>
+      <br>
+      <br>
+      <br>
+      <ClientOnly>
+        <AutoSort />
+      </ClientOnly>
+    </div>
+    <div class="half-height">
       <h2>Vuuri takes care of the rest</h2>
+      <div class="text-center mt-4">
+        <router-link to="/guide/install">
+          <b-button class="get-started" type="is-dark">Get Started &#10142;</b-button>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { usageCode, crudCode } from './codefile';
+import AutoSort from "./AutoSort";
 
 export default {
   name: "CodeDemo",
+  components: {AutoSort},
   data() {
     return {
       code: usageCode,
@@ -63,7 +80,7 @@ export default {
   background: unset;
 }
 
-h1, h2 {
+h1, h2, h3, h4, h5, h6 {
   text-align: center;
   border: none;
 }

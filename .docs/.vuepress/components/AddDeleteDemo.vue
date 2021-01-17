@@ -6,7 +6,7 @@
     </div>
     <div class="vuuri-container">
       <vuuri
-          :items="items"
+          v-model="items"
           item-key="id"
           class-name="add-delete-demo-muuri-grid"
           :get-item-width="getItemWidth"
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import vuuri from "vuuri";
+import vuuri from "../../../src";
 
 export default {
   name: "App",

@@ -1,6 +1,6 @@
 {
   "name": "vuuri",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Muuri Vue Integration",
   "main": "src/index.js",
   "scripts": {

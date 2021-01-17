@@ -4,7 +4,7 @@ export const install = `
 `;
 
 export const usageCode = `
-<vuuri :items="items">
+<vuuri v-model="items">
   <template #item="{ item }">
     <YourComponent :item="item" />
   </template>

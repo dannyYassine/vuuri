@@ -5,7 +5,7 @@
       <b-button @click="onDeleteMoreClicked()">Delete</b-button>
     </div>
     <vuuri
-        :items="items"
+        v-model="items"
         item-key="id"
         :get-item-width="getItemWidth"
         :get-item-height="getItemHeight"

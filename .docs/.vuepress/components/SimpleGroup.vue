@@ -3,7 +3,7 @@
     <div class="columns">
       <div class="column">
         <vuuri
-            :items="todoItems"
+            v-model="todoItems"
             item-key="id"
             drag-enabled
             group-id="board"
@@ -17,7 +17,7 @@
       </div>
       <div class="column">
         <vuuri
-            :items="doneItems"
+            v-model="doneItems"
             item-key="id"
             drag-enabled
             group-id="board"
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import vuuri from "vuuri";
+import vuuri from "../../../src";
 
 export default {
   name: "SimpleGroup",
