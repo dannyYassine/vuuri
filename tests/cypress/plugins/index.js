@@ -16,10 +16,10 @@
 module.exports = (on, config) => {
   return {
     ...config,
-    fixturesFolder: 'config/cypress/fixtures',
-    integrationFolder: 'config/cypress/integration',
-    screenshotsFolder: 'config/cypress/screenshots',
-    videosFolder: 'config/cypress/videos',
-    supportFile: 'config/cypress/support/index.js'
+    fixturesFolder: 'tests/cypress/fixtures',
+    integrationFolder: 'tests/cypress/integration',
+    screenshotsFolder: 'tests/cypress/screenshots',
+    videosFolder: 'tests/cypress/videos',
+    supportFile: 'tests/cypress/support/index.js'
   };
 };

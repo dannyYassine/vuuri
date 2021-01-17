@@ -1,7 +1,14 @@
 <template>
   <div>
-    Drag Enabled
-    <vuuri :items="todoItems" drag-enabled>
+    Group Id Enabled
+    <vuuri class="group-1" :items="todoItems" drag-enabled group-id="group-1">
+      <template #item="{ item }">
+        <div class="item-content">
+          {{item.id}}
+        </div>
+      </template>
+    </vuuri>
+    <vuuri class="group-2" :items="todoItems" drag-enabled group-id="group-1">
       <template #item="{ item }">
         <div class="item-content">
           {{item.id}}
@@ -36,11 +43,7 @@ name: "DragEnabled",
     },
   },
   created() {
-    this._buildItems(20);
-    window.addEventListener('trigger', () => {
-      window.dispatchEvent(new PointerEvent('pointermove', { pointerId: 1, clientX: 160, clientY: 85 }));
-      window.dispatchEvent(new PointerEvent('pointerup', { pointerId: 1 }));
-    })
+    this._buildItems(3);
   }
 }
 </script>

@@ -5,6 +5,7 @@ import Main from './Main.vue'
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
 import VueRouter from 'vue-router';
+import GroupIdEnabled from "./components/GroupIdEnabled";
 
 const router = new VueRouter({
   routes: [
@@ -13,6 +14,9 @@ const router = new VueRouter({
     },
     {
       path: '/tests/drag-enabled', component: DragEnabled
+    },
+    {
+      path: '/tests/group-id-enabled', component: GroupIdEnabled
     }
   ]
 })
