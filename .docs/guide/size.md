@@ -29,7 +29,7 @@ You will need to always return a formatted string with the right unit of size. F
 ```vue
 <template>
   <vuuri
-    :items="items"
+    v-model="items"
     :get-item-width="getItemWidth"
     :get-item-height="getItemHeight" />
     <template #item="{ item }">

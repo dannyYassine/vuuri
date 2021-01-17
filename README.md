@@ -12,7 +12,7 @@ The abstraction over the <a href="https://muuri.dev/" target="_blank">Muuri libr
 ## Usage
 
 ```vue
-<vuuri :items="items">
+<vuuri v-model="items">
   <template #item="{ item }">
     <YourComponent :item="item"/>
   </template>

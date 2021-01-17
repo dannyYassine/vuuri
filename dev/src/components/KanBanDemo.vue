@@ -8,7 +8,7 @@
         </div>
         <div>
           <vuuri
-              :items="todoItems"
+              v-model="todoItems"
               item-key="id"
               :get-item-height="getItemHeight"
               drag-enabled
@@ -16,7 +16,7 @@
           >
             <template #item="{ item }">
               <div class="demo-item" :style="{ backgroundColor: item.color }">
-                <div class="grid-card-handle"></div>
+                <div class="grid-card-handle">{{item.name}}</div>
               </div>
             </template>
           </vuuri>
@@ -28,7 +28,7 @@
         </div>
         <div>
           <vuuri
-              :items="doneItems"
+              v-model="doneItems"
               item-key="id"
               :get-item-height="getItemHeight"
               drag-enabled
@@ -36,7 +36,7 @@
           >
             <template #item="{ item }">
               <div class="demo-item" :style="{ backgroundColor: item.color }">
-                <div class="grid-card-handle"></div>
+                <div class="grid-card-handle">{{item.name}}</div>
               </div>
             </template>
           </vuuri>
@@ -49,7 +49,7 @@
         </div>
         <div>
           <vuuri
-              :items="[]"
+              v-model="binItems"
               item-key="id"
               :get-item-height="getItemHeight"
               drag-enabled
@@ -57,7 +57,7 @@
           >
             <template #item="{ item }">
               <div class="demo-item" :style="{ backgroundColor: item.color }">
-                <div class="grid-card-handle"></div>
+                <div class="grid-card-handle">{{item.name}}</div>
               </div>
             </template>
           </vuuri>
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import vuuri from "/@/vuuri";
+import vuuri from "@vuuri";
 
 export default {
   name: "DragDrop",
@@ -79,7 +79,8 @@ export default {
     return {
       count: 0,
       todoItems: [],
-      doneItems: []
+      doneItems: [],
+      binItems: []
     };
   },
   methods: {
@@ -122,7 +123,7 @@ export default {
     },
     _buildItems(numberOfTimes = 4) {
       const numberOfItems = Math.max(
-          1,
+          4,
           Math.floor(Math.random() * numberOfTimes)
       );
       for (let i = 0; i < numberOfItems; i++) {
@@ -162,8 +163,14 @@ export default {
       return "rgb(139, 152, 255)";
     },
   },
+  created() {
+    // this.todoItems = [
+    //   this._buildItem(),
+    //   this._buildItem()
+    // ];
+  },
   mounted() {
-    this._addItems();
+    this._buildItems(5);
   },
 };
 

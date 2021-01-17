@@ -7,7 +7,7 @@
         </div>
         <div>
           <vuuri
-              :items="todoItems"
+              v-model="todoItems"
               item-key="id"
               :get-item-height="getItemHeight"
               drag-enabled
@@ -27,7 +27,7 @@
         </div>
         <div>
           <vuuri
-              :items="doneItems"
+              v-model="doneItems"
               item-key="id"
               :get-item-height="getItemHeight"
               drag-enabled
@@ -48,7 +48,7 @@
         </div>
         <div>
           <vuuri
-              :items="[]"
+              v-model="binItems"
               item-key="id"
               :get-item-height="getItemHeight"
               drag-enabled
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import vuuri from "vuuri";
+import vuuri from "../../../src";
 
 export default {
   name: "KanBanDemo",
@@ -78,7 +78,8 @@ export default {
     return {
       count: 0,
       todoItems: [],
-      doneItems: []
+      doneItems: [],
+      binItems: []
     };
   },
   methods: {

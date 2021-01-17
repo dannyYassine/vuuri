@@ -21,7 +21,7 @@ Below is a simple example which you can use `vuuri` to build a kan ban board, le
         </div>
         <div>
           <vuuri
-              :items="todoItems"
+              v-model="todoItems"
               item-key="id"
               :get-item-height="getItemHeight"
               drag-enabled
@@ -41,7 +41,7 @@ Below is a simple example which you can use `vuuri` to build a kan ban board, le
         </div>
         <div>
           <vuuri
-              :items="doneItems"
+              v-model="doneItems"
               item-key="id"
               :get-item-height="getItemHeight"
               drag-enabled
@@ -62,7 +62,7 @@ Below is a simple example which you can use `vuuri` to build a kan ban board, le
         </div>
         <div>
           <vuuri
-              :items="[]"
+              v-model="binItems"
               item-key="id"
               :get-item-height="getItemHeight"
               drag-enabled
@@ -92,7 +92,8 @@ export default {
     return {
       count: 0,
       todoItems: [],
-      doneItems: []
+      doneItems: [],
+      binItems: []
     };
   },
   methods: {

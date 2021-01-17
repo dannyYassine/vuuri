@@ -5,7 +5,10 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit",
+    "test:unit:watch": "vue-cli-service test:unit --watch",
+    "test:unit:coverage": "vue-cli-service test:unit --coverage"
   },
   "dependencies": {
     "buefy": "^0.9.4",
@@ -14,6 +17,7 @@
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "vue": "^2.6.11",
+    "vue-router": "^3.4.9",
     "vuuri": "0.1.3"
   },
   "devDependencies": {

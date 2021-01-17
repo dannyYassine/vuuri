@@ -2,7 +2,7 @@
   <div class="vuuri-container">
     <vuuri
         v-if="items"
-        :items="items"
+        v-model="items"
         drag-enabled
     >
       <template #item="{ item }">
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import vuuri from "vuuri";
+import vuuri from "../../../src";
 
 export default {
   name: "ImageList",

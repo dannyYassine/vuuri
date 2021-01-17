@@ -5,7 +5,7 @@ You can quickly start using `vuuri` with the minimal configuration below:
 
 ```vue
 <template>
-  <vuuri :items="items" />
+  <vuuri v-model="items" />
 </template>
 
 <script>
@@ -32,7 +32,7 @@ export default {
 You will need to implement the required slot `#item`, in order to display your content as there is no fallback if the slot is not implemented.
 
 ```vue
-<vuuri :items="items">
+<vuuri v-model="items">
   <template #item="{ item }">
     /* your custom markup here */
     <YourCustomComponent :model="item" />
@@ -45,7 +45,7 @@ You will need to implement the required slot `#item`, in order to display your c
 Simply add the `drag-enabled` attriute to the `vuuri` component.
 
 ```vue
-<vuuri :items="items" drag-enabled>
+<vuuri v-model="items" drag-enabled>
 </vuuri>
 ```
 
@@ -68,7 +68,16 @@ this.items.splice(index, 1);
 ```
 
 <ClientOnly>
-  <AddDeleteDemo min="100" max="100" starting-items="5" adds="1" deletes="1" />
+  <AddDeleteDemo min="100" max="100" starting-items="20" adds="5" deletes="5" />
+</ClientOnly>
+
+## Automatic Updates Between Groups
+
+When moving elements between different vuuri groups, vuuri makes sure your model is always up to date for you.
+
+<br>
+<ClientOnly>
+<AutoSort />
 </ClientOnly>
 
 ## Using className
@@ -101,7 +110,7 @@ If not provided, one will be created for you for each item. This prop is used fo
 ```vue
 <template>
   <vuuri
-    :items="items"
+    v-model="items"
     item-key="id" />
     <template #item="{ item }">
       <div>

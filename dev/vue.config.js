@@ -17,7 +17,8 @@ module.exports = {
     return {
       resolve: {
         alias: {
-          '/@': path.resolve(__dirname, './src')
+          '/@': path.resolve(__dirname, './src'),
+          '@vuuri': path.resolve(__dirname, '../src'),
         }
       }
     }

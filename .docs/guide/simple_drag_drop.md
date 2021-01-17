@@ -5,7 +5,7 @@ You simply need to add the `drag-enabled` attribute on the `vuuri` component to 
 ```vue
 <template>
   <vuuri
-    :items="items"
+    v-model="items"
     drag-enabled />
 </template>
 ```
@@ -24,7 +24,7 @@ You simply need to add the `drag-enabled` attribute on the `vuuri` component to 
   <div class="vuuri-container">
     <vuuri
         v-if="items"
-        :items="items"
+        v-model="items"
         drag-enabled
     >
       <template #item="{ item }">

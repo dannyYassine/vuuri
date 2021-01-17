@@ -6,7 +6,7 @@
           <h1>Grid A</h1>
         </div>
         <vuuri
-            :items="todoItems"
+            v-model="todoItems"
             item-key="id"
             drag-enabled
             :group-ids="['grid_a', 'grid_c']"
@@ -23,7 +23,7 @@
           <h1>Grid B</h1>
         </div>
         <vuuri
-            :items="doneItems"
+            v-model="doneItems"
             item-key="id"
             drag-enabled
             :group-ids="['grid_b', 'grid_d']"
@@ -40,7 +40,7 @@
           <h1>Grid C</h1>
         </div>
         <vuuri
-            :items="[]"
+            v-model="binItems"
             item-key="id"
             drag-enabled
             :group-ids="['grid_c', 'grid_d']"
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import vuuri from "vuuri";
+import vuuri from "../../../src";
 
 export default {
   name: "KanBanDemo",
@@ -68,7 +68,8 @@ export default {
     return {
       count: 0,
       todoItems: [],
-      doneItems: []
+      doneItems: [],
+      binItems: []
     };
   },
   methods: {

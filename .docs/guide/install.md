@@ -36,7 +36,7 @@ The package itself does not include any CSS, since it only takes care of display
 
 ```vue
 <template>
-  <vuuri :items="items">
+  <vuuri v-model="items">
     <template #item="{ item }">
       <YourComponent :item="item" />
     </template>

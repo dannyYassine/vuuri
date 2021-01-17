@@ -1,9 +1,8 @@
 <template>
   <div id="home-page">
     <Header />
-    <CodeDemo />
     <ClientOnly>
-      <GridDemo />
+      <CodeDemo />
     </ClientOnly>
     <Credits />
     <ClientOnly>
