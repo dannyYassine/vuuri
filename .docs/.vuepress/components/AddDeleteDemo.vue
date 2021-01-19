@@ -4,7 +4,7 @@
       <b-button class="mr-2" @click="onAddClicked()">Add</b-button>
       <b-button @click="onDeleteMoreClicked()">Delete</b-button>
     </div>
-    <div class="vuuri-container">
+    <div class="vuuri-container hide-scrollbar mt-5">
       <vuuri
           v-model="items"
           item-key="id"

@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   devServer: {
     public: '127.0.0.1',
-    port: 8080,
+    port: 9999,
     disableHostCheck: true,
     progress: false,
     watchOptions: {

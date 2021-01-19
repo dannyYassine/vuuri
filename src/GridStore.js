@@ -1,8 +1,10 @@
-
+/**
+ * Simple memory store for Vuuri
+ */
 export class GridStore {
   constructor() {
     /**
-     * @type {Map<string, Array[Muuri]>}
+     * @type {Map<string, Array<Muuri>>}
      */
     this._store = new Map();
   
@@ -22,27 +24,48 @@ export class GridStore {
     this._draggingItem = null;
   }
   
+  /**
+   * @param {number} gridId
+   * @param {Array<*>} items
+   */
   setItemsForGridId(gridId, items) {
     this._itemStore.set(gridId, items);
   }
   
+  /**
+   * @param {number} gridId
+   * @param {Muuri.Item} muuriItem
+   * @returns {*}
+   */
   getItemFromGridId(gridId, muuriItem) {
     const items = this._itemStore.get(gridId);
     return items.find(item => item.id == muuriItem.getElement().dataset.itemKey);
   }
   
+  /**
+   * @param {Muuri.Item} value
+   */
   setDraggingGridItem(value) {
     this._draggingGridItem = value;
   }
   
+  /**
+   * @param {*} value
+   */
   setDraggingItem(value) {
     this._draggingItem = value;
   }
   
+  /**
+   * @return {Muuri.Item}
+   */
   getDraggingGridItem() {
     return this._draggingGridItem;
   }
   
+  /**
+   * @return {*}
+   */
   getDraggingItem() {
     return this._draggingItem;
   }

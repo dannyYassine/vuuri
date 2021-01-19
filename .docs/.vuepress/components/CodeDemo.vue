@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div class="full-height">
+    <div class="crud-updates full-height max-width-800 margin-auto">
       <h2>Automatic CRUD Updates</h2>
       <h2>You just worry about writing javascript</h2>
       <div class="pre-code">
@@ -35,7 +35,7 @@
         <AddDeleteDemo class="add-delete-demo" deletes="false"/>
       </ClientOnly>
     </div>
-    <div class="full-height">
+    <div class="groups full-height max-width-800 margin-auto">
       <h2>Create Groups</h2>
       <h4>Vuuri automatically handles the model updates for you</h4>
       <br>
@@ -85,6 +85,12 @@ h1, h2, h3, h4, h5, h6 {
   border: none;
 }
 
+.crud-updates {
+}
+
+.groups {
+}
+
 .pre-code {
   position: absolute;
   left: 50%;
@@ -97,4 +103,11 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+@media screen and (max-width: 768px) {
+  h1, h2, h3, h4, h5 , h6 {
+    background-color: red;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
 </style>

@@ -1,12 +1,12 @@
 {
   "name": "vuuri",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Muuri Vue Integration",
   "main": "src/index.js",
   "scripts": {
     "serve": "",
     "build": "vue-cli-service build --target lib --name vuuri src/index.js",
-    "test": "start-server-and-test serve \"http://localhost:8080\" test:cypress:run",
+    "test": "start-server-and-test serve \"http://localhost:9999\" test:cypress:run",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:watch": "yarn test:unit --watch",
     "test:unit:coverage": "vue-cli-service test:unit --coverage",

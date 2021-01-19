@@ -39,4 +39,4 @@ The merge strategy makes the options have a higher priority and will override th
 Go check out the example [simple drag and drop example](/guide/simple_drag_drop.html#example)
 
 ## Helping Out
-You can always add the required to add this use case and create a pull request on GitHub :) 
+You can always add the required logic for abstracting other use cases and create a pull request on GitHub :) 

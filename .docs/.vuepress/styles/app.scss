@@ -11,6 +11,25 @@
   margin-bottom: 30vh;
 }
 
+.max-width-800 {
+  max-width: 800px;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .spacer {
   margin-top: 300px;
   margin-bottom: 300px;
