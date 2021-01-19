@@ -105,7 +105,6 @@ h1, h2, h3, h4, h5, h6 {
 
 @media screen and (max-width: 768px) {
   h1, h2, h3, h4, h5 , h6 {
-    background-color: red;
     margin-left: 10px;
     margin-right: 10px;
   }
