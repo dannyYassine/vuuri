@@ -1,7 +1,8 @@
 {
   "name": "vuuri",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Muuri Vue Integration",
+  "homepage": "https://dannyyassine.github.io/vuuri/",
   "main": "src/index.js",
   "scripts": {
     "serve": "cd tests/client ; yarn serve",
@@ -19,7 +20,14 @@
     "test:cypress:coverage": "NODE_ENV=test cypress run",
     "send-coverage": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
   },
-  "author": "",
+  "author": {
+    "name": "Danny Yassine",
+    "url": "https://github.com/dannyyassine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dannyYassine/vuuri.git"
+  },
   "license": "MIT",
   "dependencies": {
     "@vue/cli-plugin-unit-jest": "^4.5.10",
@@ -65,5 +73,6 @@
       "test/client/src/vuuri/**/*.js",
       "test/client/src/vuuri/**/*.vue"
     ]
-  }
+  },
+  "keywords": ["vue", "muuri", "vue.js", "grid", "layout", "bin-packing", "filter", "sort", "drag"]
 }
