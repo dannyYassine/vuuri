@@ -6,18 +6,13 @@
           src="https://github.com/dannyYassine/vuuri/blob/master/.docs/.vuepress/public/vuuri_logo.png?raw=true"
       />
     </div>
-    <KanBanDemo />
   </div>
 </template>
 
 <script>
-import KanBanDemo from './components/KanBanDemo';
 
 export default {
   name: "App",
-  components: {
-    KanBanDemo
-  }
 };
 
 </script>
