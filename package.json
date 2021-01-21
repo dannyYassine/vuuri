@@ -6,6 +6,7 @@
   "scripts": {
     "serve": "cd tests/client ; yarn serve",
     "build": "vue-cli-service build --target lib --name vuuri src/index.js",
+    "install-test-client": "cd tests/client ; yarn install ; cd ../..",
     "test": "start-server-and-test serve \"http://localhost:9999\" test:cypress:run",
     "test:coverage": "start-server-and-test serve \"http://localhost:9999\" test:cypress:coverage",
     "test:unit": "vue-cli-service test:unit",

@@ -24,10 +24,12 @@ jobs:
       script: yarn install
     - stage: coverage
       script:
+        - yarn install-test-client
         - yarn test:cypress:install
         - yarn test:coverage
     - stage: send-coverage
       script:
+        - yarn install-test-client
         - yarn test:cypress:install
         - yarn test:coverage
         - yarn send-coverage
