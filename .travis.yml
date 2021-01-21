@@ -1,46 +1,46 @@
 language: node_js
 node_js:
-  - node
+- node
 cache: npm
 stages:
-  - name: version
-    if: "(type = pull_request AND branch = master) OR (branch = master)"
-  - name: install
-    if: "(type = pull_request) or branch = master"
-  - name: coverage
-    if: "(type = pull_request)"
-  - name: send-coverage
-    if: "branch = master"
-  - name: deploy-npm
-    if: "(branch = master) AND (type = push)"
+- name: version
+  if: "(type = pull_request AND branch = master) OR (branch = master)"
+- name: install
+  if: "(type = pull_request) or branch = master"
+- name: coverage
+  if: "(type = pull_request)"
+- name: send-coverage
+  if: branch = master
+- name: deploy-npm
+  if: "(branch = master) AND (type = push)"
 jobs:
   include:
-    - stage: version
-      before_script:
-        - chmod +x .travis/validate-version.js
-      script:
-        - node .travis/validate-version.js
-    - stage: install
-      script: yarn install
-    - stage: coverage
-      script:
-        - yarn install-test-client
-        - yarn test:cypress:install
-        - yarn test:update-test-client
-        - yarn test:coverage
-    - stage: send-coverage
-      script:
-        - yarn install-test-client
-        - yarn test:cypress:install
-        - yarn test:update-test-client
-        - yarn test:coverage
-        - yarn send-coverage
-    - stage: deploy-npm
-      script:
-        - yarn install
-      deploy:
-        provider: npm
-        email: $ENV_EMAIL
-        api_key:
-          secure: eWd3B9Pd3K5eIN54OelPbswOHI/bj8sfjB4Mbum4AZnLQdvKIFBD0bPoka65UKhwza141Nb0x842QFxxOj1k3I8k3Rqj8w75GHUJLGAP9wjS6XUf0lgIaDtrUCwg9cE9AjVVL0v9rxQ+SHFoDgyRwFJUbtZ47LORpbEMXnQOEXajXElyJIVf+b4q31q8hT6GAcoEA7d5+3PCAZvXyomQSzXP4GV30n0iN9496g3aIp6wq8rEsfevR+M7iNB1bv4u8Y4NSS7OyN6f9Ye6pNWJ+V+9qnZnTtvQzDC2yKiCnBCwzSHOgL3B/CtY4II5imexZ4JNaciJaq1WpuAYJgvLgSyhyeqbjMCivrb4RpoqERnCjIOalac8z4fK6Sn21y5JekL7GQZpzoAVQ19Mc+2b2wbLLWagFSNgs8DpX7JNXh8pVf6SzFw+pOlINmJ/5nw3lWSCO8lUKW4wii0k3tM1TaMo3x4v9+cO9g0urMqkJe62w3+yFLoGh/jdkIZiqk5vQuSS1QTLEuW7pNKiwsD0om3W5puO3U7wZKU3eRBpOGDQpfSHt0+S+F1AlurtIVwXlZkHfQayzzJsAEPqZLqDKVaoyOyA5X5DQ1DIOT94J4hYOGnjfj97N7zmZmAzQoLeEoNeOUPF5C1zsVbsVTVAfInGmJZuq4DYACysQJsleMU=
-        skip_cleanup: 'true'
+  - stage: version
+    before_script:
+    - chmod +x .travis/validate-version.js
+    script:
+    - node .travis/validate-version.js
+  - stage: install
+    script: yarn install
+  - stage: coverage
+    script:
+    - yarn install-test-client
+    - yarn test:cypress:install
+    - yarn test:update-test-client
+    - yarn test:coverage
+  - stage: send-coverage
+    script:
+    - yarn install-test-client
+    - yarn test:cypress:install
+    - yarn test:update-test-client
+    - yarn test:coverage
+    - yarn send-coverage
+  - stage: deploy-npm
+    script:
+    - yarn install
+    deploy:
+      provider: npm
+      email: "$ENV_EMAIL"
+      api_key:
+        secure: s423eOFEtf/tufhWga5Eb2Vr5Jx/VJawP0rhASp2cTpFESRrTN8NqGlvCw9JwcrjWr/bI/rGrTBwNdQl0W0bM/qAFW4s5jZ2VPT6iBkQVzY4vUZHd2ebSeJCnNoleBwMKvDb1jvBEFeOcnX8dsH/9yb7aq+yNk1HHGHiZyyCHCrk8QwXH7gisB6DECQx0dv464F0SnDMHRWP+UtRajOTR71UJ5N3nO62Y8E2BSEMaf/Crj9AYchLTAYZpVGaJe5BNx6cUolbPa1RpvS4WLDuB6XrcOxtBysv9zPP2PeOPTlbbBwNjnTJsZ9Kb6Zh8AD2u+Qg7jxUF8IatPDKDah/PsNjZchEmAn7+4k3mxtC187qBMOidtIqpeJBB63os6TtXKAUC25K0gESfNxzhvjZub6rhHcAXcpvZToL7orFspVegb9V/JSYhl1XcpC/NJPtaHLogqRbb+LGskQoS7Q4IyOlTzgPaUSwu3unle8T6EHLPWSze5dP2nBXuw7k83HidXrWEGuz4QZadmuATfoBqLManuZywhejePChNX2AXHto6K+5SRaYB1KO+gEZKxNLyKOzs2LDWW1Sp00efS2wkkfQS4z1iiqUH/TfMjX1vKJl48aMAu6oKQRc0Nrpi60PdBF8WNtBOfQobK2T3XvGRs3NEutTZ1NfhlfnGhwyNCE=
+      skip_cleanup: 'true'
