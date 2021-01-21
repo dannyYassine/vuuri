@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1611256067687" clover="3.2.0">
-  <project timestamp="1611256067687" name="All files">
+<coverage generated="1611256095919" clover="3.2.0">
+  <project timestamp="1611256095919" name="All files">
     <metrics statements="159" coveredstatements="152" conditionals="47" coveredconditionals="41" methods="72" coveredmethods="69" elements="278" coveredelements="262" complexity="0" loc="159" ncloc="159" packages="1" files="6" classes="6"/>
     <file name="Env.js" path="/Users/dannyyassine/Documents/dev/vuuri/tests/client/src/vuuri/Env.js">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -8,129 +8,129 @@
     </file>
     <file name="GridEvent.js" path="/Users/dannyyassine/Documents/dev/vuuri/tests/client/src/vuuri/GridEvent.js">
       <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <line num="2" count="12" type="stmt"/>
+      <line num="2" count="15" type="stmt"/>
     </file>
     <file name="GridStore.js" path="/Users/dannyyassine/Documents/dev/vuuri/tests/client/src/vuuri/GridStore.js">
       <metrics statements="22" coveredstatements="18" conditionals="4" coveredconditionals="3" methods="13" coveredmethods="11"/>
-      <line num="9" count="12" type="stmt"/>
-      <line num="14" count="12" type="stmt"/>
-      <line num="19" count="12" type="stmt"/>
-      <line num="24" count="12" type="stmt"/>
-      <line num="32" count="49" type="stmt"/>
+      <line num="9" count="15" type="stmt"/>
+      <line num="14" count="15" type="stmt"/>
+      <line num="19" count="15" type="stmt"/>
+      <line num="24" count="15" type="stmt"/>
+      <line num="32" count="62" type="stmt"/>
       <line num="41" count="0" type="stmt"/>
       <line num="42" count="0" type="stmt"/>
-      <line num="49" count="4" type="stmt"/>
-      <line num="56" count="3" type="stmt"/>
-      <line num="63" count="1" type="stmt"/>
-      <line num="70" count="1" type="stmt"/>
-      <line num="78" count="3" type="stmt"/>
-      <line num="79" count="3" type="cond" truecount="2" falsecount="0"/>
-      <line num="80" count="2" type="stmt"/>
-      <line num="82" count="3" type="stmt"/>
-      <line num="90" count="2" type="stmt"/>
-      <line num="98" count="1" type="cond" truecount="1" falsecount="1"/>
-      <line num="99" count="1" type="stmt"/>
-      <line num="100" count="1" type="stmt"/>
-      <line num="101" count="1" type="stmt"/>
+      <line num="49" count="8" type="stmt"/>
+      <line num="56" count="6" type="stmt"/>
+      <line num="63" count="2" type="stmt"/>
+      <line num="70" count="2" type="stmt"/>
+      <line num="78" count="6" type="stmt"/>
+      <line num="79" count="6" type="cond" truecount="2" falsecount="0"/>
+      <line num="80" count="4" type="stmt"/>
+      <line num="82" count="6" type="stmt"/>
+      <line num="90" count="4" type="stmt"/>
+      <line num="98" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="99" count="2" type="stmt"/>
+      <line num="100" count="2" type="stmt"/>
+      <line num="101" count="2" type="stmt"/>
       <line num="104" count="0" type="stmt"/>
       <line num="105" count="0" type="stmt"/>
     </file>
     <file name="Vuuri.vue" path="/Users/dannyyassine/Documents/dev/vuuri/tests/client/src/vuuri/Vuuri.vue">
       <metrics statements="132" coveredstatements="130" conditionals="43" coveredconditionals="38" methods="58" coveredmethods="58"/>
-      <line num="39" count="14" type="stmt"/>
-      <line num="48" count="14" type="stmt"/>
-      <line num="63" count="5" type="stmt"/>
-      <line num="71" count="49" type="stmt"/>
-      <line num="79" count="49" type="stmt"/>
-      <line num="113" count="14" type="stmt"/>
-      <line num="132" count="21" type="cond" truecount="2" falsecount="0"/>
+      <line num="39" count="19" type="stmt"/>
+      <line num="48" count="19" type="stmt"/>
+      <line num="63" count="10" type="stmt"/>
+      <line num="71" count="77" type="stmt"/>
+      <line num="79" count="77" type="stmt"/>
+      <line num="113" count="19" type="stmt"/>
+      <line num="132" count="24" type="cond" truecount="2" falsecount="0"/>
       <line num="133" count="18" type="stmt"/>
-      <line num="139" count="14" type="stmt"/>
-      <line num="147" count="57" type="stmt"/>
-      <line num="148" count="57" type="stmt"/>
-      <line num="150" count="36" type="stmt"/>
-      <line num="158" count="14" type="stmt"/>
-      <line num="159" count="14" type="cond" truecount="2" falsecount="0"/>
-      <line num="160" count="1" type="stmt"/>
-      <line num="162" count="14" type="cond" truecount="2" falsecount="0"/>
-      <line num="163" count="2" type="stmt"/>
-      <line num="165" count="14" type="cond" truecount="1" falsecount="1"/>
-      <line num="166" count="14" type="stmt"/>
-      <line num="167" count="30" type="stmt"/>
-      <line num="169" count="14" type="stmt"/>
-      <line num="171" count="14" type="stmt"/>
-      <line num="172" count="14" type="stmt"/>
-      <line num="173" count="14" type="stmt"/>
-      <line num="183" count="14" type="stmt"/>
-      <line num="187" count="14" type="stmt"/>
-      <line num="191" count="14" type="stmt"/>
-      <line num="198" count="14" type="cond" truecount="2" falsecount="0"/>
-      <line num="199" count="4" type="stmt"/>
-      <line num="201" count="14" type="cond" truecount="4" falsecount="0"/>
-      <line num="202" count="3" type="stmt"/>
-      <line num="203" count="3" type="cond" truecount="2" falsecount="0"/>
-      <line num="204" count="1" type="stmt"/>
-      <line num="206" count="3" type="cond" truecount="2" falsecount="0"/>
-      <line num="207" count="2" type="stmt"/>
-      <line num="209" count="3" type="stmt"/>
-      <line num="210" count="1" type="stmt"/>
-      <line num="213" count="14" type="stmt"/>
-      <line num="219" count="4" type="stmt"/>
-      <line num="231" count="2" type="stmt"/>
-      <line num="246" count="14" type="stmt"/>
-      <line num="247" count="350" type="stmt"/>
-      <line num="248" count="209" type="stmt"/>
-      <line num="250" count="350" type="stmt"/>
-      <line num="252" count="350" type="cond" truecount="2" falsecount="0"/>
-      <line num="253" count="14" type="stmt"/>
-      <line num="255" count="350" type="cond" truecount="2" falsecount="0"/>
-      <line num="256" count="14" type="stmt"/>
-      <line num="258" count="350" type="cond" truecount="2" falsecount="0"/>
-      <line num="259" count="14" type="stmt"/>
-      <line num="261" count="350" type="cond" truecount="2" falsecount="0"/>
-      <line num="262" count="14" type="stmt"/>
-      <line num="264" count="350" type="cond" truecount="2" falsecount="0"/>
-      <line num="265" count="14" type="stmt"/>
-      <line num="274" count="1" type="stmt"/>
-      <line num="275" count="25" type="stmt"/>
-      <line num="276" count="25" type="stmt"/>
-      <line num="285" count="2" type="stmt"/>
-      <line num="293" count="1" type="stmt"/>
-      <line num="294" count="1" type="stmt"/>
-      <line num="302" count="4" type="stmt"/>
-      <line num="303" count="1" type="stmt"/>
-      <line num="304" count="1" type="stmt"/>
-      <line num="305" count="1" type="stmt"/>
-      <line num="312" count="1" type="stmt"/>
-      <line num="313" count="1" type="stmt"/>
-      <line num="314" count="1" type="stmt"/>
-      <line num="315" count="1" type="stmt"/>
-      <line num="321" count="2" type="stmt"/>
-      <line num="322" count="2" type="stmt"/>
-      <line num="330" count="2" type="stmt"/>
-      <line num="332" count="2" type="stmt"/>
-      <line num="333" count="2" type="stmt"/>
-      <line num="334" count="24" type="stmt"/>
-      <line num="335" count="24" type="stmt"/>
-      <line num="336" count="24" type="stmt"/>
-      <line num="339" count="2" type="stmt"/>
-      <line num="340" count="24" type="stmt"/>
-      <line num="341" count="24" type="stmt"/>
-      <line num="349" count="49" type="stmt"/>
-      <line num="362" count="28" type="stmt"/>
-      <line num="369" count="25" type="stmt"/>
-      <line num="370" count="25" type="stmt"/>
-      <line num="381" count="96" type="stmt"/>
+      <line num="139" count="19" type="stmt"/>
+      <line num="147" count="69" type="stmt"/>
+      <line num="148" count="69" type="stmt"/>
+      <line num="150" count="47" type="stmt"/>
+      <line num="158" count="19" type="stmt"/>
+      <line num="159" count="19" type="cond" truecount="2" falsecount="0"/>
+      <line num="160" count="2" type="stmt"/>
+      <line num="162" count="19" type="cond" truecount="2" falsecount="0"/>
+      <line num="163" count="4" type="stmt"/>
+      <line num="165" count="19" type="cond" truecount="1" falsecount="1"/>
+      <line num="166" count="19" type="stmt"/>
+      <line num="167" count="40" type="stmt"/>
+      <line num="169" count="19" type="stmt"/>
+      <line num="171" count="19" type="stmt"/>
+      <line num="172" count="19" type="stmt"/>
+      <line num="173" count="19" type="stmt"/>
+      <line num="183" count="19" type="stmt"/>
+      <line num="187" count="19" type="stmt"/>
+      <line num="191" count="19" type="stmt"/>
+      <line num="198" count="19" type="cond" truecount="2" falsecount="0"/>
+      <line num="199" count="8" type="stmt"/>
+      <line num="201" count="19" type="cond" truecount="4" falsecount="0"/>
+      <line num="202" count="6" type="stmt"/>
+      <line num="203" count="6" type="cond" truecount="2" falsecount="0"/>
+      <line num="204" count="2" type="stmt"/>
+      <line num="206" count="6" type="cond" truecount="2" falsecount="0"/>
+      <line num="207" count="4" type="stmt"/>
+      <line num="209" count="6" type="stmt"/>
+      <line num="210" count="2" type="stmt"/>
+      <line num="213" count="19" type="stmt"/>
+      <line num="219" count="8" type="stmt"/>
+      <line num="231" count="4" type="stmt"/>
+      <line num="246" count="19" type="stmt"/>
+      <line num="247" count="475" type="stmt"/>
+      <line num="248" count="295" type="stmt"/>
+      <line num="250" count="475" type="stmt"/>
+      <line num="252" count="475" type="cond" truecount="2" falsecount="0"/>
+      <line num="253" count="19" type="stmt"/>
+      <line num="255" count="475" type="cond" truecount="2" falsecount="0"/>
+      <line num="256" count="19" type="stmt"/>
+      <line num="258" count="475" type="cond" truecount="2" falsecount="0"/>
+      <line num="259" count="19" type="stmt"/>
+      <line num="261" count="475" type="cond" truecount="2" falsecount="0"/>
+      <line num="262" count="19" type="stmt"/>
+      <line num="264" count="475" type="cond" truecount="2" falsecount="0"/>
+      <line num="265" count="19" type="stmt"/>
+      <line num="274" count="2" type="stmt"/>
+      <line num="275" count="50" type="stmt"/>
+      <line num="276" count="50" type="stmt"/>
+      <line num="285" count="4" type="stmt"/>
+      <line num="293" count="2" type="stmt"/>
+      <line num="294" count="2" type="stmt"/>
+      <line num="302" count="8" type="stmt"/>
+      <line num="303" count="2" type="stmt"/>
+      <line num="304" count="2" type="stmt"/>
+      <line num="305" count="2" type="stmt"/>
+      <line num="312" count="2" type="stmt"/>
+      <line num="313" count="2" type="stmt"/>
+      <line num="314" count="2" type="stmt"/>
+      <line num="315" count="2" type="stmt"/>
+      <line num="321" count="4" type="stmt"/>
+      <line num="322" count="4" type="stmt"/>
+      <line num="330" count="4" type="stmt"/>
+      <line num="332" count="4" type="stmt"/>
+      <line num="333" count="4" type="stmt"/>
+      <line num="334" count="48" type="stmt"/>
+      <line num="335" count="48" type="stmt"/>
+      <line num="336" count="48" type="stmt"/>
+      <line num="339" count="4" type="stmt"/>
+      <line num="340" count="48" type="stmt"/>
+      <line num="341" count="48" type="stmt"/>
+      <line num="349" count="77" type="stmt"/>
+      <line num="362" count="56" type="stmt"/>
+      <line num="369" count="32" type="stmt"/>
+      <line num="370" count="32" type="stmt"/>
+      <line num="381" count="111" type="stmt"/>
       <line num="382" count="33" type="stmt"/>
-      <line num="392" count="32" type="cond" truecount="3" falsecount="1"/>
+      <line num="392" count="37" type="cond" truecount="3" falsecount="1"/>
       <line num="393" count="0" type="stmt"/>
-      <line num="396" count="32" type="stmt"/>
-      <line num="398" count="32" type="stmt"/>
-      <line num="399" count="32" type="stmt"/>
-      <line num="400" count="32" type="stmt"/>
-      <line num="411" count="32" type="stmt"/>
-      <line num="412" count="32" type="cond" truecount="2" falsecount="0"/>
-      <line num="413" count="29" type="stmt"/>
+      <line num="396" count="37" type="stmt"/>
+      <line num="398" count="37" type="stmt"/>
+      <line num="399" count="37" type="stmt"/>
+      <line num="400" count="37" type="stmt"/>
+      <line num="411" count="37" type="stmt"/>
+      <line num="412" count="37" type="cond" truecount="2" falsecount="0"/>
+      <line num="413" count="34" type="stmt"/>
       <line num="416" count="3" type="stmt"/>
       <line num="417" count="3" type="stmt"/>
       <line num="418" count="3" type="stmt"/>
@@ -146,35 +146,35 @@
       <line num="440" count="6" type="stmt"/>
       <line num="441" count="3" type="stmt"/>
       <line num="444" count="3" type="stmt"/>
-      <line num="456" count="32" type="stmt"/>
-      <line num="457" count="32" type="stmt"/>
-      <line num="458" count="32" type="cond" truecount="2" falsecount="0"/>
+      <line num="456" count="37" type="stmt"/>
+      <line num="457" count="37" type="stmt"/>
+      <line num="458" count="37" type="cond" truecount="2" falsecount="0"/>
       <line num="459" count="12" type="stmt"/>
-      <line num="462" count="20" type="cond" truecount="2" falsecount="0"/>
-      <line num="463" count="33" type="stmt"/>
-      <line num="467" count="20" type="stmt"/>
-      <line num="469" count="20" type="stmt"/>
-      <line num="470" count="20" type="stmt"/>
-      <line num="471" count="43" type="stmt"/>
-      <line num="472" count="43" type="stmt"/>
-      <line num="477" count="69" type="stmt"/>
-      <line num="481" count="3" type="stmt"/>
-      <line num="482" count="3" type="stmt"/>
-      <line num="483" count="3" type="stmt"/>
-      <line num="484" count="3" type="stmt"/>
-      <line num="485" count="3" type="stmt"/>
-      <line num="490" count="14" type="stmt"/>
-      <line num="491" count="14" type="stmt"/>
-      <line num="494" count="14" type="stmt"/>
-      <line num="495" count="14" type="stmt"/>
-      <line num="498" count="1" type="stmt"/>
-      <line num="499" count="1" type="stmt"/>
+      <line num="462" count="25" type="cond" truecount="2" falsecount="0"/>
+      <line num="463" count="66" type="stmt"/>
+      <line num="467" count="25" type="stmt"/>
+      <line num="469" count="25" type="stmt"/>
+      <line num="470" count="25" type="stmt"/>
+      <line num="471" count="71" type="stmt"/>
+      <line num="472" count="71" type="stmt"/>
+      <line num="477" count="102" type="stmt"/>
+      <line num="481" count="6" type="stmt"/>
+      <line num="482" count="6" type="stmt"/>
+      <line num="483" count="6" type="stmt"/>
+      <line num="484" count="6" type="stmt"/>
+      <line num="485" count="6" type="stmt"/>
+      <line num="490" count="19" type="stmt"/>
+      <line num="491" count="19" type="stmt"/>
+      <line num="494" count="19" type="stmt"/>
+      <line num="495" count="19" type="stmt"/>
+      <line num="498" count="2" type="stmt"/>
+      <line num="499" count="2" type="stmt"/>
     </file>
     <file name="constants.js" path="/Users/dannyyassine/Documents/dev/vuuri/tests/client/src/vuuri/constants.js">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <line num="2" count="12" type="stmt"/>
-      <line num="6" count="12" type="stmt"/>
-      <line num="11" count="12" type="stmt"/>
+      <line num="2" count="15" type="stmt"/>
+      <line num="6" count="15" type="stmt"/>
+      <line num="11" count="15" type="stmt"/>
     </file>
     <file name="index.js" path="/Users/dannyyassine/Documents/dev/vuuri/tests/client/src/vuuri/index.js">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
