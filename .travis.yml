@@ -8,8 +8,14 @@ jobs:
       script: yarn install
     - stage: coverage
       script:
-        - npm run test:unit:coverage
-        - npm run send-coverage
+        -
+        - yarn test:cypress:install
+        - yarn test:cypress:coverage
+    - stage: send-coverage
+      script:
+        - yarn test:cypress:install
+        - yarn test:cypress:coverage
+        - yarn send-coverage
     - stage: version
       before_script:
         - chmod +x .travis/validate-version.js
@@ -26,9 +32,11 @@ jobs:
         skip_cleanup: 'true'
 stages:
   - name: install
-    if: "(type = pull_request)"
+    if: "(type = pull_request) or branch = master"
   - name: coverage
     if: "(type = pull_request)"
+  - name: send-coverage
+    if: "branch = master"
   - name: version
     if: "(type = pull_request AND branch = master) OR (branch = master)"
   - name: deploy-npm

@@ -1,5 +1,9 @@
 <template>
-  <div ref="muuri" class="muuri-grid" :class="className">
+  <div
+      ref="muuri"
+      class="muuri-grid"
+      :class="className"
+      :data-grid-key="gridKey">
     <div
         v-for="item in copiedItems"
         :key="item[itemKey]"
@@ -15,11 +19,13 @@
 </template>
 
 <script>
-import { cloneDeep, debounce, differenceWith } from 'lodash';
+import { debounce, differenceWith } from 'lodash';
 import Muuri from 'muuri';
 import { v4 as uuidv4 } from 'uuid';
 import { GridEvent } from './GridEvent';
 import GridStore from './GridStore';
+import { Env } from './Env';
+import { ItemKey, ItemSize, ItemDragHandle } from './constants';
 
 export default {
   name: 'Vuuri',
@@ -30,7 +36,7 @@ export default {
     className: {
       type: String,
       required: false,
-      default: () => `class${uuidv4().replaceAll('-', '')}`
+      default: () => `class${uuidv4().replace(/-/g, '')}`
     },
     /**
      * To set up options of the grid
@@ -42,11 +48,11 @@ export default {
       default: () => ({})
     },
     /**
-     * Collection to render
+     * Array input for items to display (via v-model)
      */
-    items: {
+    value: {
       type: Array,
-      required: true
+      required: false
     },
     /**
      * Identifier property for each item
@@ -54,7 +60,7 @@ export default {
     itemKey: {
       type: String,
       required: false,
-      default: () => '_$muuri_id'
+      default: () => ItemKey.key
     },
     /**
      * Callback to fetch a dynamic width based on item
@@ -62,7 +68,7 @@ export default {
     getItemWidth: {
       type: Function,
       required: false,
-      default: () => '100px'
+      default: () => ItemSize.width
     },
     /**
      * Callback to fetch a dynamic height based on item
@@ -70,7 +76,7 @@ export default {
     getItemHeight: {
       type: Function,
       required: false,
-      default: () => '100px'
+      default: () => ItemSize.height
     },
     /**
      * Enable drag and drop feature on the grid
@@ -80,10 +86,13 @@ export default {
       required: false,
       default: false
     },
+    /**
+     * Selector for determining the handle to activate dragging
+     */
     dragHandle: {
       type: String,
       required: false,
-      default: '.muuri-item:first-child'
+      default: ItemDragHandle.select
     },
     /**
      * When dragEnabled is on, can control which other grid you can drag into
@@ -119,8 +128,10 @@ export default {
     }
   },
   watch: {
-    items(newItems) {
-      this._sync(newItems, this.copiedItems);
+    value(newItems) {
+      if (!this.internallySet) {
+        this._sync(newItems, this.copiedItems);
+      }
     }
   },
   computed: {
@@ -151,12 +162,20 @@ export default {
       if (this.groupIds) {
         GridStore.addGridToGroups(this.groupIds, this.muuri);
       }
-      this.observer = new ResizeObserver(() => {
-        this._resizeOnLoad();
+      if (!Env.isUnitTesting) {
+        this.observer = new ResizeObserver(() => {
+          this._resizeOnLoad();
+        });
+        this.observer.observe(this.$refs.muuri);
+      }
+      this._sync(this.value, []);
+      this.$nextTick(() => {
+        GridStore.setItemsForGridId(this.gridKey, this.value);
       });
-      this.observer.observe(this.$refs.muuri);
-      this._sync(this.items, []);
     },
+    /**
+     * @private
+     */
     _setupNonReactiveProps() {
       /**
        * @type {Muuri}
@@ -166,7 +185,15 @@ export default {
        * @type {ResizeObserver}
        */
       this.observer = undefined;
+      /**
+       * @type {string}
+       */
+      this.gridKey = uuidv4().replace(/-/g, '')
     },
+    /**
+     * Creates the options object for Muuri
+     * @private
+     */
     _setupOptions() {
       if (this.dragEnabled) {
         this.muuriOptions = {...this._generateDragOptions(), ...this.muuriOptions};
@@ -185,12 +212,15 @@ export default {
       }
       this.muuriOptions = {...this.options, ...this.muuriOptions};
     },
+    /**
+     * @private
+     */
     _generateDragOptions() {
       return {
         dragEnabled: true,
-          dragHandle: this.dragHandle,
-          dragContainer: document.querySelector(`.muuri-grid${this.selector}`),
-          dragRelease: {
+        dragHandle: this.dragHandle,
+        dragContainer: document.querySelector(`.muuri-grid${this.selector}`),
+        dragRelease: {
           duration: 400,
           easing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
           useDragContainer: true,
@@ -210,6 +240,7 @@ export default {
     },
     /**
      * Registers Muuri events
+     * @private
      */
     _registerEvents() {
       Object.values(GridEvent).forEach(event => {
@@ -217,16 +248,98 @@ export default {
           this.$emit(event, ...args);
         }
         this.muuri.on(event, this.events[event]);
+
+        if (event === GridEvent.dragStart) {
+          this.muuri.on(event, this._onDragStart)
+        }
+        if (event === GridEvent.send) {
+          this.muuri.on(event, this._onItemSend);
+        }
+        if (event === GridEvent.receive) {
+          this.muuri.on(event, this._onItemReceive);
+        }
+        if (event === GridEvent.move) {
+          this.muuri.on(event, this._onItemMove);
+        }
+        if (event === GridEvent.dragEnd) {
+          this.muuri.on(event, this._onDragEnd);
+        }
       });
     },
     /**
-     * Unregisters Muuri events
+     * Unregister Muuri events
+     * @private
      */
     _unregisterEvents() {
       Object.values(GridEvent).forEach(event => {
         this.muuri.off(event, this.events[event]);
         delete this.events[event];
       });
+    },
+    /**
+     * Listener when dragging begins
+     * @type {Muuri.Item} item
+     * @private
+     */
+    _onDragStart(item) {
+      GridStore.setDraggingGridItem(item);
+    },
+    /**
+     * Listener when item moves within the same grid
+     * @type {Muuri.Item} item
+     * @private
+     */
+    _onItemMove({ item }) {
+      const value = this._reOrderWithItem(item);
+      this._emitValue(value);
+    },
+    /**
+     * Listener when item leaves its original grid
+     * @type {Muuri.Item} item
+     * @private
+     */
+    _onItemSend({ item }) {
+      const index = this.value.findIndex(value => value.id == item.getElement().dataset.itemKey);
+      const removedItem = this.value.splice(index, 1)[0];
+      GridStore.setDraggingItem(removedItem);
+      this._emitValue(this.value);
+    },
+    /**
+     * Listener when item enters a new grid
+     * @private
+     */
+    _onItemReceive() {
+      const vuuriItem = GridStore.getDraggingItem();
+      this.value.push(vuuriItem);
+      const value = this._reOrderWithItem(GridStore.getDraggingGridItem())
+      this._emitValue(value);
+    },
+    /**
+     * Listener when dragging ends
+     */
+    _onDragEnd() {
+      GridStore.setDraggingGridItem(null);
+      GridStore.setDraggingItem(null);
+    },
+    /**
+     * Makes sure the items order is updated with value
+     * @type {Muuri.Item} item
+     * @private
+     */
+    _reOrderWithItem(item) {
+      const $grid = item.getGrid();
+
+      let i = 0
+      const itemKeys = $grid.getItems().reduce((accum, item) => {
+        accum[item.getElement().dataset.itemKey] = i;
+        i += 1;
+        return accum;
+      }, {});
+
+      return this.value.reduce((accum, a) => {
+        accum[itemKeys[a[this.itemKey]]] = a;
+        return accum
+      }, []);
     },
     /**
      * Styles for each grid item
@@ -254,7 +367,7 @@ export default {
      */
     _resizeOnLoad: debounce(function() {
       this.$nextTick(() => {
-        this._sync();
+        this.update();
       }, 100);
     }),
     /**
@@ -284,6 +397,7 @@ export default {
           .then(() => {
             this.update();
             this._add(newItems, oldItems);
+            GridStore.setItemsForGridId(this.gridKey, this.copiedItems);
           })
     },
     /**
@@ -304,7 +418,7 @@ export default {
         const itemToRemove = this.muuri.getItems().find(item => {
           return (
               value[this.itemKey]+'' ===
-              item.getElement().getAttribute('data-item-key')
+              item.getElement().dataset.itemKey
           );
         });
 
@@ -339,12 +453,13 @@ export default {
      * @private
      */
     _add(newItems, oldItems) {
-      const valuesToAdd = this._getDiff(newItems, oldItems);
+      let valuesToAdd = this._getDiff(newItems, oldItems);
+      valuesToAdd = this._getDiff(valuesToAdd, this.copiedItems); // sync from setup and watch may overlap
       if (!valuesToAdd.length) {
         return;
       }
 
-      if (this.itemKey === '_$muuri_id') {
+      if (this.itemKey === ItemKey.key) {
         valuesToAdd.forEach(item => this._generateItemKey(item));
       }
 
@@ -362,14 +477,14 @@ export default {
         this.muuri.filter(() => true);
       });
     },
-    /**
-     * Create a copy of the items from the vue props
-     * @param items
-     * @private
-     */
-    _copyItems(items = this.items) {
-      this.copiedItems = cloneDeep(items);
-    },
+    _emitValue(value) {
+      this.internallySet = true;
+      this.$emit('input', value);
+      this.$nextTick(() => {
+        this.internallySet = false;
+        GridStore.setItemsForGridId(this.gridKey, this.value);
+      });
+    }
   },
   created() {
     this._setupNonReactiveProps();
@@ -381,6 +496,7 @@ export default {
   },
   beforeDestroy() {
     this._unregisterEvents();
+    this.$emit('on-destroy', this);
   }
 }
 </script>

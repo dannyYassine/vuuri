@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { cloneDeep, debounce, differenceWith } from 'lodash';
+import { debounce, differenceWith } from 'lodash';
 import Muuri from 'muuri';
 import { v4 as uuidv4 } from 'uuid';
 import { GridEvent } from './GridEvent';
@@ -477,14 +477,6 @@ export default {
         this.muuri.filter(() => true);
       });
     },
-    /**
-     * Create a copy of the items from the vue props
-     * @param items
-     * @private
-     */
-    _copyItems(items = this.value) {
-      this.copiedItems = cloneDeep(items);
-    },
     _emitValue(value) {
       this.internallySet = true;
       this.$emit('input', value);
@@ -504,6 +496,7 @@ export default {
   },
   beforeDestroy() {
     this._unregisterEvents();
+    this.$emit('on-destroy', this);
   }
 }
 </script>

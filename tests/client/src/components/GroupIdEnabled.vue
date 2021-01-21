@@ -8,7 +8,14 @@
         </div>
       </template>
     </vuuri>
-    <vuuri v-model="tododoItems" class="group-2" drag-enabled group-id="group-1">
+    <vuuri v-model="tododoItems" class="group-2" drag-enabled :group-ids="['group-1']">
+      <template #item="{ item }">
+        <div class="item-content">
+          {{item.id}}
+        </div>
+      </template>
+    </vuuri>
+    <vuuri v-model="binItems" class="group-3" drag-enabled :group-ids="['group-3']">
       <template #item="{ item }">
         <div class="item-content">
           {{item.id}}
@@ -18,7 +25,7 @@
   </div>
 </template>
 <script>
-import vuuri from "@vuuri";
+import vuuri from "../vuuri";
 
 export default {
 name: "DragEnabled",
@@ -29,6 +36,7 @@ name: "DragEnabled",
     return {
       todoItems: [],
       tododoItems: [],
+      binItems: [this.buildItem()],
     }
   },
   methods: {
@@ -40,7 +48,7 @@ name: "DragEnabled",
     },
     buildItem() {
       return {
-        id: this.todoItems.length
+        id: Math.random()
       };
     },
   },

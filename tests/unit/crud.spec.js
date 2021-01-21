@@ -2,7 +2,7 @@ import { mount } from './main';
 
 jest.mock('muuri');
 
-import vuuri from "../../src";
+import vuuri from "../../client/src/vuuri";
 
 describe("CRUD Operations", () => {
   

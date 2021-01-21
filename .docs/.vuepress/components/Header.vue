@@ -19,8 +19,13 @@
     </div>
     <div class="badges animate-delay-1 mt-5">
       <a href='https://www.npmjs.com/package/vuuri' target="_blank"><img src='https://img.shields.io/npm/v/vuuri.svg' alt='Library Version' /></a>
-<!--      <a href='https://travis-ci.com/dannyYassine/vuuri' target="_blank"><img src='https://travis-ci.com/dannyYassine/vuuri.svg?branch=master' alt='Build Status' /></a>-->
-<!--      <a href='https://coveralls.io/github/dannyYassine/vuuri?branch=master' target="_blank"><img src='https://coveralls.io/repos/github/dannyYassine/vuuri/badge.svg?branch=master' alt='Coverage Status' /></a>-->
+      <a href='https://travis-ci.com/dannyYassine/vuuri' target="_blank"><img src='https://travis-ci.com/dannyYassine/vuuri.svg?branch=master' alt='Build Status' /></a>
+      <a href='https://coveralls.io/github/dannyYassine/vuuri?branch=master' target="_blank"><img src='https://coveralls.io/repos/github/dannyYassine/vuuri/badge.svg?branch=master' alt='Coverage Status' /></a>
+      <div>
+        <a><img src="https://img.shields.io/bundlephobia/min/vuuri.svg" alt="Minified size"></a>
+        <a href="https://npm-stat.com/charts.html?package=vuuri"><img src="https://img.shields.io/npm/dm/vuuri.svg" alt="Downloads"></a>
+        <a href="https://david-dm.org/dannyyassine/vuuri"><img src="https://img.shields.io/david/dannyyassine/vuuri.svg" alt="Dependencies"></a>
+      </div>
     </div>
     <div style="position: relative">
       <h1 class="animate-delay-2">The Vue Muuri Integration</h1>
@@ -91,12 +96,11 @@ header {
 
 .badges {
   position: relative;
-  top: -75px;
-  display: flex;
-  justify-content: center;
+  top: -70px;
+  text-align: center;
 
-  a {
-    margin: 0 4px;
+  img {
+    height: 20px
   }
 }
 

@@ -1,6 +1,8 @@
-export class GroupIdEnabledPo {
-  visit() {
-    cy.visit(`${Cypress.env('CLIENT_URL') || 'http://localhost:8080/#/tests/group-id-enabled'}`);
+import { BasePageObject } from './BasePageObject';
+
+export class GroupIdEnabledPageObject extends BasePageObject {
+  getPath() {
+    return '/group-id-enabled';
   }
   
   getItemsInGrid1() {

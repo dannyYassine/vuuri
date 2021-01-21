@@ -1,20 +1,17 @@
 <template>
   <div id="code-demo-app">
     <div class="mb-2">
-      <b-button class="mr-2" @click="onAddClicked()">Add</b-button>
-      <b-button @click="onDeleteMoreClicked()">Delete</b-button>
+      <b-button data-e2e="add-button" class="mr-2" @click="onAddClicked()">Add</b-button>
     </div>
     <vuuri
         v-model="items"
         item-key="id"
-        :get-item-width="getItemWidth"
-        :get-item-height="getItemHeight"
-        :options="options"
     >
       <template #item="{ item }">
         <div class="demo-item" :style="{ backgroundColor: item.color }">
           <div class="grid-card-handle"></div>
           <b-button
+              data-e2e="delete-button"
               type="is-danger"
               class="delete-btn"
               @click="onDeleteClicked(item)"
@@ -27,7 +24,7 @@
 </template>
 
 <script>
-import vuuri from "vuuri";
+import vuuri from "../vuuri";
 
 export default {
   name: "App",
@@ -37,42 +34,7 @@ export default {
   data() {
     return {
       count: 0,
-      items: [],
-      options: {
-        showDuration: 400,
-        showEasing: "ease",
-        hideDuration: 400,
-        hideEasing: "ease",
-        layoutDuration: 400,
-        layoutEasing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
-        sortData: {
-          title(item, element) {
-            return element.getAttribute("data-title") || "";
-          },
-          color(item, element) {
-            return element.getAttribute("data-color") || "";
-          },
-        },
-        dragEnabled: true,
-        dragHandle: ".grid-card-handle",
-        dragContainer: document.querySelector(".muuri-grid"),
-        dragRelease: {
-          duration: 400,
-          easing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
-          useDragContainer: true,
-        },
-        dragPlaceholder: {
-          enabled: true,
-          createElement(item) {
-            return item.getElement().cloneNode(true);
-          },
-        },
-        dragAutoScroll: {
-          targets: [window],
-          sortDuringScroll: false,
-          syncAfterScroll: false,
-        },
-      },
+      items: []
     };
   },
   methods: {
@@ -83,66 +45,14 @@ export default {
     onAddClicked() {
       this._buildItems();
     },
-    onDeleteMoreClicked() {
-      const numberOfTimesToDelete = Math.max(
-          1,
-          Math.floor(Math.random() * this.items.length)
-      );
-      console.log("numberOfTimesToDelete: ", numberOfTimesToDelete);
-      for (let i = 0; i < numberOfTimesToDelete; i++) {
-        const index = Math.floor(Math.random() * this.items.length);
-        if (index < 0) {
-          return;
-        }
-        console.log("index", index, this.items.length);
-        this.items.splice(index, 1);
-      }
-    },
-    getItemWidth(item) {
-      return `${item.width}px`;
-    },
-    getItemHeight(item) {
-      return `${item.height}px`;
-    },
-    getSize() {
-      const number = Math.random();
-      if (number < 0.333) {
-        return 100;
-      }
-
-      if (number < 0.666) {
-        return 150;
-      }
-
-      return 200;
-    },
-    _buildItems(numberOfTimes = 4) {
-      const numberOfItems = Math.max(
-          1,
-          Math.floor(Math.random() * numberOfTimes)
-      );
-      for (let i = 0; i < numberOfItems; i++) {
-        this.items.push(this._buildItem());
-      }
-    },
-    _addItems() {
-      if (this.count > 10) {
-        return;
-      }
-
-      setTimeout(() => {
-        this.count++;
-        this._buildItems(1);
-        this._addItems();
-      }, 150);
+    _buildItems() {
+      this.items.push(this._buildItem());
     },
     _buildItem() {
       return {
         id: Math.random(),
         name: makeid(2),
-        color: this._getColor(),
-        width: this.getSize(),
-        height: this.getSize(),
+        color: this._getColor()
       };
     },
     _getColor() {
@@ -159,7 +69,7 @@ export default {
     },
   },
   mounted() {
-    this._addItems();
+    this._buildItems();
   },
 };
 

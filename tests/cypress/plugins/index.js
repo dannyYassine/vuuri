@@ -11,10 +11,12 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
-
 // https://docs.cypress.io/guides/guides/plugins-guide.html
+const webpackPlugin = require('./webpack.plugin');
+const codeCoveragePlugin = require('@cypress/code-coverage/task');
+
 module.exports = (on, config) => {
-  return {
+  const plugin = {
     ...config,
     fixturesFolder: 'tests/cypress/fixtures',
     integrationFolder: 'tests/cypress/integration',
@@ -22,4 +24,9 @@ module.exports = (on, config) => {
     videosFolder: 'tests/cypress/videos',
     supportFile: 'tests/cypress/support/index.js'
   };
+  
+  codeCoveragePlugin(on, config)
+  webpackPlugin(on, config);
+  
+  return plugin;
 };

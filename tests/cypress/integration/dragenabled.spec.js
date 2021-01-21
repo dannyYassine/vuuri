@@ -1,5 +1,5 @@
-import { DragEnabledPageObject } from '../pageobjects/DragEnabled.po';
-import { wait } from '../utils';
+import { DragEnabledPageObject } from '@/pageobjects/DragEnabled.pageObject';
+import { wait } from '@/utils';
 
 context('Drag Enabled', () => {
   it('should drag and drop item in same grid', () => {

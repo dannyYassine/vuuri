@@ -1,6 +1,8 @@
-export class DragEnabledPageObject {
-  visit() {
-    cy.visit(`${Cypress.env('CLIENT_URL') || 'http://localhost:8080/#/tests/drag-enabled'}`);
+import { BasePageObject } from './BasePageObject';
+
+export class DragEnabledPageObject extends BasePageObject {
+  getPath() {
+    return '/drag-enabled';
   }
   
   getGrid() {
