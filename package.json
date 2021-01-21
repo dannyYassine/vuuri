@@ -15,7 +15,7 @@
     "test:cypress:install": "cypress install",
     "test:cypress:open": "cypress open",
     "test:cypress:run": "cypress run",
-    "test:cypress:coverage": "rm -rf tests/client/src/vuuri/* ; cp -a src/ tests/client/src/vuuri ; NODE_ENV=test cypress run",
+    "test:cypress:coverage": "rm -rf tests/client/src/vuuri/* ; ls -ls tests/client/src/vuuri ; cp src/* tests/client/src/vuuri ; ls -ls tests/client/src/vuuri ; NODE_ENV=test cypress run",
     "send-coverage": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
   },
   "author": "",

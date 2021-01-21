@@ -25,7 +25,9 @@ jobs:
     - stage: coverage
       script:
         - yarn install-test-client
+        - pwd
         - yarn test:cypress:install
+        - pwd
         - yarn test:coverage
     - stage: send-coverage
       script:
