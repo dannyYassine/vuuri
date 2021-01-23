@@ -11,8 +11,14 @@ context('CRUD ', () => {
     wait(2000);
   
     crudPageObject.getItems().should('have.length', 1);
-    
-    crudPageObject.getAddButtonAtIndex().click();
+  
+    cy.window().then( (window) => {
+      const component = window.__components__.AddDeleteDemo;
+      component.items.push({
+        id: Math.random(),
+        name: Math.random()+''
+      });
+    });
     
     wait(2000);
   
@@ -29,8 +35,11 @@ context('CRUD ', () => {
   
     crudPageObject.getItems().should('have.length', 1);
   
-    crudPageObject.getDeleteButtonAtIndex(0).click();
-  
+    cy.window().then( (window) => {
+      const component = window.__components__.AddDeleteDemo;
+      component.items.splice(0, 1);
+    });
+    
     wait(2000);
     
     crudPageObject.getItems().should('have.length', 0);

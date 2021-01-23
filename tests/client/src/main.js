@@ -9,6 +9,16 @@ import GroupIdEnabled from './components/GroupIdEnabled';
 import AddDeleteDemo from './components/AddDeleteDemo';
 import Destroy from './components/Destroy';
 
+window.__components__ = {};
+Vue.mixin({
+  created() {
+    const { name } = this.$options;
+    if (!window[name]) {
+      window.__components__[name] = this;
+    }
+  }
+})
+
 const router = new VueRouter({
   routes: [
     {

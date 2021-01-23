@@ -27,7 +27,7 @@
 import vuuri from "../vuuri";
 
 export default {
-  name: "App",
+  name: "AddDeleteDemo",
   components: {
     vuuri,
   },

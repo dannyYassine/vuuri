@@ -24,7 +24,6 @@ import Muuri from 'muuri';
 import { v4 as uuidv4 } from 'uuid';
 import { GridEvent } from './GridEvent';
 import GridStore from './GridStore';
-import { Env } from './Env';
 import { ItemKey, ItemSize, ItemDragHandle } from './constants';
 
 export default {
@@ -162,12 +161,10 @@ export default {
       if (this.groupIds) {
         GridStore.addGridToGroups(this.groupIds, this.muuri);
       }
-      if (!Env.isUnitTesting) {
-        this.observer = new ResizeObserver(() => {
-          this._resizeOnLoad();
-        });
-        this.observer.observe(this.$refs.muuri);
-      }
+      this.observer = new ResizeObserver(() => {
+        this._resizeOnLoad();
+      });
+      this.observer.observe(this.$refs.muuri);
       this._sync(this.value, []);
       this.$nextTick(() => {
         GridStore.setItemsForGridId(this.gridKey, this.value);
@@ -299,7 +296,7 @@ export default {
      * @private
      */
     _onItemSend({ item }) {
-      const index = this.value.findIndex(value => value.id == item.getElement().dataset.itemKey);
+      const index = this.value.findIndex(value => value[this.itemKey] == item.getElement().dataset.itemKey);
       const removedItem = this.value.splice(index, 1)[0];
       GridStore.setDraggingItem(removedItem);
       this._emitValue(this.value);
@@ -338,6 +335,7 @@ export default {
 
       return this.value.reduce((accum, a) => {
         accum[itemKeys[a[this.itemKey]]] = a;
+        // accum.push(a);
         return accum
       }, []);
     },

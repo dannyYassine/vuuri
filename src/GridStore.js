@@ -33,16 +33,6 @@ export class GridStore {
   }
   
   /**
-   * @param {number} gridId
-   * @param {Muuri.Item} muuriItem
-   * @returns {*}
-   */
-  getItemFromGridId(gridId, muuriItem) {
-    const items = this._itemStore.get(gridId);
-    return items.find(item => item.id == muuriItem.getElement().dataset.itemKey);
-  }
-  
-  /**
    * @param {Muuri.Item} value
    */
   setDraggingGridItem(value) {
@@ -91,18 +81,13 @@ export class GridStore {
   }
   
   /**
-   * @param {string|Array<string>} group
+   * @param {Array<string>} group
    * @returns {*}
    */
   getGrids(group) {
-    if (Array.isArray(group)) {
-      let groups = [];
-      group.forEach((groupy) => groups = groups.concat(this._store.get((groupy+''))));
-      return groups;
-    }
-  
-    const groupIdString = group+'';
-    return this._store.get(groupIdString);
+    let groups = [];
+    group.forEach((groupy) => groups = groups.concat(this._store.get((groupy+''))));
+    return groups;
   }
 }
 

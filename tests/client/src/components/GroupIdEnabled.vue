@@ -28,7 +28,7 @@
 import vuuri from "../vuuri";
 
 export default {
-name: "DragEnabled",
+name: "GroupIdEnabled",
   components: {
     vuuri
   },
@@ -36,7 +36,7 @@ name: "DragEnabled",
     return {
       todoItems: [],
       tododoItems: [],
-      binItems: [this.buildItem()],
+      binItems: [this.buildItem({id: 9999})],
     }
   },
   methods: {
@@ -46,9 +46,9 @@ name: "DragEnabled",
         this.tododoItems.push(this.buildItem());
       }
     },
-    buildItem() {
+    buildItem(props = {}) {
       return {
-        id: Math.random()
+        id: props.id || (this.todoItems.length + this.tododoItems.length) + 1
       };
     },
   },

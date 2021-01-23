@@ -1,7 +1,7 @@
 <template>
   <div>
     Drag Enabled
-    <vuuri v-model="todoItems" drag-enabled>
+    <vuuri v-model="items" drag-enabled>
       <template #item="{ item }">
         <div class="item-content">
           {{item.id}}
@@ -20,23 +20,23 @@ name: "DragEnabled",
   },
   data() {
     return {
-      todoItems: [],
+      items: [],
     }
   },
   methods: {
     _buildItems(numberOfItems = 4) {
       for (let i = 0; i < numberOfItems; i++) {
-        this.todoItems.push(this.buildItem());
+        this.items.push(this.buildItem());
       }
     },
     buildItem() {
       return {
-        id: this.todoItems.length
+        id: this.items.length
       };
     },
   },
   created() {
-    this._buildItems(20);
+    this._buildItems(3);
     window.addEventListener('trigger', () => {
       window.dispatchEvent(new PointerEvent('pointermove', { pointerId: 1, clientX: 160, clientY: 85 }));
       window.dispatchEvent(new PointerEvent('pointerup', { pointerId: 1 }));
