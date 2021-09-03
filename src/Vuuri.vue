@@ -435,7 +435,7 @@ export default {
             this.muuri.remove(itemsToRemove, {removeElements: true});
 
             valuesToRemove.forEach(value => {
-              const index = this.copiedItems.findIndex(item => item._$muuri_id === value._$muuri_id);
+              const index = this.copiedItems.findIndex(item => item[this.itemKey] === value[this.itemKey]);
               this.copiedItems.splice(index, 1);
             });
 
