@@ -432,7 +432,7 @@ export default {
       return new Promise((resolve) => {
         this.muuri.hide(itemsToRemove, {
           onFinish: () => {
-            this.muuri.remove(itemsToRemove);
+            this.muuri.remove(itemsToRemove, {removeElements: true});
 
             valuesToRemove.forEach(value => {
               const index = this.copiedItems.findIndex(item => item._id === value._id);
