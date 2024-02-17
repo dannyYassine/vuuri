@@ -1,27 +1,22 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import Main from './Main.vue'
-import Buefy from 'buefy';
-import 'buefy/dist/buefy.css';
-import VueRouter from 'vue-router';
+import Oruga from '@oruga-ui/oruga-next';
+import { bulmaConfig } from '@oruga-ui/theme-bulma'
+import '@oruga-ui/theme-bulma/dist/bulma.css'
+import { createRouter, createWebHashHistory } from 'vue-router';
 
-const router = new VueRouter({
+const router = new createRouter({
+  history: createWebHashHistory(),
   routes: [
     {
-      path: '/', component: App
+      path: '/', component: App,
+      path: '/', component: App,
     }
   ]
-})
-
-Vue.config.productionTip = false
-
-Vue.use(VueRouter)
-
-Vue.use(Buefy, {
-  defaultIconPack: 'fa'
 });
 
-new Vue({
-  render: h => h(Main),
-  router
-}).$mount('#app')
+const app = createApp(Main);
+app.use(router);
+app.use(Oruga, bulmaConfig);
+app.mount('#app');
