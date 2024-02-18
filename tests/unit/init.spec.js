@@ -1,25 +1,27 @@
 import { describe, test, expect, vi } from 'vitest';
 import { mount } from './main';
 import vuuri from '@/Vuuri.vue';
-import { isEmpty } from 'lodash';
+import { GridEvent } from '@/GridEvent';
 import { assert } from '@test/utils.js';
 
 vi.mock('muuri', async () => {
   return await import('../__mocks__/muuri.js');
 });
 
-describe('On destroy', () => {
-  test('should remove muuri events on destroy', async () => {
+describe('On init', () => {
+  test('should add all muuri events', async () => {
     const todoItems = [];
     const wrapper = mount(vuuri, {
       props: {
         modelValue: todoItems
       }
     });
-    wrapper.unmount();
 
     await assert(() => {
-      expect(isEmpty(wrapper.vm.events)).toBeTruthy();
+      expect(wrapper.vm.events).toBeDefined();
+      Object.values(GridEvent).forEach((event) => {
+        expect(wrapper.vm.events[event]).toBeTruthy();
+      });
     });
   });
 });
