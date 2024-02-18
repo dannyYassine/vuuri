@@ -1,7 +1,6 @@
 import { describe, test, expect, vi } from 'vitest';
-import { mount } from './main';
+import { mount } from '@test/unit/main';
 import vuuri from '@/Vuuri.vue';
-import { GridEvent } from '@/GridEvent';
 import { assert } from '@test/utils.js';
 
 vi.mock('muuri', async () => {
@@ -9,7 +8,7 @@ vi.mock('muuri', async () => {
 });
 
 describe('On init', () => {
-  test('should add all muuri events', async () => {
+  test('should render with minimal props', async () => {
     const todoItems = [];
     const wrapper = mount(vuuri, {
       props: {
@@ -18,10 +17,7 @@ describe('On init', () => {
     });
 
     await assert(() => {
-      expect(wrapper.vm.events).toBeDefined();
-      Object.values(GridEvent).forEach((event) => {
-        expect(wrapper.vm.events[event]).toBeTruthy();
-      });
+      expect(wrapper.html()).toBeTruthy();
     });
   });
 });

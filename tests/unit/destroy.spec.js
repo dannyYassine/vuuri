@@ -1,5 +1,5 @@
 import { describe, test, expect, vi } from 'vitest';
-import { mount } from './main';
+import { mount } from '@test/unit/main';
 import vuuri from '@/Vuuri.vue';
 import { isEmpty } from 'lodash';
 import { assert } from '@test/utils.js';
@@ -20,6 +20,19 @@ describe('On destroy', () => {
 
     await assert(() => {
       expect(isEmpty(wrapper.vm.events)).toBeTruthy();
+    });
+  });
+
+  test('should emit on-destroy event', async () => {
+    const wrapper = mount(vuuri, {
+      props: {
+        modelValue: []
+      }
+    });
+    wrapper.unmount();
+
+    await assert(() => {
+      expect(wrapper.emitted()['on-destroy']).toHaveLength(1);
     });
   });
 });
