@@ -1,6 +1,6 @@
 import { describe, test, expect, vi } from 'vitest';
-import vuuri from '@/Vuuri.vue';
 import { isEmpty } from 'lodash';
+import vuuri from '@/Vuuri.vue';
 import { assert, mount } from '@test/utils';
 
 vi.mock('muuri', async () => {
