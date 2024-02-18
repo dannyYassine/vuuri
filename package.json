@@ -40,6 +40,7 @@
     "@vue/test-utils": "^2.4.4",
     "babel-plugin-istanbul": "^6.0.0",
     "coveralls": "^3.1.0",
+    "happy-dom": "^13.3.8",
     "jsdom": "^21.1.1",
     "prettier": "^3.2.5",
     "start-server-and-test": "^1.11.7",
