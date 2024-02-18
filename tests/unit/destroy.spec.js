@@ -1,42 +1,41 @@
+import { describe, test, expect, vi } from 'vitest';
 import { mount } from './main';
-
-jest.mock('muuri');
-
+import vuuri from "@/Vuuri.vue";
 import { isEmpty } from 'lodash';
-import vuuri from "../../client/src/vuuri";
-import {GridEvent} from "../../src";
+import { GridEvent } from "@/GridEvent";
+
+vi.mock('muuri', async () => {
+  return (await import('../__mocks__/muuri.js'))
+}
+);
 
 describe("CRUD Operations", () => {
-  
-  let wrapper;
-  
-  beforeEach(() => {
-  });
-  
   describe('Adding', () => {
     test('should add all muuri events', async () => {
       const todoItems = [];
-      wrapper = mount(vuuri, {
-        propsData: {
-          items: todoItems
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: todoItems
         }
       });
-      
+      await wrapper.vm.$nextTick();
+
       expect(wrapper.vm.events).toBeDefined();
       Object.values(GridEvent).forEach(event => {
-        expect(this.events[event]).toEqual(event);
+        expect(wrapper.vm.events[event]).toBeTruthy();
       });
     });
     
     test('should remove muuri events on destroy', async () => {
       const todoItems = [];
-      wrapper = mount(vuuri, {
-        propsData: {
-          items: todoItems
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: todoItems
         }
       });
-      
-      expect(isEmpty(wrapper.vm.events)).toBe(true);
+      wrapper.unmount();
+
+      expect(isEmpty(wrapper.vm.events)).toBeTruthy();
     });
   });
   
