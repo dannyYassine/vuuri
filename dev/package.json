@@ -14,7 +14,6 @@
   "dependencies": {
     "@oruga-ui/oruga-next": "^0.8.3",
     "@oruga-ui/theme-bulma": "^0.2.11",
-    "buefy": "^0.9.4",
     "core-js": "^3.6.5",
     "lodash": "^4.17.21",
     "sass": "^1.30.0",

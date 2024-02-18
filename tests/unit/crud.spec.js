@@ -1,7 +1,6 @@
 import { describe, test, expect, vi } from 'vitest';
-import { mount } from '@test/unit/main';
 import vuuri from '@/Vuuri.vue';
-import { assert } from '@test/utils';
+import { assert, mount } from '@test/utils';
 
 vi.mock('muuri', async () => {
   return await import('../__mocks__/muuri.js');

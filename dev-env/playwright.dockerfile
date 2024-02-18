@@ -5,6 +5,4 @@ WORKDIR /usr/src/vuuri
 COPY ./package.json ./
 COPY ./yarn.lock ./
 
-# RUN yarn
-
 COPY . .
