@@ -18,7 +18,7 @@
 The Vue Muuri Integration:
 </h1>
 <p align="center">
-The abstraction over the <a href="https://muuri.dev/" target="_blank">Muuri library</a> for creating dynamic layout in vue.js
+The abstraction over the <a href="https://muuri.dev/" target="_blank">Muuri library</a> for creating dynamic layouts in vue.js
 </p>
 
 ## Usage
