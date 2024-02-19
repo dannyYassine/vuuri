@@ -40,4 +40,40 @@ describe('Props', () => {
       });
     });
   });
+
+  describe('prop getItemWidth', () => {
+    test('should be called to add width on muuri item', async () => {
+      const width = `5px`;
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: [
+            {}
+          ],
+          getItemWidth: () => width
+        }
+      });
+
+      await assert(() => {
+        expect(wrapper.find('[test-id="muuri-grid-item"]').attributes('style')).toContain(`width: ${width};`);
+      });
+    });
+  });
+
+  describe('prop getItemHeight', () => {
+    test('should be called to add width on muuri item', async () => {
+      const height = `5px`;
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: [
+            {}
+          ],
+          getItemHeight: () => height
+        }
+      });
+
+      await assert(() => {
+        expect(wrapper.find('[test-id="muuri-grid-item"]').attributes('style')).toContain(`height: ${height};`);
+      });
+    });
+  });
 });

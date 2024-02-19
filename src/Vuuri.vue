@@ -3,13 +3,15 @@
       ref="muuri"
       class="muuri-grid"
       :class="className"
-      :data-grid-key="gridKey">
+      :data-grid-key="gridKey"
+      test-id="muuri-grid-container">
     <div
         v-for="item in copiedItems"
         :key="item[itemKey]"
         :style="_getItemStyles(item)"
         class="muuri-item"
         :data-item-key="item[itemKey]"
+        test-id="muuri-grid-item"
     >
       <div class="muuri-item-content">
         <slot name="item" :item="item" />
