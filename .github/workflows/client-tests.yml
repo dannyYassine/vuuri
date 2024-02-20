@@ -16,7 +16,7 @@ jobs:
         with:
           working-directory: .
       - name: Build containers
-        run: docker-compose -f docker-compose.ci.yml build vuuri-client
+        run: docker-compose -f docker-compose.ci.yml build client
       - name: Install node_modules
         run: docker-compose run vuuri-client yarn
       - name: Run tests
