@@ -7,8 +7,13 @@ import { configDefaults } from 'vitest/config';
 export default defineConfig({
   plugins: [vue()],
   test: {
+    coverage: {
+      provider: 'istanbul', // or 'v8'
+      reporter: ['lcov', 'html']
+    },
     globals: true,
     environment: 'happy-dom',
+    include: ['**/tests/**/*.spec.*'],
     exclude: [...configDefaults.exclude, '**/playwright/**', '**/cypress/**'],
     mockReset: true,
     restoreMocks: true,
