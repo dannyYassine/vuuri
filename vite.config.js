@@ -8,13 +8,13 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     coverage: {
-      provider: 'istanbul', // or 'v8'
-      reporter: ['lcov', 'html']
+      provider: 'istanbul', // or 'v8',
+      reporter: ['html', 'lcov']
     },
     globals: true,
     environment: 'happy-dom',
-    include: ['**/tests/**/*.spec.*'],
-    exclude: [...configDefaults.exclude, '**/playwright/**', '**/cypress/**'],
+    include: ['tests/unit/**/*.spec.*'],
+    exclude: [...configDefaults.exclude, '**/playwright/**', '**/cypress/**', '**/dev/**'],
     mockReset: true,
     restoreMocks: true,
     testTimeout: false ? 30000 : 10000,
@@ -26,6 +26,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      '/@/vuuri': path.resolve(__dirname, 'src'),
+      '@vuuri': path.resolve(__dirname, 'src'),
       '@test': path.resolve(__dirname, 'tests')
     }
   }
