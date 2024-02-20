@@ -76,4 +76,54 @@ describe('Props', () => {
       });
     });
   });
+
+  describe('prop dragEnabled', () => {
+    test('when true, should add draggable options to muuri options', async () => {
+      const height = `5px`;
+      const wrapper = mount(vuuri, {
+        props: {
+          dragEnabled: true
+        }
+      });
+
+      await assert(() => {
+        expect(wrapper.vm.muuriOptions).toMatchSnapshot({
+          dragEnabled: true,
+          dragRelease: {
+            duration: 400,
+            easing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
+            useDragContainer: true,
+          },
+          dragPlaceholder: {
+            enabled: true
+          },
+          dragAutoScroll: {
+              sortDuringScroll: false,
+              syncAfterScroll: false,
+          },
+        });
+        
+        expect(wrapper.vm.muuriOptions.dragEnabled).toBeDefined();
+        expect(wrapper.vm.muuriOptions.dragContainer).toBeDefined();
+        expect(wrapper.vm.muuriOptions.dragPlaceholder.createElement).toBeDefined();
+        expect(wrapper.vm.muuriOptions.dragAutoScroll.targets).toBeDefined();
+      });
+    });
+
+    test('when false, should not add draggable options to muuri options', async () => {
+      const height = `5px`;
+      const wrapper = mount(vuuri, {
+        props: {
+          dragEnabled: false
+        }
+      });
+
+      await assert(() => {
+        expect(wrapper.vm.muuriOptions.dragEnabled).toBeFalsy();
+        expect(wrapper.vm.muuriOptions.dragRelease).toBeFalsy();
+        expect(wrapper.vm.muuriOptions.dragPlaceholder).toBeFalsy();
+        expect(wrapper.vm.muuriOptions.dragAutoScroll).toBeFalsy();
+      });
+    });
+  });
 });
