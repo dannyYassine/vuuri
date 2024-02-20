@@ -6,7 +6,7 @@ networks:
 
 services:
   client:
-    container_name: vuuri-client
+    container_name: client
     build:
       context: .
       dockerfile: dev-env/client.ci.dockerfile
@@ -19,7 +19,7 @@ services:
       - vuuri
 
   # playwright:
-  #   container_name: vuuri-playwright
+  #   container_name: playwright
   #   build:
   #     context: .
   #     dockerfile: dev-env/playwright.ci.dockerfile
