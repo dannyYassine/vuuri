@@ -118,12 +118,13 @@ describe('Props', () => {
         }
       });
 
-      await assert(() => {
-        expect(wrapper.vm.muuriOptions.dragEnabled).toBeFalsy();
-        expect(wrapper.vm.muuriOptions.dragRelease).toBeFalsy();
-        expect(wrapper.vm.muuriOptions.dragPlaceholder).toBeFalsy();
-        expect(wrapper.vm.muuriOptions.dragAutoScroll).toBeFalsy();
-      });
+      await wrapper.vm.$nextTick();
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.muuriOptions.dragEnabled).toBeFalsy();
+      expect(wrapper.vm.muuriOptions.dragRelease).toBeFalsy();
+      expect(wrapper.vm.muuriOptions.dragPlaceholder).toBeFalsy();
+      expect(wrapper.vm.muuriOptions.dragAutoScroll).toBeFalsy();
     });
   });
 });
