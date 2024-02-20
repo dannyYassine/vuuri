@@ -1,0 +1,27 @@
+name: upload-coverage
+
+defaults:
+ run:
+  working-directory: .
+
+on:
+  workflow_dispatch:
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          working-directory: .
+      - name: Build containers
+        run: docker-compose -f docker-compose.ci.yml build client
+      - name: Install dependencies
+        run: docker-compose run client yarn
+      - name: Run tests with coverage
+        run: docker-compose run client yarn ci:test:unit:coverage
+      - name: Upload coverage
+        run: CODECOV_TOKEN=${{secrets.CODECOV_TOKEN}} . send-coverage.sh
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f docker-compose.ci.yml down
