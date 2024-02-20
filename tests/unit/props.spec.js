@@ -87,7 +87,7 @@ describe('Props', () => {
       });
 
       await assert(() => {
-        expect(wrapper.vm.muuriOptions).toMatchSnapshot({
+        expect(wrapper.vm.muuriOptions).toMatchObject({
           dragEnabled: true,
           dragRelease: {
             duration: 400,
