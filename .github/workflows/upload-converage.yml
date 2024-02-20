@@ -19,6 +19,8 @@ jobs:
         run: docker-compose -f docker-compose.ci.yml build client
       - name: Install dependencies
         run: docker-compose run client yarn
+      - name: Install dependencies
+        run: docker-compose run client rm -rf dev docs
       - name: Run tests with coverage
         run: docker-compose run client yarn ci:test:unit:coverage
       - name: Upload coverage
