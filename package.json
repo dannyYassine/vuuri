@@ -12,6 +12,7 @@
     "test:coverage": "start-server-and-test serve \"http://localhost:9999\" test:cypress:coverage",
     "test:update-test-client": "rm -rf tests/client/src/vuuri/* ; ls -ls tests/client/src/vuuri ; cp src/* tests/client/src/vuuri ; ls -ls tests/client/src/vuuri ; ",
     "test:unit": "vitest --segfault-retry=3",
+    "ci:test:unit": "vitest --segfault-retry=3 run",
     "test:unit:watch": "yarn test:unit --watch",
     "test:unit:coverage": "vue-cli-service test:unit --coverage",
     "test:cypress:install": "cypress install",
