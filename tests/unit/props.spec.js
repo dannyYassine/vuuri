@@ -85,29 +85,29 @@ describe('Props', () => {
           dragEnabled: true
         }
       });
-      await wrapper.vm.$nextTick();
-      await wrapper.vm.$nextTick();
 
-      expect(wrapper.vm.muuriOptions).toMatchSnapshot({
-        dragEnabled: true,
-        dragRelease: {
-          duration: 400,
-          easing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
-          useDragContainer: true,
-        },
-        dragPlaceholder: {
-          enabled: true
-        },
-        dragAutoScroll: {
-            sortDuringScroll: false,
-            syncAfterScroll: false,
-        },
+      await assert(() => {
+        expect(wrapper.vm.muuriOptions).toMatchObject({
+          dragEnabled: true,
+          dragRelease: {
+            duration: 400,
+            easing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
+            useDragContainer: true,
+          },
+          dragPlaceholder: {
+            enabled: true
+          },
+          dragAutoScroll: {
+              sortDuringScroll: false,
+              syncAfterScroll: false,
+          },
+        });
+        
+        expect(wrapper.vm.muuriOptions.dragEnabled).toBeDefined();
+        expect(wrapper.vm.muuriOptions.dragContainer).toBeDefined();
+        expect(wrapper.vm.muuriOptions.dragPlaceholder.createElement).toBeDefined();
+        expect(wrapper.vm.muuriOptions.dragAutoScroll.targets).toBeDefined();
       });
-      
-      expect(wrapper.vm.muuriOptions.dragEnabled).toBeDefined();
-      expect(wrapper.vm.muuriOptions.dragContainer).toBeDefined();
-      expect(wrapper.vm.muuriOptions.dragPlaceholder.createElement).toBeDefined();
-      expect(wrapper.vm.muuriOptions.dragAutoScroll.targets).toBeDefined();
     });
 
     test('when false, should not add draggable options to muuri options', async () => {
@@ -118,13 +118,12 @@ describe('Props', () => {
         }
       });
 
-      await wrapper.vm.$nextTick();
-      await wrapper.vm.$nextTick();
-
-      expect(wrapper.vm.muuriOptions.dragEnabled).toBeFalsy();
-      expect(wrapper.vm.muuriOptions.dragRelease).toBeFalsy();
-      expect(wrapper.vm.muuriOptions.dragPlaceholder).toBeFalsy();
-      expect(wrapper.vm.muuriOptions.dragAutoScroll).toBeFalsy();
+      await assert(() => {
+        expect(wrapper.vm.muuriOptions.dragEnabled).toBeFalsy();
+        expect(wrapper.vm.muuriOptions.dragRelease).toBeFalsy();
+        expect(wrapper.vm.muuriOptions.dragPlaceholder).toBeFalsy();
+        expect(wrapper.vm.muuriOptions.dragAutoScroll).toBeFalsy();
+      });
     });
   });
 });
