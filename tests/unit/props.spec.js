@@ -1,5 +1,6 @@
-import { describe, test, expect, vi } from 'vitest';
+import { describe, test, expect, vi, MockInstance } from 'vitest';
 import vuuri from '@/Vuuri.vue';
+import GridStore from '../../src/GridStore.js';
 import { assert, mount } from '@test/utils';
 
 vi.mock('muuri', async () => {
@@ -55,6 +56,49 @@ describe('Props', () => {
 
       await assert(() => {
         expect(wrapper.find('[test-id="muuri-grid-item"]').attributes('style')).toContain(`width: ${width};`);
+      });
+    });
+  });
+
+  describe('prop groupId', () => {
+    test('should add groupid and muuri to store', async () => {
+      const groupId = "group-1";
+      const addGridSpy = vi.spyOn(GridStore, 'addGrid');
+
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: [
+            {}
+          ],
+          groupId
+        }
+      });
+
+      await assert(() => {
+        expect(addGridSpy).toHaveBeenCalledWith(groupId, wrapper.vm.muuri);
+      });
+    });
+  });
+
+  describe('prop groupIds', () => {
+    test('should add groupids and muuri to store', async () => {
+      const groupIds = ["group-1", 'group-2'];
+      const addGridSpy = vi.spyOn(GridStore, 'addGrid');
+      const addGridToGroupsSpy = vi.spyOn(GridStore, 'addGridToGroups');
+
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: [
+            {}
+          ],
+          groupIds
+        }
+      });
+
+      await assert(() => {
+        expect(addGridToGroupsSpy).toHaveBeenCalledWith(groupIds, wrapper.vm.muuri);
+        expect(addGridSpy).toHaveBeenCalledWith(groupIds[0], wrapper.vm.muuri);
+        expect(addGridSpy).toHaveBeenCalledWith(groupIds[1], wrapper.vm.muuri);
       });
     });
   });

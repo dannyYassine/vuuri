@@ -1,4 +1,4 @@
-import { vi } from 'vitest';
+import { vi, afterEach } from 'vitest';
 
 
 
@@ -13,3 +13,8 @@ import { vi } from 'vitest';
       // do nothing
     }
   };
+
+  afterEach(() => {
+    vi.clearAllMocks();
+    vi.resetAllMocks();
+  });
