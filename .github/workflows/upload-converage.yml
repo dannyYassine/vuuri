@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: docker-compose run client yarn
       - name: Install dependencies
-        run: docker-compose run client rm -rf dev docs
+        run: docker-compose run client rm -rf dev docs playwright.config.ts
       - name: Run tests with coverage
         run: docker-compose run client yarn ci:test:unit:coverage
       - name: Upload coverage
