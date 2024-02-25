@@ -27,3 +27,5 @@ coverage
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+.nyc_output/*
