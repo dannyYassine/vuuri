@@ -1,4 +1,4 @@
-import { describe, test, expect, vi, MockInstance } from 'vitest';
+import { describe, test, expect, vi, MockInstance, beforeEach } from 'vitest';
 import vuuri from '@/Vuuri.vue';
 import GridStore from '../../src/GridStore.js';
 import { assert, mount } from '@test/utils';
@@ -8,6 +8,10 @@ vi.mock('muuri', async () => {
 });
 
 describe('Props', () => {
+  beforeEach(() =>{
+    GridStore.clear();
+  });
+
   describe('prop className', () => {
     test('should add className to vuuri container', async () => {
       const className = 'my-something-class';
@@ -21,6 +25,22 @@ describe('Props', () => {
 
       await assert(() => {
         expect(grid.classes()).toContain(className);
+      });
+    });
+  });
+
+  describe('prop modelValue', () => {
+    test('should set model values to store', async () => {
+      const setItemsForGridIdSpy =vi.spyOn(GridStore, 'setItemsForGridId');
+      const modelValue = [];
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue
+        }
+      });
+
+      await assert(() => {
+        expect(setItemsForGridIdSpy).toHaveBeenCalledWith(wrapper.vm.gridKey, modelValue);
       });
     });
   });
@@ -78,6 +98,26 @@ describe('Props', () => {
         expect(addGridSpy).toHaveBeenCalledWith(groupId, wrapper.vm.muuri);
       });
     });
+
+    test('should return muuri object based on groupId when dragSort in called', async () => {
+      const groupId = "group-1";
+
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: [
+            {}
+          ],
+          groupId
+        }
+      });
+
+      await assert(() => {
+        const ids = wrapper.vm.muuriOptions.dragSort();
+
+        expect(ids.length).toEqual(1);
+        expect(ids[0]).toEqual(wrapper.vm.muuri);
+      });
+    });
   });
 
   describe('prop groupIds', () => {
@@ -99,6 +139,27 @@ describe('Props', () => {
         expect(addGridToGroupsSpy).toHaveBeenCalledWith(groupIds, wrapper.vm.muuri);
         expect(addGridSpy).toHaveBeenCalledWith(groupIds[0], wrapper.vm.muuri);
         expect(addGridSpy).toHaveBeenCalledWith(groupIds[1], wrapper.vm.muuri);
+      });
+    });
+
+    test('should return muuri objects based on groupIds when dragSort in called', async () => {
+      const groupIds = ["group-1", 'group-2'];
+
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: [
+            {}
+          ],
+          groupIds
+        }
+      });
+
+      await assert(() => {
+        const ids = wrapper.vm.muuriOptions.dragSort();
+
+        expect(ids.length).toEqual(2);
+        expect(ids[0]).toEqual(wrapper.vm.muuri);
+        expect(ids[1]).toEqual(wrapper.vm.muuri);
       });
     });
   });
