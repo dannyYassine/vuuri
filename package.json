@@ -20,7 +20,7 @@
     "test:cypress:install": "cypress install",
     "test:cypress:open": "cypress open",
     "pw:install": "npx playwright install --with-deps",
-    "pw:test:coverage": "nyc playwright test",
+    "pw:test:coverage": "nyc --reporter=lcov playwright test",
     "test:pw": "npx playwright test",
     "test:pw:debug": "npx playwright test --debug",
     "test:cypress:run": "cypress run",

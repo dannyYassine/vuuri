@@ -29,3 +29,4 @@ coverage
 /playwright/.cache/
 
 .nyc_output/*
+dev/.nyc_output/*
