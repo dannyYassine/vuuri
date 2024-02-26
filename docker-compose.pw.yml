@@ -10,7 +10,7 @@ services:
     build:
       context: .
       dockerfile: dev-env/client.ci.dockerfile
-    command: sh -c "yarn dev --host"
+    command: sh -c "yarn dev"
     ports:
       - "3000:3000"
     volumes:
