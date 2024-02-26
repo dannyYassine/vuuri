@@ -1,7 +1,7 @@
 <template>
   <div id="code-demo-app">
     <div class="mb-5">
-      <o-button variant="primary" class="mr-2" @click="onAddClicked()">Add</o-button>
+      <o-button variant="primary" class="mr-2" @click="onAddClicked()" data-test="add">Add</o-button>
       <o-button variant="danger" @click="onDeleteMoreClicked()">Delete</o-button>
     </div>
     <vuuri
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import vuuri from "@vuuri";
+import vuuri from "../../vuuri";
 
 export default {
   name: "AddDeleteDemo",

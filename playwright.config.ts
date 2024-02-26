@@ -10,7 +10,6 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 
-// process.env.PW_CLIENT_URL = 'http://client:3000';
 process.env.PW_CLIENT_URL = 'http://client:3000';
 
 export default defineConfig({
@@ -68,4 +67,14 @@ export default defineConfig({
   //   url: 'http://127.0.0.1:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
+  // webServer: {
+  //   /**
+  //    * Use the dev server by default for faster feedback loop.
+  //    * Use the preview server on CI for more realistic testing.
+  //    * Playwright will re-use the local server if there is already a dev-server running.
+  //    */
+  //   command: process.env.CI ? 'vite preview --port 5173' : 'yarn dev',
+  //   port: 3000,
+  //   reuseExistingServer: !process.env.CI
+  // }
 });

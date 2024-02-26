@@ -19,10 +19,18 @@ jobs:
         run: docker-compose -f docker-compose.ci.yml build client
       - name: Install dependencies
         run: docker-compose run client yarn
+      - name: Install playwright dependencies
+        run: docker-compose run playwright yarn
+      - name: Up environment
+        run: docker-compose -f "./docker-compose.pw.yml" up --detach client
+      - name: Run playwright tests with coverage
+        run: docker-compose run playwright yarn pw:test:coverage
       - name: Install dependencies
         run: docker-compose run client rm -rf dev docs playwright.config.ts
-      - name: Run tests with coverage
+      - name: Run unit tests with coverage
         run: docker-compose run client yarn ci:test:unit:coverage
+      # - name: Merge coverage reports
+      #   run: docker-compose run playwright npx playwright merge-reports --reporter lcov.info ./all-blob-reports
       - name: Upload coverage
         run: CODECOV_TOKEN=${{secrets.CODECOV_TOKEN}} . send-coverage.sh
       - name: Stop containers

@@ -7,6 +7,7 @@
   "type": "module",
   "scripts": {
     "serve": "cd tests/client ; yarn serve",
+    "dev": "cd dev ; yarn dev",
     "build": "vue-cli-service build --target lib --name vuuri src/index.js",
     "install-test-client": "cd tests/client ; yarn install ; cd ../..",
     "test": "start-server-and-test serve \"http://localhost:9999\" test:cypress:run",
@@ -19,7 +20,7 @@
     "test:unit:coverage": "vue-cli-service test:unit --coverage",
     "test:cypress:install": "cypress install",
     "test:cypress:open": "cypress open",
-    "pw:install": "npx playwright install --with-deps",
+    "pw:install": "npx playwright install chromium",
     "pw:test:coverage": "nyc --reporter=lcov playwright test",
     "test:pw": "npx playwright test",
     "test:pw:debug": "npx playwright test --debug",
@@ -30,6 +31,14 @@
   "author": {
     "name": "Danny Yassine",
     "url": "https://github.com/dannyyassine"
+  },
+  "nyc": {
+    "extension": [
+      ".js",
+      ".ts",
+      ".tsx",
+      ".vue"
+    ]
   },
   "repository": {
     "type": "git",
