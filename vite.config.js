@@ -9,7 +9,7 @@ export default defineConfig({
   test: {
     coverage: {
       provider: 'v8',
-      reporter: ['html', 'lcov'],
+      reporter: ['html', 'lcov', 'json'],
       reportsDirectory: './tests/unit/coverage'
     },
     globals: true,
