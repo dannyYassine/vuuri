@@ -21,6 +21,8 @@ jobs:
         run: docker-compose run client yarn
       - name: Install playwright dependencies
         run: docker-compose run playwright yarn
+      - name: Install nyc for playwright
+        run: docker-compose run playwright npm install -D nyc
       - name: Up environment
         run: docker-compose -f "./docker-compose.pw.yml" up --detach client
       - name: Run playwright tests with coverage
