@@ -17,16 +17,18 @@ jobs:
           working-directory: .
       - name: Build containers
         run: docker-compose -f docker-compose.ci.yml build client
+      - name: Build containers
+        run: docker-compose -f docker-compose.pw.yml build client playwright
       - name: Install dependencies
-        run: docker-compose run client yarn
+        run: docker-compose -f "./docker-compose.pw.yml" run client yarn
       - name: Install playwright dependencies
-        run: docker-compose run playwright yarn
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn
       - name: Install nyc for playwright
-        run: docker-compose run playwright npm install -D nyc
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright npm install -D nyc
       - name: Up environment
         run: docker-compose -f "./docker-compose.pw.yml" up --detach client
       - name: Run playwright tests with coverage
-        run: docker-compose run playwright yarn pw:test:coverage
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn pw:test:coverage
       - name: Install dependencies
         run: docker-compose run client rm -rf dev docs playwright.config.ts
       - name: Run unit tests with coverage
