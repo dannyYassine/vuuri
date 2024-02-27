@@ -23,6 +23,7 @@ pnpm-debug.log*
 *.sw?
 
 coverage
+unit-coverage
 /test-results/
 /playwright-report/
 /blob-report/

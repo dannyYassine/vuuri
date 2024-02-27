@@ -9,7 +9,8 @@ export default defineConfig({
   test: {
     coverage: {
       provider: 'v8',
-      reporter: ['html', 'json']
+      reporter: ['html', 'json'],
+      reportsDirectory: './unit-coverage'
     },
     globals: true,
     environment: 'happy-dom',
