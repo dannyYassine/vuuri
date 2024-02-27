@@ -4,7 +4,7 @@
   </vuuri>
 </template>
 <script>
-import vuuri from "/@/vuuri";
+import vuuri from "../../../../src";
 
 export default {
 name: "DragEnabled",

@@ -4,7 +4,6 @@
   "description": "Muuri Vue Integration",
   "homepage": "https://dannyyassine.github.io/vuuri/",
   "main": "src/index.js",
-  "type": "module",
   "scripts": {
     "serve": "cd tests/client ; yarn serve",
     "dev": "cd dev ; yarn dev",

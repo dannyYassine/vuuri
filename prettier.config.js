@@ -11,4 +11,4 @@ module.exports = {
     endOfLine: 'lf',
     htmlWhitespaceSensitivity: 'ignore',
     trailingComma: 'none'
-  };
+};
