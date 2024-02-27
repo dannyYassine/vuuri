@@ -30,13 +30,19 @@ jobs:
       - name: Run playwright tests with coverage
         run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn pw:test:coverage
       - name: Rename pw coverage
-        run: mv coverage pw-coverage
-      # - name: Remove unwanted files detection
-        # run: docker-compose run client rm -rf dev docs playwright.config.ts
-      # - name: Run unit tests with coverage
-        # run: docker-compose run client yarn ci:test:unit:coverage
-      # - name: Rename pw coverage
-        # run: mv coverage unit-coverage
+        run: mv coverage/coverage-final.json merge-json/pw-coverage-final.json
+      - name: Delete
+        run: rm -rf coverage
+      - name: Remove unwanted files detection
+        run: docker-compose run client rm -rf dev docs playwright.config.ts
+      - name: Run unit tests with coverage
+        run: docker-compose run client yarn ci:test:unit:coverage
+      - name: Rename pw coverage
+        run: mv coverage/coverage-final.json merge-json/unit-coverage-final.json
+      - name: Merge
+        run: yarn merge-coverage
+      - name: Delete
+        run: rm -rf coverage
       - name: Upload coverage
         run: CODECOV_TOKEN=${{secrets.CODECOV_TOKEN}} . send-coverage.sh
       - name: Stop containers
