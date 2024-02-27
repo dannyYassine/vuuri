@@ -10,7 +10,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 
-process.env.PW_CLIENT_URL = 'http://client:3000';
+process.env.PW_CLIENT_URL = 'http://client:3000/#/';
 
 export default defineConfig({
   testDir: './e2e',

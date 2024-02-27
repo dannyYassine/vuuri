@@ -5,7 +5,7 @@ import Main from './Main.vue'
 import Oruga from '@oruga-ui/oruga-next';
 import { bulmaConfig } from '@oruga-ui/theme-bulma'
 import '@oruga-ui/theme-bulma/dist/bulma.css'
-import { createRouter, createMemoryHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 window.__components__ = {};
 const TestingPlugin = {
@@ -18,14 +18,16 @@ const TestingPlugin = {
         }
       },
     });
-}
+  }
 };
 
 const router = new createRouter({
-  history: createMemoryHistory(),
+  history: createWebHashHistory(),
   routes: [
     {
-      path: '/', component: App,
+      path: '/', component: App
+    },
+    {
       path: '/e2e/crud', component: AddDeleteDemo
     }
   ]

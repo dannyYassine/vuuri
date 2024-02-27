@@ -15,7 +15,7 @@ export class BasePageObject {
     }
     
     getUrl() {
-      return `${this.getHost()}:${this.getPort()}/e2e/${this.getPath()}`
+      return `${this.getHost()}:${this.getPort()}/#/e2e/${this.getPath()}`
     }
     
     /**
