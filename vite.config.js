@@ -9,8 +9,7 @@ export default defineConfig({
   test: {
     coverage: {
       provider: 'v8',
-      reporter: ['html', 'lcov', 'json'],
-      reportsDirectory: './tests/unit/coverage'
+      reporter: ['html', 'lcov']
     },
     globals: true,
     environment: 'happy-dom',

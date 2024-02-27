@@ -29,14 +29,20 @@ jobs:
         run: docker-compose -f "./docker-compose.pw.yml" up --detach client
       - name: Run playwright tests with coverage
         run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn pw:test:coverage
-      - name: Install dependencies
+      - name: Rename coverage
+        run: mv coverage pw-coverage
+      - name: Remove unwanted files detection
         run: docker-compose run client rm -rf dev docs playwright.config.ts
       - name: Run unit tests with coverage
         run: docker-compose run client yarn ci:test:unit:coverage
-      # - name: Merge coverage reports
-      #   run: docker-compose run playwright npx playwright merge-reports --reporter lcov.info ./all-blob-reports
-      - name: Upload coverage
-        run: CODECOV_TOKEN=${{secrets.CODECOV_TOKEN}} . send-coverage.sh
+      - name: Upload playwright coverage
+        run: CODECOV_TOKEN=${{secrets.CODECOV_TOKEN}} . send-coverage.sh -cF typescript
+      - name: Delete coverage
+        run: rm -rf coverage
+      - name: Rename pw coverage back to coverage
+        run: mv pw-coverage coverage
+      - name: Upload unit coverage
+        run: CODECOV_TOKEN=${{secrets.CODECOV_TOKEN}} . send-coverage.sh -cF javacript
       - name: Stop containers
         if: always()
         run: docker-compose -f docker-compose.ci.yml down
