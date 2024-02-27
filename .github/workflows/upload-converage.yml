@@ -38,7 +38,7 @@ jobs:
       - name: Upload playwright coverage
         run: CODECOV_TOKEN=${{secrets.CODECOV_TOKEN}} . send-coverage.sh -cF typescript
       - name: Delete coverage
-        run: rm -rf coverage
+        run: mv coverage unit-coverage
       - name: Rename pw coverage back to coverage
         run: mv pw-coverage coverage
       - name: Upload unit coverage
