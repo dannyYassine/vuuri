@@ -11,7 +11,7 @@ test.describe('CRUD ', () => {
 
     let initialCount = await crudPageObject.getItems().count();
 
-    await page.evaluate(async () => {
+    await page.evaluate(() => {
       const component = window.__components__.AddDeleteDemo;
       component.items.push({
         id: Math.random(),
@@ -33,7 +33,7 @@ test.describe('CRUD ', () => {
 
     let initialCount = await crudPageObject.getItems().count();
 
-    await page.evaluate(async () => {
+    await page.evaluate(() => {
       const component = window.__components__.AddDeleteDemo;
       component.items.splice(0, 1);
     });

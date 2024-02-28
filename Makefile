@@ -16,3 +16,5 @@ client-test:
 	docker exec -it vuuri-client sh -c "yarn test:unit"
 client-test-coverage:
 	docker exec -it vuuri-client sh -c "yarn ci:test:unit:coverage"
+pw-report:
+	docker exec -it vuuri-playwright sh -c "yarn pw:report"
