@@ -12,11 +12,11 @@ test.describe('CRUD ', () => {
     let initialCount = await crudPageObject.getItems().count();
     console.log('initialCount', initialCount);
 
-    const components = await page.evaluateHandle('window.__components__');
+    const components = await page.evaluateHandle('window.vuuriComponents');
     console.log('__components__', components);
 
     await page.evaluate(() => {
-      const component = window.__components__.AddDeleteDemo;
+      const component = window.vuuriComponents.AddDeleteDemo;
       component.items.push({
         id: Math.random(),
         name: Math.random() + ''

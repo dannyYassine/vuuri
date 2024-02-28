@@ -8,16 +8,15 @@ import '@oruga-ui/theme-bulma/dist/bulma.css'
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 console.log('init app');
-window.__components__ = {};
+window.vuuriComponents = {};
 const TestingPlugin = {
   install(app, options) {
     app.mixin({
       created() {
         const { name } = this.$options;
         if (!window[name]) {
-          window.__components__[name] = this;
+          window.vuuriComponents[name] = this;
         }
-        console.log(window.__components__);
       },
     });
   }
