@@ -1,25 +1,24 @@
 <template>
   <div id="code-demo-app">
     <div class="mb-5">
-      <o-button variant="primary" class="mr-2" @click="onAddClicked()" data-test="add">Add</o-button>
-      <o-button variant="danger" @click="onDeleteMoreClicked()" data-test="remove">Delete</o-button>
+      <o-button variant="primary" class="mr-2" @click="onAddClicked()" data-test="add">
+        Add
+      </o-button>
+      <o-button variant="danger" @click="onDeleteMoreClicked()" data-test="delete">Delete</o-button>
     </div>
     <vuuri
-        v-model="items"
-        item-key="id"
-        :get-item-width="getItemWidth"
-        :get-item-height="getItemHeight"
-        drag-enabled
+      v-model="items"
+      item-key="id"
+      :get-item-width="getItemWidth"
+      :get-item-height="getItemHeight"
+      drag-enabled
     >
       <template #item="{ item }">
         <div class="demo-item" :style="{ backgroundColor: item.color }">
           <div class="grid-card-handle"></div>
-          <b-button
-              type="is-danger"
-              class="delete-btn"
-              @click="onDeleteClicked(item)"
-          >&times;</b-button
-          >
+          <b-button type="is-danger" class="delete-btn" @click="onDeleteClicked(item)">
+            &times;
+          </b-button>
         </div>
       </template>
     </vuuri>
@@ -27,12 +26,12 @@
 </template>
 
 <script>
-import vuuri from "../../../../src";
+import vuuri from '../../../../src';
 
 export default {
-  name: "AddDeleteDemo",
+  name: 'AddDeleteDemo',
   components: {
-    vuuri,
+    vuuri
   },
   data() {
     return {
@@ -49,19 +48,11 @@ export default {
       this._buildItems();
     },
     onDeleteMoreClicked() {
-      const numberOfTimesToDelete = Math.max(
-          1,
-          Math.floor(Math.random() * this.items.length)
-      );
-      console.log("numberOfTimesToDelete: ", numberOfTimesToDelete);
-      for (let i = 0; i < numberOfTimesToDelete; i++) {
-        const index = Math.floor(Math.random() * this.items.length);
-        if (index < 0) {
-          return;
-        }
-        console.log("index", index, this.items.length);
-        this.items.splice(index, 1);
+      if (this.items.length <= 0) {
+        return;
       }
+
+      this.items.splice(this.items.length - 1, 1);
     },
     getItemWidth(item) {
       return `${item.width}px`;
@@ -81,14 +72,8 @@ export default {
 
       return 200;
     },
-    _buildItems(numberOfTimes = 4) {
-      const numberOfItems = Math.max(
-          1,
-          Math.floor(Math.random() * numberOfTimes)
-      );
-      for (let i = 0; i < numberOfItems; i++) {
-        this.items.push(this._buildItem());
-      }
+    _buildItems() {
+      this.items.push(this._buildItem());
     },
     _addItems() {
       if (this.count > 10) {
@@ -107,31 +92,30 @@ export default {
         name: makeid(2),
         color: this._getColor(),
         width: this.getSize(),
-        height: this.getSize(),
+        height: this.getSize()
       };
     },
     _getColor() {
       const number = Math.random();
       if (number < 0.333) {
-        return "#aaffdc";
+        return '#aaffdc';
       }
 
       if (number < 0.666) {
-        return "#ff69ea";
+        return '#ff69ea';
       }
 
-      return "rgb(139, 152, 255)";
-    },
+      return 'rgb(139, 152, 255)';
+    }
   },
   mounted() {
     this._buildItems(5);
-  },
+  }
 };
 
 function makeid(length) {
-  var result = "";
-  var characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -168,7 +152,9 @@ function makeid(length) {
       height: 30px !important;
       width: 30px !important;
       padding: 0;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
       opacity: 0;
       transform: scale(0.5);
     }
