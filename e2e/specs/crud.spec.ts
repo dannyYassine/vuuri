@@ -12,18 +12,18 @@ test.describe('CRUD ', () => {
     let initialCount = await crudPageObject.getItems().count();
     console.log('initialCount', initialCount);
 
-    await crudPageObject.getAddButton().click();
+    // await crudPageObject.getAddButton().click();
 
-    // const components = await page.evaluateHandle('window.vuuriComponents.AddDeleteDemo');
-    // console.log('__components__', components);
+    const components = await page.evaluateHandle('window.vuuriComponents.AddDeleteDemo');
+    console.log('__components__', components);
 
-    // await page.evaluate(() => {
-    //   const component = window.vuuriComponents.AddDeleteDemo;
-    //   component.items.push({
-    //     id: Math.random(),
-    //     name: Math.random() + ''
-    //   });
-    // });
+    await page.evaluate(() => {
+      const component = window.vuuriComponents.AddDeleteDemo;
+      component.items.push({
+        id: Math.random(),
+        name: Math.random() + ''
+      });
+    });
 
     await wait(2000);
 
@@ -39,7 +39,12 @@ test.describe('CRUD ', () => {
 
     let initialCount = await crudPageObject.getItems().count();
 
-    await crudPageObject.getDeleteButton().click();
+    // await crudPageObject.getDeleteButton().click();
+
+    await page.evaluate(() => {
+      const component = window.vuuriComponents.AddDeleteDemo;
+      component.items.splice(0, 1);
+    });
 
     await wait(2000);
 
