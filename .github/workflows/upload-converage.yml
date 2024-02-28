@@ -30,7 +30,7 @@ jobs:
       - name: Run playwright tests with coverage
         run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn pw:test:coverage
       - name: Remove unwanted files detection
-        run: docker-compose run client rm -rf dev docs playwright.config.ts
+        run: docker-compose run client rm -rf dev docs playwright.config.ts e2e
       - name: Run unit tests with coverage
         run: docker-compose run client yarn ci:test:unit:coverage
       - name: Upload coverage
