@@ -22,7 +22,8 @@ jobs:
       - name: Install chromium
         run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn pw:install
       - name: Install client dependencies
-        run: docker-compose -f "./docker-compose.pw.yml" run client yarn
+        run: docker-compose -f "./docker-compose.pw.yml" run client yarn && \
+          docker-compose -f "./docker-compose.pw.yml" run client cd dev ; yarn
       - name: Up environment
         run: docker-compose -f "./docker-compose.pw.yml" up --detach client
       - name: Wait
