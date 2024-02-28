@@ -10,6 +10,10 @@ test.describe('CRUD ', () => {
     await wait(2000);
 
     let initialCount = await crudPageObject.getItems().count();
+    console.log('initialCount', initialCount);
+
+    const components = await page.evaluateHandle('window.__components__');
+    console.log('__components__', components);
 
     await page.evaluate(() => {
       const component = window.__components__.AddDeleteDemo;
