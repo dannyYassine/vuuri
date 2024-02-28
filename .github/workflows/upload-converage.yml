@@ -16,9 +16,7 @@ jobs:
         with:
           working-directory: .
       - name: Build containers
-        run: docker-compose -f docker-compose.pw.yml build client
-      - name: Build containers
-        run: docker-compose -f docker-compose.pw.yml build client playwright
+        run: docker-compose -f docker-compose.pw.yml build --parallel client playwright
       - name: Install dependencies
         run: docker-compose -f "./docker-compose.pw.yml" run client yarn
       - name: Install client-dev dependencies
