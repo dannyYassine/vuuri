@@ -12,7 +12,7 @@ test.describe('CRUD ', () => {
     let initialCount = await crudPageObject.getItems().count();
     console.log('initialCount', initialCount);
 
-    const components = await page.evaluateHandle('window.vuuriComponents');
+    const components = await page.evaluateHandle('window.vuuriComponents.AddDeleteDemo');
     console.log('__components__', components);
 
     await page.evaluate(() => {
