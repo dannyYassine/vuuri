@@ -18,15 +18,15 @@ jobs:
       - name: Build containers
         run: docker-compose -f "./docker-compose.pw.yml" build --parallel
       - name: Install playwright dependencies
-        run: docker-compose run playwright yarn
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn
       - name: Install client dependencies
-        run: docker-compose run client yarn
+        run: docker-compose -f "./docker-compose.pw.yml" run client yarn
       - name: Up environment
         run: docker-compose -f "./docker-compose.pw.yml" up --detach client
       - name: Wait
         run: sleep 5
       - name: Run tests
-        run: docker-compose run playwright npx playwright test
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn pw:test
       - name: Stop containers
         if: always()
         run: docker-compose -f "./docker-compose.pw.yml" down

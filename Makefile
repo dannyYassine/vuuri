@@ -7,7 +7,7 @@ pw-ssh:
 pw-install:
 	docker exec -it vuuri-playwright sh -c "yarn pw:install"
 pw-test:
-	docker exec -it vuuri-playwright sh -c "yarn test:pw"
+	docker exec -it vuuri-playwright sh -c "yarn pw:test"
 pw-coverage:
 	docker exec -it vuuri-playwright sh -c "yarn pw:test:coverage"
 client-dev:
