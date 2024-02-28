@@ -1,8 +1,8 @@
 name: upload-coverage
 
 defaults:
- run:
-  working-directory: .
+  run:
+    working-directory: .
 
 on:
   workflow_dispatch:
@@ -16,7 +16,7 @@ jobs:
         with:
           working-directory: .
       - name: Build containers
-        run: docker-compose -f docker-compose.ci.yml build client
+        run: docker-compose -f docker-compose.pw.yml build client
       - name: Build containers
         run: docker-compose -f docker-compose.pw.yml build client playwright
       - name: Install dependencies
