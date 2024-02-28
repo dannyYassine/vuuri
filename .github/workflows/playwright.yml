@@ -24,7 +24,7 @@ jobs:
       - name: Install client dependencies
         run: docker-compose -f "./docker-compose.pw.yml" run client yarn
       - name: Install client-dev dependencies
-        run: docker-compose -f "./docker-compose.pw.yml" run client cd dev ; yarn
+        run: docker-compose -f "./docker-compose.pw.yml" run client sh -c "cd dev ; yarn"
       - name: Up environment
         run: docker-compose -f "./docker-compose.pw.yml" up --detach client
       - name: Wait
