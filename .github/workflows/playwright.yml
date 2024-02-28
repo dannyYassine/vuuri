@@ -19,6 +19,8 @@ jobs:
         run: docker-compose -f "./docker-compose.pw.yml" build --parallel
       - name: Install playwright dependencies
         run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn
+      - name: Install chromium
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn pw:install
       - name: Install client dependencies
         run: docker-compose -f "./docker-compose.pw.yml" run client yarn
       - name: Up environment
