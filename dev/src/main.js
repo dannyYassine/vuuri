@@ -7,6 +7,7 @@ import { bulmaConfig } from '@oruga-ui/theme-bulma'
 import '@oruga-ui/theme-bulma/dist/bulma.css'
 import { createRouter, createWebHashHistory } from 'vue-router';
 
+console.log('init app');
 window.__components__ = {};
 const TestingPlugin = {
   install(app, options) {
@@ -16,6 +17,7 @@ const TestingPlugin = {
         if (!window[name]) {
           window.__components__[name] = this;
         }
+        console.log(window.__components__);
       },
     });
   }
