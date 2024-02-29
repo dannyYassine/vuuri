@@ -74,6 +74,10 @@ export default {
     },
     _buildItems() {
       this.items.push(this._buildItem());
+      this.items.push(this._buildItem());
+      this.items.push(this._buildItem());
+      this.items.push(this._buildItem());
+      this.items.push(this._buildItem());
     },
     _addItems() {
       if (this.count > 10) {
