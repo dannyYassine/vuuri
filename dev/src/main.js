@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import AddDeleteDemo from './components/e2e/AddDeleteDemo.vue'
+import DragEnabled from './components/e2e/DragEnabled.vue'
 import Main from './Main.vue'
 import Oruga from '@oruga-ui/oruga-next';
 import { bulmaConfig } from '@oruga-ui/theme-bulma'
@@ -29,7 +30,8 @@ const router = new createRouter({
       path: '/', component: App
     },
     {
-      path: '/e2e/crud', component: AddDeleteDemo
+      path: '/e2e/crud', component: AddDeleteDemo,
+      path: '/e2e/drag-enabled', component: DragEnabled
     }
   ]
 });
