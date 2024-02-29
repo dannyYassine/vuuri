@@ -7,8 +7,10 @@ test.describe("CRUD ", () => {
     const dragEnabledPageObject = new DragEnabledPageObject(page);
     dragEnabledPageObject.visit();
 
+    await wait(2000);
+
     const firstItem = dragEnabledPageObject.getItemAtIndex(0);
-    const secondItem = dragEnabledPageObject.getItemAtIndex(2);
+    const secondItem = dragEnabledPageObject.getItemAtIndex(1);
 
     await firstItem.hover();
     await wait(500);
