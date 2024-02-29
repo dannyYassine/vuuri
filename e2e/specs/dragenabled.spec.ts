@@ -2,7 +2,7 @@ import { expect, test } from 'playwright-test-coverage';
 import { DragEnabledPageObject } from '../pageobjects/DragEnabledPageObject';
 
 test.describe('CRUD ', () => {
-  test('should drag and drop item in same grid', async ({ page }) => {
+  test('should drag and drop item in same grid left to right', async ({ page }) => {
     const dragEnabledPageObject = new DragEnabledPageObject(page);
     dragEnabledPageObject.visit();
 
@@ -35,6 +35,6 @@ test.describe('CRUD ', () => {
     const firstBox = await firstItem.boundingBox();
     const secondBox = await secondItem.boundingBox();
 
-    expect(firstBox!.x < secondBox!.x).toBeTruthy();
+    expect(firstBox!.x > secondBox!.x).toBeTruthy();
   });
 });
