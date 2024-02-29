@@ -2,6 +2,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { configDefaults } from 'vitest/config';
+import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +16,13 @@ export default defineConfig({
     globals: true,
     environment: 'happy-dom',
     include: ['tests/unit/**/*.spec.*'],
-    exclude: [...configDefaults.exclude, '**/playwright/**', '**/cypress/**', '**/dev/**', '**/docs/**'],
+    exclude: [
+      ...configDefaults.exclude,
+      '**/playwright/**',
+      '**/cypress/**',
+      '**/dev/**',
+      '**/docs/**'
+    ],
     mockReset: true,
     restoreMocks: true,
     testTimeout: false ? 30000 : 10000,
@@ -24,6 +31,7 @@ export default defineConfig({
     reporters: ['verbose'],
     setupFiles: ['./tests/bootstrap.js']
   },
+  plugins: [dts()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
