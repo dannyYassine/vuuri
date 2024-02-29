@@ -30,7 +30,9 @@ const router = new createRouter({
       path: '/', component: App
     },
     {
-      path: '/e2e/crud', component: AddDeleteDemo,
+      path: '/e2e/crud', component: AddDeleteDemo
+    },
+    {
       path: '/e2e/drag-enabled', component: DragEnabled
     }
   ]

@@ -10,7 +10,6 @@ test.describe('CRUD ', () => {
     await wait(2000);
 
     let initialCount = await crudPageObject.getItems().count();
-    console.log('initialCount', initialCount);
 
     await crudPageObject.getAddButton().click();
 

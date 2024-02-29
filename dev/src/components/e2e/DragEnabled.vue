@@ -29,7 +29,7 @@
 import vuuri from '../../../../src';
 
 export default {
-  name: 'AddDeleteDemo',
+  name: 'DragEnabled',
   components: {
     vuuri
   },
