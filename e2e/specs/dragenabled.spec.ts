@@ -2,7 +2,7 @@ import { expect, test } from 'playwright-test-coverage';
 import { DragEnabledPageObject } from '../pageobjects/DragEnabledPageObject';
 import { wait } from '../utils';
 
-test.describe('CRUD ', () => {
+test.describe('Drag enabled ', () => {
   test('should drag and drop item in same grid left to right', async ({ page }) => {
     const dragEnabledPageObject = new DragEnabledPageObject(page);
     dragEnabledPageObject.visit();

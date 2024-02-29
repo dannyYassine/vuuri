@@ -2,7 +2,7 @@ import { expect, test } from 'playwright-test-coverage';
 import { CrudPageObject } from '../pageobjects/CrudPageObject';
 import { wait } from '../utils';
 
-test.describe('CRUD ', () => {
+test.describe('CRUD', () => {
   test('should add new items', async ({ page }) => {
     const crudPageObject = new CrudPageObject(page);
     crudPageObject.visit();
