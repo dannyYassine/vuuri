@@ -7,13 +7,13 @@ test.describe('CRUD ', () => {
     const crudPageObject = new CrudPageObject(page);
     crudPageObject.visit();
 
-    await wait(1000);
+    await wait(2000);
 
     let initialCount = await crudPageObject.getItems().count();
 
     await crudPageObject.getAddButton().click();
 
-    await wait(1000);
+    await wait(2000);
 
     const newCount = await crudPageObject.getItems().count();
     expect(newCount).toEqual(++initialCount);
@@ -23,13 +23,13 @@ test.describe('CRUD ', () => {
     const crudPageObject = new CrudPageObject(page);
     crudPageObject.visit();
 
-    await wait(1000);
+    await wait(2000);
 
     let initialCount = await crudPageObject.getItems().count();
 
     await crudPageObject.getDeleteButton().click();
 
-    await wait(1000);
+    await wait(2000);
 
     const newCount = await crudPageObject.getItems().count();
     expect(newCount).toEqual(--initialCount);
