@@ -1,0 +1,32 @@
+version: '3'
+
+networks:
+  vuuri:
+    driver: bridge
+
+services:
+  client:
+    container_name: client
+    build:
+      context: .
+      dockerfile: dev-env/client.ci.dockerfile
+    command: tail -f /dev/null
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/vuuri
+    networks:
+      - vuuri
+
+  # playwright:
+  #   container_name: playwright
+  #   build:
+  #     context: .
+  #     dockerfile: dev-env/playwright.ci.dockerfile
+  #   command: tail -f /dev/null
+  #   ports:
+  #     - "3001:3001"
+  #   volumes:
+  #     - .:/usr/src/vuuri
+  #   networks:
+  #     - vuuri

@@ -1,0 +1,40 @@
+name: upload-coverage
+
+defaults:
+  run:
+    working-directory: .
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          working-directory: .
+      - name: Build containers
+        run: docker-compose -f docker-compose.pw.yml build --parallel client playwright
+      - name: Install dependencies
+        run: docker-compose -f "./docker-compose.pw.yml" run client yarn
+      - name: Install client-dev dependencies
+        run: docker-compose -f "./docker-compose.pw.yml" run client sh -c "cd dev ; yarn"
+      - name: Install playwright dependencies
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn
+      - name: Install nyc for playwright
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright npm install -D nyc
+      - name: Up environment
+        run: docker-compose -f "./docker-compose.pw.yml" up --detach client
+      - name: Run playwright tests with coverage
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn pw:test:coverage
+      - name: Remove unwanted files detection
+        run: docker-compose run client rm -rf dev docs playwright.config.ts e2e
+      - name: Run unit tests with coverage
+        run: docker-compose run client yarn ci:test:unit:coverage
+      - name: Upload coverage
+        run: CODECOV_TOKEN=${{secrets.CODECOV_TOKEN}} . send-coverage.sh
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f docker-compose.ci.yml down

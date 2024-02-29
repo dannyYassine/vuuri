@@ -1,0 +1,26 @@
+name: client-tests
+
+defaults:
+ run:
+  working-directory: .
+
+on:
+  workflow_dispatch:
+  pull_request:
+  
+jobs:
+  vitest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          working-directory: .
+      - name: Build containers
+        run: docker-compose -f docker-compose.ci.yml build client
+      - name: Install node_modules
+        run: docker-compose run client yarn
+      - name: Run tests
+        run: docker-compose run client yarn ci:test:unit
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f docker-compose.ci.yml down

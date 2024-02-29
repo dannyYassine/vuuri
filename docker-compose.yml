@@ -23,7 +23,11 @@ services:
     build:
       context: .
       dockerfile: dev-env/playwright.dockerfile
+    command: tail -f /dev/null
     ports:
       - "3001:3001"
+      - "9323:9323"
+    volumes:
+      - .:/usr/src/vuuri
     networks:
-      - vuuri
+      - vuuri 

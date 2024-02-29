@@ -6,23 +6,41 @@
   "main": "src/index.js",
   "scripts": {
     "serve": "cd tests/client ; yarn serve",
-    "build": "vue-cli-service build --target lib --name vuuri src/index.js",
+    "dev": "cd dev ; yarn dev",
+    "build": "vite build",
     "install-test-client": "cd tests/client ; yarn install ; cd ../..",
     "test": "start-server-and-test serve \"http://localhost:9999\" test:cypress:run",
     "test:coverage": "start-server-and-test serve \"http://localhost:9999\" test:cypress:coverage",
     "test:update-test-client": "rm -rf tests/client/src/vuuri/* ; ls -ls tests/client/src/vuuri ; cp src/* tests/client/src/vuuri ; ls -ls tests/client/src/vuuri ; ",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "vitest --segfault-retry=3",
+    "ci:test:unit": "vitest --segfault-retry=3 run",
+    "ci:test:unit:coverage": "vitest --segfault-retry=3 run --coverage",
     "test:unit:watch": "yarn test:unit --watch",
     "test:unit:coverage": "vue-cli-service test:unit --coverage",
     "test:cypress:install": "cypress install",
     "test:cypress:open": "cypress open",
+    "pw:install": "npx playwright install chromium",
+    "pw:test:coverage": "nyc --reporter=json playwright test",
+    "pw:test": "npx playwright test",
+    "pw:report": "playwright show-report --host=0.0.0.0",
+    "test:pw:debug": "npx playwright test --debug",
     "test:cypress:run": "cypress run",
     "test:cypress:coverage": "NODE_ENV=test cypress run",
-    "send-coverage": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
+    "send-coverage": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
+    "merge-coverage": "nyc merge merge-json merge-json/coverage-final.json",
+    "report-coverage": "nyc report merge-json/total.json --reporter=lcov"
   },
   "author": {
     "name": "Danny Yassine",
     "url": "https://github.com/dannyyassine"
+  },
+  "nyc": {
+    "extension": [
+      ".js",
+      ".ts",
+      ".tsx",
+      ".vue"
+    ]
   },
   "repository": {
     "type": "git",
@@ -30,49 +48,39 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@vue/cli-plugin-unit-jest": "^4.5.10",
     "lodash": "^4.17.20",
     "muuri": "^0.9.3",
     "uuid": "^8.3.2",
-    "vue": "^2.6.11",
-    "vue-jest": "^3.0.7"
+    "vue": "^3.4.15"
   },
   "devDependencies": {
-    "@cypress/code-coverage": "^3.9.2",
-    "@cypress/webpack-preprocessor": "^5.5.0",
-    "@vue/babel-preset-app": "^4.5.10",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/test-utils": "^1.1.2",
-    "babel-eslint": "^10.1.0",
-    "babel-plugin-istanbul": "^6.0.0",
+    "@playwright/test": "^1.41.2",
+    "@types/node": "^20.11.19",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vitest/coverage-v8": "^1.3.0",
+    "@vue/test-utils": "^2.4.4",
     "coveralls": "^3.1.0",
-    "cypress": "^6.2.1",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
+    "happy-dom": "^13.3.8",
+    "jsdom": "^21.1.1",
+    "nyc": "^15.1.0",
+    "playwright": "^1.37.1",
+    "playwright-test-coverage": "^1.2.12",
+    "prettier": "^3.2.5",
     "start-server-and-test": "^1.11.7",
-    "vue-template-compiler": "^2.6.11"
+    "vite": "^5.1.0",
+    "vite-plugin-dts": "^3.7.3",
+    "vite-plugin-istanbul": "^5.0.0",
+    "vitest": "^1.3.0"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "nyc": {
-    "include": [
-      "test/client/src/vuuri/**/*.js",
-      "test/client/src/vuuri/**/*.vue"
-    ]
-  },
-  "keywords": ["vue", "muuri", "vue.js", "grid", "layout", "bin-packing", "filter", "sort", "drag"]
+  "keywords": [
+    "vue",
+    "muuri",
+    "vue.js",
+    "grid",
+    "layout",
+    "bin-packing",
+    "filter",
+    "sort",
+    "drag"
+  ]
 }

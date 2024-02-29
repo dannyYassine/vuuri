@@ -89,6 +89,13 @@ export class GridStore {
     group.forEach((groupy) => groups = groups.concat(this._store.get((groupy+''))));
     return groups;
   }
+
+  clear() {
+     this._store = new Map();
+     this._itemStore = new Map();
+     this._draggingGridItem = null;
+     this._draggingItem = null;
+  }
 }
 
 export default new GridStore();

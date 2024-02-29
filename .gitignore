@@ -16,9 +16,18 @@ pnpm-debug.log*
 
 # Editor directories and files
 .idea
-.vscode
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+coverage
+unit-coverage
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+codecov
+.nyc_output/*
+dev/.nyc_output/*

@@ -3,13 +3,15 @@
       ref="muuri"
       class="muuri-grid"
       :class="className"
-      :data-grid-key="gridKey">
+      :data-grid-key="gridKey"
+      test-id="muuri-grid-container">
     <div
         v-for="item in copiedItems"
         :key="item[itemKey]"
         :style="_getItemStyles(item)"
         class="muuri-item"
         :data-item-key="item[itemKey]"
+        test-id="muuri-grid-item"
     >
       <div class="muuri-item-content">
         <slot name="item" :item="item" />
@@ -49,7 +51,7 @@ export default {
     /**
      * Array input for items to display (via v-model)
      */
-    value: {
+     modelValue: {
       type: Array,
       required: false
     },
@@ -127,10 +129,13 @@ export default {
     }
   },
   watch: {
-    value(newItems) {
-      if (!this.internallySet) {
-        this._sync(newItems, this.copiedItems);
-      }
+    modelValue: {
+      handler(newItems) {
+        if (!this.internallySet) {
+          this._sync(newItems, this.copiedItems);
+        }
+      },
+      deep: true
     }
   },
   computed: {
@@ -165,9 +170,9 @@ export default {
         this._resizeOnLoad();
       });
       this.observer.observe(this.$refs.muuri);
-      this._sync(this.value, []);
+      this._sync(this.modelValue, []);
       this.$nextTick(() => {
-        GridStore.setItemsForGridId(this.gridKey, this.value);
+        GridStore.setItemsForGridId(this.gridKey, this.modelValue);
       });
     },
     /**
@@ -296,10 +301,10 @@ export default {
      * @private
      */
     _onItemSend({ item }) {
-      const index = this.value.findIndex(value => value[this.itemKey] == item.getElement().dataset.itemKey);
-      const removedItem = this.value.splice(index, 1)[0];
+      const index = this.modelValue.findIndex(value => value[this.itemKey] == item.getElement().dataset.itemKey);
+      const removedItem = this.modelValue.splice(index, 1)[0];
       GridStore.setDraggingItem(removedItem);
-      this._emitValue(this.value);
+      this._emitValue(this.modelValue);
     },
     /**
      * Listener when item enters a new grid
@@ -307,7 +312,7 @@ export default {
      */
     _onItemReceive() {
       const vuuriItem = GridStore.getDraggingItem();
-      this.value.push(vuuriItem);
+      this.modelValue.push(vuuriItem);
       const value = this._reOrderWithItem(GridStore.getDraggingGridItem())
       this._emitValue(value);
     },
@@ -333,7 +338,7 @@ export default {
         return accum;
       }, {});
 
-      return this.value.reduce((accum, a) => {
+      return this.modelValue.reduce((accum, a) => {
         accum[itemKeys[a[this.itemKey]]] = a;
         // accum.push(a);
         return accum
@@ -480,7 +485,7 @@ export default {
       this.$emit('input', value);
       this.$nextTick(() => {
         this.internallySet = false;
-        GridStore.setItemsForGridId(this.gridKey, this.value);
+        GridStore.setItemsForGridId(this.gridKey, this.modelValue);
       });
     }
   },
@@ -492,7 +497,7 @@ export default {
     this._setup();
     this._registerEvents();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this._unregisterEvents();
     this.$emit('on-destroy', this);
   }

@@ -1,52 +1,47 @@
-import { mount } from './main';
+import { describe, test, expect, vi } from 'vitest';
+import vuuri from '@/Vuuri.vue';
+import { assert, mount } from '@test/utils';
 
-jest.mock('muuri');
+vi.mock('muuri', async () => {
+  return await import('../__mocks__/muuri.js');
+});
 
-import vuuri from "../../client/src/vuuri";
-
-describe("CRUD Operations", () => {
-  
-  let wrapper;
-  
-  beforeEach(() => {
-  });
-  
+describe('CRUD Operations', () => {
   describe('Adding', () => {
     test('should add new item', async () => {
       const todoItems = [];
-      wrapper = mount(vuuri, {
-        propsData: {
-          items: todoItems
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: todoItems
         }
       });
-      const originalCount = wrapper.vm.items.length;
+      const originalCount = wrapper.vm.modelValue.length;
 
       const item = { id: 2 };
       todoItems.push(item);
       await wrapper.vm.$nextTick();
 
-      const newCount = wrapper.vm.items.length;
+      const newCount = wrapper.vm.modelValue.length;
       expect(newCount).toBeGreaterThan(originalCount);
       expect(newCount - originalCount).toBe(1);
     });
-    
+
     test('should add new item to muuri', async () => {
       const todoItems = [];
-      wrapper = mount(vuuri, {
-        propsData: {
-          items: todoItems
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: todoItems
         }
       });
-      wrapper.vm.muuri.add = jest.fn();
-      const originalCount = wrapper.vm.items.length;
+      wrapper.vm.muuri.add = vi.fn();
+      const originalCount = wrapper.vm.modelValue.length;
 
       const item = { id: 2 };
       todoItems.push(item);
-      await wrapper.vm.$nextTick();
 
-      const newCount = wrapper.vm.items.length;
-      expect(wrapper.vm.muuri.add).toHaveBeenCalledTimes(1);
+      await assert(() => {
+        expect(wrapper.vm.muuri.add).toHaveBeenCalledTimes(1);
+      });
     });
   });
-  
 });

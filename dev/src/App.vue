@@ -1,36 +1,29 @@
 <template>
-  <div id="app">
-    <div>
-      <img
-          alt="Vue logo"
-          src="https://github.com/dannyYassine/vuuri/blob/master/.docs/.vuepress/public/vuuri_logo.png?raw=true"
-      />
-    </div>
+  <section>
+    <Header />
+    <AddDeleteDemo />
     <KanBanDemo />
-  </div>
+  </section>
 </template>
 
 <script>
-import KanBanDemo from './components/KanBanDemo';
+import Header from './components/Header.vue';
+import KanBanDemo from './components/KanBanDemo.vue';
+import AddDeleteDemo from './components/AddDeleteDemo.vue';
 
 export default {
   name: "App",
   components: {
-    KanBanDemo
+    AddDeleteDemo,
+    KanBanDemo,
+    Header
   }
 };
 
 </script>
 
 <style scoped lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+section {
   text-align: center;
-
-  img {
-    max-height: 150px;
-  }
 }
 </style>

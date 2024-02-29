@@ -1,10 +1,8 @@
-FROM mcr.microsoft.com/playwright:v1.31.0-focal
+FROM mcr.microsoft.com/playwright:v1.41.2-focal
 
 WORKDIR /usr/src/vuuri
 
 COPY ./package.json ./
 COPY ./yarn.lock ./
-
-# RUN yarn
 
 COPY . .

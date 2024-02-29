@@ -1,8 +1,8 @@
 <template>
   <div id="code-demo-app">
-    <div class="mb-2">
-      <b-button class="mr-2" @click="onAddClicked()">Add</b-button>
-      <b-button @click="onDeleteMoreClicked()">Delete</b-button>
+    <div class="mb-5">
+      <o-button variant="primary" class="mr-2" @click="onAddClicked()" data-test="add">Add</o-button>
+      <o-button variant="danger" @click="onDeleteMoreClicked()">Delete</o-button>
     </div>
     <vuuri
         v-model="items"
@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import vuuri from "@vuuri";
+import vuuri from "../../../src";
 
 export default {
-  name: "App",
+  name: "AddDeleteDemo",
   components: {
     vuuri,
   },

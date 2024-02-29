@@ -1,43 +1,37 @@
-import { mount } from './main';
-
-jest.mock('muuri');
-
+import { describe, test, expect, vi } from 'vitest';
 import { isEmpty } from 'lodash';
-import vuuri from "../../client/src/vuuri";
-import {GridEvent} from "../../src";
+import vuuri from '@/Vuuri.vue';
+import { assert, mount } from '@test/utils';
 
-describe("CRUD Operations", () => {
-  
-  let wrapper;
-  
-  beforeEach(() => {
-  });
-  
-  describe('Adding', () => {
-    test('should add all muuri events', async () => {
-      const todoItems = [];
-      wrapper = mount(vuuri, {
-        propsData: {
-          items: todoItems
-        }
-      });
-      
-      expect(wrapper.vm.events).toBeDefined();
-      Object.values(GridEvent).forEach(event => {
-        expect(this.events[event]).toEqual(event);
-      });
+vi.mock('muuri', async () => {
+  return await import('../__mocks__/muuri.js');
+});
+
+describe('On destroy', () => {
+  test('should remove muuri events on destroy', async () => {
+    const todoItems = [];
+    const wrapper = mount(vuuri, {
+      props: {
+        modelValue: todoItems
+      }
     });
-    
-    test('should remove muuri events on destroy', async () => {
-      const todoItems = [];
-      wrapper = mount(vuuri, {
-        propsData: {
-          items: todoItems
-        }
-      });
-      
-      expect(isEmpty(wrapper.vm.events)).toBe(true);
+    wrapper.unmount();
+
+    await assert(() => {
+      expect(isEmpty(wrapper.vm.events)).toBeTruthy();
     });
   });
-  
+
+  test('should emit on-destroy event', async () => {
+    const wrapper = mount(vuuri, {
+      props: {
+        modelValue: []
+      }
+    });
+    wrapper.unmount();
+
+    await assert(() => {
+      expect(wrapper.emitted()['on-destroy']).toHaveLength(1);
+    });
+  });
 });

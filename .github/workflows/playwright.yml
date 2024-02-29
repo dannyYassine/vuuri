@@ -1,0 +1,36 @@
+name: playwright-tests
+
+defaults:
+  run:
+    working-directory: .
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  playwright:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          working-directory: .
+      - name: Build containers
+        run: docker-compose -f "./docker-compose.pw.yml" build --parallel
+      - name: Install playwright dependencies
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn
+      - name: Install chromium
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn pw:install
+      - name: Install client dependencies
+        run: docker-compose -f "./docker-compose.pw.yml" run client yarn
+      - name: Install client-dev dependencies
+        run: docker-compose -f "./docker-compose.pw.yml" run client sh -c "cd dev ; yarn"
+      - name: Up environment
+        run: docker-compose -f "./docker-compose.pw.yml" up --detach client
+      - name: Wait
+        run: sleep 5
+      - name: Run tests
+        run: docker-compose -f "./docker-compose.pw.yml" run playwright yarn pw:test
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f "./docker-compose.pw.yml" down
