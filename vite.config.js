@@ -6,7 +6,7 @@ import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), dts()],
   test: {
     coverage: {
       provider: 'v8',
@@ -31,7 +31,14 @@ export default defineConfig({
     reporters: ['verbose'],
     setupFiles: ['./tests/bootstrap.js']
   },
-  plugins: [dts()],
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, 'src/index.js'),
+      name: 'index',
+      fileName: 'index'
+    },
+    outDir: path.resolve(__dirname, 'dist')
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
