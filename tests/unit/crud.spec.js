@@ -47,6 +47,7 @@ describe('CRUD Operations', () => {
   });
 
   describe('Deleting', () => {
+    test('should delete items from muuri with default primary key', async () => {
       const todoItems = [
         {
           [ItemKey.key]: 1
