@@ -1,17 +1,18 @@
 <template>
   <div
-      ref="muuri"
-      class="muuri-grid"
-      :class="className"
-      :data-grid-key="gridKey"
-      test-id="muuri-grid-container">
+    ref="muuri"
+    class="muuri-grid"
+    :class="className"
+    :data-grid-key="gridKey"
+    test-id="muuri-grid-container"
+  >
     <div
-        v-for="item in copiedItems"
-        :key="item[itemKey]"
-        :style="_getItemStyles(item)"
-        class="muuri-item"
-        :data-item-key="item[itemKey]"
-        test-id="muuri-grid-item"
+      v-for="item in copiedItems"
+      :key="item[itemKey]"
+      :style="_getItemStyles(item)"
+      class="muuri-item"
+      :data-item-key="item[itemKey]"
+      test-id="muuri-grid-item"
     >
       <div class="muuri-item-content">
         <slot name="item" :item="item" />
@@ -51,7 +52,7 @@ export default {
     /**
      * Array input for items to display (via v-model)
      */
-     modelValue: {
+    modelValue: {
       type: Array,
       required: false
     },
@@ -123,10 +124,10 @@ export default {
        */
       events: {},
       /*
-      * The generated Muuri Options object
-      */
+       * The generated Muuri Options object
+       */
       muuriOptions: {}
-    }
+    };
   },
   watch: {
     modelValue: {
@@ -149,9 +150,7 @@ export default {
      */
     update() {
       this.$nextTick(() => {
-        this.muuri
-            .refreshItems()
-            .layout(true, () => this.$emit('updated'));
+        this.muuri.refreshItems().layout(true, () => this.$emit('updated'));
       });
     },
     /**
@@ -190,7 +189,7 @@ export default {
       /**
        * @type {string}
        */
-      this.gridKey = uuidv4().replace(/-/g, '')
+      this.gridKey = uuidv4().replace(/-/g, '');
     },
     /**
      * Creates the options object for Muuri
@@ -198,7 +197,7 @@ export default {
      */
     _setupOptions() {
       if (this.dragEnabled) {
-        this.muuriOptions = {...this._generateDragOptions(), ...this.muuriOptions};
+        this.muuriOptions = { ...this._generateDragOptions(), ...this.muuriOptions };
       }
       if (this.groupId || this.groupIds) {
         let groupIds = [];
@@ -212,7 +211,7 @@ export default {
           return GridStore.getGrids(groupIds);
         };
       }
-      this.muuriOptions = {...this.options, ...this.muuriOptions};
+      this.muuriOptions = { ...this.options, ...this.muuriOptions };
     },
     /**
      * @private
@@ -224,20 +223,20 @@ export default {
         dragContainer: document.querySelector(`.muuri-grid${this.selector}`),
         dragRelease: {
           duration: 400,
-          easing: "cubic-bezier(0.625, 0.225, 0.100, 0.890)",
-          useDragContainer: true,
+          easing: 'cubic-bezier(0.625, 0.225, 0.100, 0.890)',
+          useDragContainer: true
         },
         dragPlaceholder: {
           enabled: true,
           createElement(item) {
             return item.getElement().cloneNode(true);
-          },
+          }
         },
         dragAutoScroll: {
           targets: [window],
-            sortDuringScroll: false,
-            syncAfterScroll: false,
-        },
+          sortDuringScroll: false,
+          syncAfterScroll: false
+        }
       };
     },
     /**
@@ -245,14 +244,14 @@ export default {
      * @private
      */
     _registerEvents() {
-      Object.values(GridEvent).forEach(event => {
+      Object.values(GridEvent).forEach((event) => {
         this.events[event] = (...args) => {
           this.$emit(event, ...args);
-        }
+        };
         this.muuri.on(event, this.events[event]);
 
         if (event === GridEvent.dragStart) {
-          this.muuri.on(event, this._onDragStart)
+          this.muuri.on(event, this._onDragStart);
         }
         if (event === GridEvent.send) {
           this.muuri.on(event, this._onItemSend);
@@ -273,7 +272,7 @@ export default {
      * @private
      */
     _unregisterEvents() {
-      Object.values(GridEvent).forEach(event => {
+      Object.values(GridEvent).forEach((event) => {
         this.muuri.off(event, this.events[event]);
         delete this.events[event];
       });
@@ -301,7 +300,9 @@ export default {
      * @private
      */
     _onItemSend({ item }) {
-      const index = this.modelValue.findIndex(value => value[this.itemKey] == item.getElement().dataset.itemKey);
+      const index = this.modelValue.findIndex(
+        (value) => value[this.itemKey] == item.getElement().dataset.itemKey
+      );
       const removedItem = this.modelValue.splice(index, 1)[0];
       GridStore.setDraggingItem(removedItem);
       this._emitValue(this.modelValue);
@@ -313,7 +314,7 @@ export default {
     _onItemReceive() {
       const vuuriItem = GridStore.getDraggingItem();
       this.modelValue.push(vuuriItem);
-      const value = this._reOrderWithItem(GridStore.getDraggingGridItem())
+      const value = this._reOrderWithItem(GridStore.getDraggingGridItem());
       this._emitValue(value);
     },
     /**
@@ -331,7 +332,7 @@ export default {
     _reOrderWithItem(item) {
       const $grid = item.getGrid();
 
-      let i = 0
+      let i = 0;
       const itemKeys = $grid.getItems().reduce((accum, item) => {
         accum[item.getElement().dataset.itemKey] = i;
         i += 1;
@@ -341,7 +342,7 @@ export default {
       return this.modelValue.reduce((accum, a) => {
         accum[itemKeys[a[this.itemKey]]] = a;
         // accum.push(a);
-        return accum
+        return accum;
       }, []);
     },
     /**
@@ -368,7 +369,7 @@ export default {
      * Callback used to resize the muuri grid
      * @private
      */
-    _resizeOnLoad: debounce(function() {
+    _resizeOnLoad: debounce(function () {
       this.$nextTick(() => {
         this.update();
       }, 100);
@@ -396,12 +397,11 @@ export default {
         return;
       }
 
-      this._remove(newItems, oldItems)
-          .then(() => {
-            this.update();
-            this._add(newItems, oldItems);
-            GridStore.setItemsForGridId(this.gridKey, this.copiedItems);
-          })
+      this._remove(newItems, oldItems).then(() => {
+        this.update();
+        this._add(newItems, oldItems);
+        GridStore.setItemsForGridId(this.gridKey, this.copiedItems);
+      });
     },
     /**
      * Remove deleted items from muuri
@@ -413,20 +413,18 @@ export default {
     _remove(newItems, oldItems) {
       const valuesToRemove = this._getDiff(oldItems, newItems);
       if (!valuesToRemove.length) {
+        console.log(newItems, oldItems);
         return Promise.resolve();
       }
 
-      const itemsToRemove = []
-      valuesToRemove.forEach(value => {
-        const itemToRemove = this.muuri.getItems().find(item => {
-          return (
-              value[this.itemKey]+'' ===
-              item.getElement().dataset.itemKey
-          );
+      const itemsToRemove = [];
+      valuesToRemove.forEach((value) => {
+        const itemToRemove = this.muuri.getItems().find((item) => {
+          return value[this.itemKey] + '' === item.getElement().dataset.itemKey;
         });
 
         if (itemToRemove) {
-          itemsToRemove.push(itemToRemove)
+          itemsToRemove.push(itemToRemove);
         }
       });
 
@@ -439,8 +437,10 @@ export default {
           onFinish: () => {
             this.muuri.remove(itemsToRemove);
 
-            valuesToRemove.forEach(value => {
-              const index = this.copiedItems.findIndex(item => item.id === value.id);
+            valuesToRemove.forEach((value) => {
+              const index = this.copiedItems.findIndex(
+                (item) => item[this.itemKey] === value[this.itemKey]
+              );
               this.copiedItems.splice(index, 1);
             });
 
@@ -463,15 +463,17 @@ export default {
       }
 
       if (this.itemKey === ItemKey.key) {
-        valuesToAdd.forEach(item => this._generateItemKey(item));
+        valuesToAdd.forEach((item) => this._generateItemKey(item));
       }
 
       // renders new elements
       this.copiedItems = this.copiedItems.concat(valuesToAdd);
 
       this.$nextTick(() => {
-        valuesToAdd.forEach(value => {
-          const $element = document.querySelector(`${this.selector} [data-item-key="${value[this.itemKey]}"]`);
+        valuesToAdd.forEach((value) => {
+          const $element = document.querySelector(
+            `${this.selector} [data-item-key="${value[this.itemKey]}"]`
+          );
           this.muuri.add($element, {
             layout: false,
             active: false
@@ -501,7 +503,7 @@ export default {
     this._unregisterEvents();
     this.$emit('on-destroy', this);
   }
-}
+};
 </script>
 
 <style scoped>

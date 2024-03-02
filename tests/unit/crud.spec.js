@@ -44,4 +44,109 @@ describe('CRUD Operations', () => {
       });
     });
   });
+
+  describe('Deleting', () => {
+    test('should delete items from muuri with default primary key', async () => {
+      const todoItems = [
+        {
+          id: 1
+        },
+        {
+          id: 2
+        },
+        {
+          id: 3
+        }
+      ];
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: todoItems
+        }
+      });
+      wrapper.vm.muuri.refreshItems = vi.fn().mockReturnValue({
+        layout: vi.fn()
+      });
+      wrapper.vm.muuri.hide = vi.fn();
+      wrapper.vm.muuri.remove = vi.fn();
+      wrapper.vm.muuri.getItems = vi.fn().mockReturnValue([]);
+
+      wrapper.vm.modelValue.splice(0, 1);
+
+      await assert(() => {
+        expect(wrapper.vm.muuri.refreshItems).toHaveBeenCalled();
+        expect(wrapper.vm.copiedItems.length).toEqual(2);
+        expect(wrapper.vm.copiedItems[0].id).toEqual(2);
+        expect(wrapper.vm.copiedItems[1].id).toEqual(3);
+      });
+    });
+
+    test('should delete items from muuri with default primary key', async () => {
+      const todoItems = [
+        {
+          id: 1
+        },
+        {
+          id: 2
+        },
+        {
+          id: 3
+        }
+      ];
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: todoItems
+        }
+      });
+      wrapper.vm.muuri.refreshItems = vi.fn().mockReturnValue({
+        layout: vi.fn()
+      });
+      wrapper.vm.muuri.hide = vi.fn();
+      wrapper.vm.muuri.remove = vi.fn();
+      wrapper.vm.muuri.getItems = vi.fn().mockReturnValue([]);
+
+      wrapper.vm.modelValue.splice(0, 1);
+
+      await assert(() => {
+        expect(wrapper.vm.muuri.refreshItems).toHaveBeenCalled();
+        expect(wrapper.vm.copiedItems.length).toEqual(2);
+        expect(wrapper.vm.copiedItems[0].id).toEqual(2);
+        expect(wrapper.vm.copiedItems[1].id).toEqual(3);
+      });
+    });
+
+    test('should delete items from muuri with custom primary key', async () => {
+      const todoItems = [
+        {
+          customId: 1
+        },
+        {
+          customId: 2
+        },
+        {
+          customId: 3
+        }
+      ];
+      const wrapper = mount(vuuri, {
+        props: {
+          modelValue: todoItems,
+          itemKey: 'customId'
+        }
+      });
+      wrapper.vm.muuri.refreshItems = vi.fn().mockReturnValue({
+        layout: vi.fn()
+      });
+      wrapper.vm.muuri.hide = vi.fn();
+      wrapper.vm.muuri.remove = vi.fn();
+      wrapper.vm.muuri.getItems = vi.fn().mockReturnValue([]);
+
+      wrapper.vm.modelValue.splice(0, 1);
+
+      await assert(() => {
+        expect(wrapper.vm.muuri.refreshItems).toHaveBeenCalled();
+        expect(wrapper.vm.copiedItems.length).toEqual(2);
+        expect(wrapper.vm.copiedItems[0].customId).toEqual(2);
+        expect(wrapper.vm.copiedItems[1].customId).toEqual(3);
+      });
+    });
+  });
 });
