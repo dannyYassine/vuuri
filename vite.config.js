@@ -16,13 +16,7 @@ export default defineConfig({
     globals: true,
     environment: 'happy-dom',
     include: ['tests/unit/**/*.spec.*'],
-    exclude: [
-      ...configDefaults.exclude,
-      '**/playwright/**',
-      '**/cypress/**',
-      '**/dev/**',
-      '**/docs/**'
-    ],
+    exclude: [...configDefaults.exclude, '**/playwright/**', '**/dev/**', '**/docs/**'],
     mockReset: true,
     restoreMocks: true,
     testTimeout: false ? 30000 : 10000,
