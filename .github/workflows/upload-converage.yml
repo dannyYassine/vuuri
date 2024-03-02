@@ -6,7 +6,9 @@ defaults:
 
 on:
   workflow_dispatch:
-
+  push:
+    branches:
+      - master
 jobs:
   coverage:
     runs-on: ubuntu-latest
