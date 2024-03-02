@@ -418,6 +418,7 @@ export default {
       }
 
       const itemsToRemove = [];
+
       valuesToRemove.forEach((value) => {
         const itemToRemove = this.muuri.getItems().find((item) => {
           return value[this.itemKey] + '' === item.getElement().dataset.itemKey;

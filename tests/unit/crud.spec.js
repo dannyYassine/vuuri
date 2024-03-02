@@ -1,6 +1,7 @@
 import { describe, test, expect, vi } from 'vitest';
 import vuuri from '@/Vuuri.vue';
 import { assert, mount } from '@test/utils';
+import { ItemKey } from '../../src/constants.js';
 
 vi.mock('muuri', async () => {
   return await import('../__mocks__/muuri.js');
@@ -46,16 +47,15 @@ describe('CRUD Operations', () => {
   });
 
   describe('Deleting', () => {
-    test('should delete items from muuri with default primary key', async () => {
       const todoItems = [
         {
-          id: 1
+          [ItemKey.key]: 1
         },
         {
-          id: 2
+          [ItemKey.key]: 2
         },
         {
-          id: 3
+          [ItemKey.key]: 3
         }
       ];
       const wrapper = mount(vuuri, {
@@ -63,6 +63,7 @@ describe('CRUD Operations', () => {
           modelValue: todoItems
         }
       });
+      wrapper.vm.copiedItems = todoItems;
       wrapper.vm.muuri.refreshItems = vi.fn().mockReturnValue({
         layout: vi.fn()
       });
@@ -75,21 +76,21 @@ describe('CRUD Operations', () => {
       await assert(() => {
         expect(wrapper.vm.muuri.refreshItems).toHaveBeenCalled();
         expect(wrapper.vm.copiedItems.length).toEqual(2);
-        expect(wrapper.vm.copiedItems[0].id).toEqual(2);
-        expect(wrapper.vm.copiedItems[1].id).toEqual(3);
+        expect(wrapper.vm.copiedItems[0][ItemKey.key]).toEqual(2);
+        expect(wrapper.vm.copiedItems[1][ItemKey.key]).toEqual(3);
       });
     });
 
-    test('should delete items from muuri with default primary key', async () => {
+    test('should delete items from muuri with default primary key when assign a new array', async () => {
       const todoItems = [
         {
-          id: 1
+          [ItemKey.key]: 1
         },
         {
-          id: 2
+          [ItemKey.key]: 2
         },
         {
-          id: 3
+          [ItemKey.key]: 3
         }
       ];
       const wrapper = mount(vuuri, {
@@ -102,15 +103,40 @@ describe('CRUD Operations', () => {
       });
       wrapper.vm.muuri.hide = vi.fn();
       wrapper.vm.muuri.remove = vi.fn();
-      wrapper.vm.muuri.getItems = vi.fn().mockReturnValue([]);
+      wrapper.vm.muuri.getItems = vi.fn().mockReturnValue(
+        todoItems.map((item) => {
+          return {
+            ...item,
+            getElement: vi.fn().mockReturnValue({
+              dataset: {
+                itemKey: item[ItemKey.key] + ''
+              }
+            })
+          };
+        })
+      );
 
-      wrapper.vm.modelValue.splice(0, 1);
+      wrapper.vm.copiedItems = todoItems;
+      wrapper.setProps({
+        modelValue: [
+          {
+            [ItemKey.key]: 2
+          },
+          {
+            [ItemKey.key]: 3
+          }
+        ]
+      });
+
+      await assert(() => {});
+
+      wrapper.vm.muuri.hide.mock.calls[0][1].onFinish();
 
       await assert(() => {
         expect(wrapper.vm.muuri.refreshItems).toHaveBeenCalled();
         expect(wrapper.vm.copiedItems.length).toEqual(2);
-        expect(wrapper.vm.copiedItems[0].id).toEqual(2);
-        expect(wrapper.vm.copiedItems[1].id).toEqual(3);
+        expect(wrapper.vm.copiedItems[0][ItemKey.key]).toEqual(2);
+        expect(wrapper.vm.copiedItems[1][ItemKey.key]).toEqual(3);
       });
     });
 
