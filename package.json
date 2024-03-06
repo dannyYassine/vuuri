@@ -3,7 +3,7 @@
   "version": "0.4.1",
   "description": "Muuri Vue Integration",
   "homepage": "https://dannyyassine.github.io/vuuri/",
-  "main": "src/index.js",
+  "main": "dist/index.umd.js",
   "scripts": {
     "serve": "cd tests/client ; yarn serve",
     "dev": "cd dev ; yarn dev",

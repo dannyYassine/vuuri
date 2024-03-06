@@ -12,6 +12,8 @@ pw-coverage:
 	docker exec -it vuuri-playwright sh -c "yarn pw:test:coverage"
 client-dev:
 	docker exec -it vuuri-client sh -c "cd dev && yarn dev"
+build:
+	docker exec -it vuuri-client sh -c "yarn build"
 client-test:
 	docker exec -it vuuri-client sh -c "yarn test:unit"
 client-test-coverage:
