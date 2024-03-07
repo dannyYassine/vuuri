@@ -28,10 +28,18 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.js'),
-      name: 'index',
-      fileName: 'index'
+      name: 'Vuuri',
+      fileName: 'vuuri'
     },
     outDir: path.resolve(__dirname, 'dist')
+  },
+  rollupOptions: {
+    external: ["vue"],
+    output: {
+      globals: {
+        vue: "Vue",
+      },
+    },
   },
   resolve: {
     alias: {
