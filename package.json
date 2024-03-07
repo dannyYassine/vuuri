@@ -3,7 +3,7 @@
   "version": "0.4.1",
   "description": "Muuri Vue Integration",
   "homepage": "https://dannyyassine.github.io/vuuri/",
-  "main": "./dist/index.umd.cjs",
+  "main": "./sec/index.js",
   "module": "./dist/vuuri.js",
   "files": ["dist"],
   "type": "module",
