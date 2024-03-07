@@ -24,13 +24,13 @@
     "@oruga-ui/oruga-next": "^0.8.3",
     "@oruga-ui/theme-bulma": "^0.2.11",
     "core-js": "^3.6.5",
-    "lodash": "^4.17.21",
     "muuri": "^0.9.3",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "uuid": "^8.3.2",
     "vue": "^3.4.15",
-    "vue-router": "4"
+    "vue-router": "4",
+    "vuuri": "file:.."
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.3",

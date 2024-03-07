@@ -3,7 +3,20 @@
   "version": "0.4.1",
   "description": "Muuri Vue Integration",
   "homepage": "https://dannyyassine.github.io/vuuri/",
-  "main": "src/index.js",
+  "main": "./src/index.js",
+  "module": "./dist/vuuri.js",
+  "files": ["dist"],
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/vuuri.js",
+      "require": "./dist/vuuri.umd.cjs"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
   "scripts": {
     "serve": "cd tests/client ; yarn serve",
     "dev": "cd dev ; yarn dev",
@@ -39,10 +52,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.20",
+    "lodash-es": "^4.17.21",
     "muuri": "^0.9.3",
     "uuid": "^8.3.2",
     "vue": "^3.4.15"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0",
+    "lodash-es": "^4.17.21",
+    "muuri": "^0.9.3",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.41.2",

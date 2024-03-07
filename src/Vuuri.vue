@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { debounce, differenceWith } from 'lodash';
+import { debounce, differenceWith } from 'lodash-es';
 import Muuri from 'muuri';
 import { v4 as uuidv4 } from 'uuid';
 import { GridEvent } from './GridEvent';
