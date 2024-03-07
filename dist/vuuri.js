@@ -4879,7 +4879,7 @@ const fc = (t, e) => {
     _setup() {
       this.muuri = new T(this.selector, this.muuriOptions), this.groupId && tt.addGrid(this.groupId, this.muuri), this.groupIds && tt.addGridToGroups(this.groupIds, this.muuri), this.observer = new ResizeObserver(() => {
         this._resizeOnLoad();
-      }), this.observer.observe(this.$refs.muuri), this._sync(this.modelValue, []), this.$nextTick(() => {
+      }), this.observer.observe(this.muuri.getElement()), this._sync(this.modelValue, []), this.$nextTick(() => {
         tt.setItemsForGridId(this.gridKey, this.modelValue);
       });
     },
@@ -5135,7 +5135,7 @@ function vc(t, e, i, r, n, s) {
     ], 12, pc))), 128))
   ], 10, _c);
 }
-const mc = /* @__PURE__ */ fc(dc, [["render", vc], ["__scopeId", "data-v-1bd1eb89"]]);
+const mc = /* @__PURE__ */ fc(dc, [["render", vc], ["__scopeId", "data-v-d0725908"]]);
 export {
   Ct as GridEvent,
   mc as default

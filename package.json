@@ -1,22 +1,11 @@
 {
   "name": "vuuri",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Muuri Vue Integration",
   "homepage": "https://dannyyassine.github.io/vuuri/",
   "main": "./src/index.js",
-  "module": "./dist/vuuri.js",
   "files": ["dist"],
   "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/vuuri.js",
-      "require": "./dist/vuuri.umd.cjs"
-    },
-    "./dist/style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
-    }
-  },
   "scripts": {
     "serve": "cd tests/client ; yarn serve",
     "dev": "cd dev ; yarn dev",
