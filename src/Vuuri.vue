@@ -168,7 +168,7 @@ export default {
       this.observer = new ResizeObserver(() => {
         this._resizeOnLoad();
       });
-      this.observer.observe(this.$refs.muuri);
+      this.observer.observe(this.muuri.getElement());
       this._sync(this.modelValue, []);
       this.$nextTick(() => {
         GridStore.setItemsForGridId(this.gridKey, this.modelValue);
