@@ -413,7 +413,6 @@ export default {
     _remove(newItems, oldItems) {
       const valuesToRemove = this._getDiff(oldItems, newItems);
       if (!valuesToRemove.length) {
-        console.log(newItems, oldItems);
         return Promise.resolve();
       }
 
