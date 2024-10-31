@@ -21,7 +21,7 @@ jobs:
       - name: Build containers
         run: docker compose -f docker-compose.pw.yml build --parallel client playwright
       - name: Install dependencies
-        run: docker-compose -f "./docker-compose.pw.yml" run client yarn
+        run: docker compose -f "./docker-compose.pw.yml" run client yarn
       - name: Install client-dev dependencies
         run: docker compose -f "./docker-compose.pw.yml" run client sh -c "cd dev ; yarn"
       - name: Install playwright dependencies
